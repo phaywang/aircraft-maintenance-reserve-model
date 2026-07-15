@@ -22,6 +22,27 @@ from .models import (
     ReserveBasis,
     UtilizationOverride,
 )
+from .lifecycle import (
+    SCENARIO_SCHEMA_VERSION,
+    AircraftAsset,
+    AnalysisContext,
+    ContractPeriod,
+    CutoffPosition,
+    KnownState,
+    LeaseContract,
+    ProrationConvention,
+    ReserveAccountRule,
+    Scenario,
+    TerminalValue,
+    TerminalValueBasis,
+    TransitionPeriod,
+    UtilizationPattern,
+    UtilizationRegime,
+    build_contract_periods,
+    lifecycle_segments,
+    migrate_v1_case,
+    scenario_to_v1_case,
+)
 from .utilization import build_forecast_utilization, build_full_utilization
 
 __all__ = [
@@ -30,6 +51,25 @@ __all__ = [
     "EventDriver",
     "ReserveBasis",
     "UtilizationOverride",
+    "SCENARIO_SCHEMA_VERSION",
+    "AircraftAsset",
+    "AnalysisContext",
+    "ContractPeriod",
+    "CutoffPosition",
+    "KnownState",
+    "LeaseContract",
+    "ProrationConvention",
+    "ReserveAccountRule",
+    "Scenario",
+    "TerminalValue",
+    "TerminalValueBasis",
+    "TransitionPeriod",
+    "UtilizationPattern",
+    "UtilizationRegime",
+    "build_contract_periods",
+    "lifecycle_segments",
+    "migrate_v1_case",
+    "scenario_to_v1_case",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",
@@ -43,4 +83,4 @@ __all__ = [
     "escalated_event_cost",
 ]
 
-__version__ = "1.0.0"
+__version__ = "2.0.0a0"
