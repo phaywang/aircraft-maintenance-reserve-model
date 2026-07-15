@@ -43,4 +43,4 @@ __all__ = [
     "escalated_event_cost",
 ]
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"

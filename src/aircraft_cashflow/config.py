@@ -14,6 +14,9 @@ DEMO_BASE_DATE = date(2017, 6, 30)
 def build_default_case() -> CaseInputs:
     """Build a validated, synthetic narrowbody demonstration case."""
 
+    # Reserve rates are deliberately calibrated to create a useful mix of
+    # funded, near-threshold and materially underfunded forecast events.
+
     airframe_6y = ComponentConfig(
         code="6Y",
         name="Airframe 6Y Check",
@@ -23,7 +26,7 @@ def build_default_case() -> CaseInputs:
         cost_base_date=DEMO_BASE_DATE,
         annual_cost_escalation=Decimal("0.032"),
         reserve_basis=ReserveBasis.PER_MONTH,
-        base_reserve_rate=Decimal("11000"),
+        base_reserve_rate=Decimal("11500"),
         reserve_rate_base_date=DEMO_BASE_DATE,
         annual_reserve_escalation=Decimal("0.028"),
     )
@@ -36,7 +39,7 @@ def build_default_case() -> CaseInputs:
         cost_base_date=DEMO_BASE_DATE,
         annual_cost_escalation=Decimal("0.032"),
         reserve_basis=ReserveBasis.PER_MONTH,
-        base_reserve_rate=Decimal("7500"),
+        base_reserve_rate=Decimal("8800"),
         reserve_rate_base_date=DEMO_BASE_DATE,
         annual_reserve_escalation=Decimal("0.028"),
     )
@@ -49,7 +52,7 @@ def build_default_case() -> CaseInputs:
         cost_base_date=DEMO_BASE_DATE,
         annual_cost_escalation=Decimal("0.035"),
         reserve_basis=ReserveBasis.PER_FLIGHT_CYCLE,
-        base_reserve_rate=Decimal("35"),
+        base_reserve_rate=Decimal("47"),
         reserve_rate_base_date=DEMO_BASE_DATE,
         annual_reserve_escalation=Decimal("0.03"),
         usage_since_event_at_lease_start=Decimal("0"),

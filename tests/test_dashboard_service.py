@@ -33,10 +33,23 @@ class DashboardServiceTests(unittest.TestCase):
 
     def test_summary_metrics_match_verified_stage_4(self) -> None:
         summary = run_dashboard_case(build_default_case())["summary"]
-        self.assertEqual(summary["forecast_shortfall"], "1200226.199207128272910369257")
-        self.assertEqual(summary["lease_end_reserve_balance"], "6258742.935460651736537378133")
+        self.assertEqual(summary["forecast_shortfall"], "785151.723350436147847273156")
+        self.assertEqual(summary["lease_end_reserve_balance"], "6339723.741906995985402601186")
         self.assertEqual(summary["component_event_count"], 5)
-        self.assertEqual(summary["underfunded_event_count"], 5)
+        self.assertEqual(summary["underfunded_event_count"], 3)
+
+    def test_demo_contains_funded_near_threshold_and_shortfall_events(self) -> None:
+        events = {
+            event["component"]: event
+            for event in run_dashboard_case(build_default_case())["funding_events"]
+        }
+        self.assertTrue(events["6Y"]["fully_funded"])
+        self.assertTrue(events["LDG"]["fully_funded"])
+        self.assertFalse(events["12Y"]["fully_funded"])
+        self.assertGreater(Decimal(events["12Y"]["coverage_ratio"]), Decimal("0.98"))
+        for code in ("E1", "E2"):
+            self.assertFalse(events[code]["fully_funded"])
+            self.assertGreater(Decimal(events[code]["shortfall"]), Decimal("350000"))
 
     def test_opening_balance_history_reconciles_to_analysis_date_opening(self) -> None:
         payload = run_dashboard_case(build_default_case())
@@ -101,7 +114,7 @@ class DashboardServiceTests(unittest.TestCase):
     def test_payload_is_json_serializable_without_float_financial_values(self) -> None:
         payload = run_dashboard_case(build_default_case())
         encoded = json.dumps(payload)
-        self.assertIn('"forecast_shortfall": "1200226.', encoded)
+        self.assertIn('"forecast_shortfall": "785151.', encoded)
         self.assertNotIsInstance(payload["summary"]["forecast_shortfall"], float)
 
     def test_invalid_payload_reports_missing_fields(self) -> None:

@@ -307,7 +307,7 @@ def run_dashboard_case(case: CaseInputs) -> dict[str, object]:
                 else "failed"
             ),
             "calculated_at": datetime.now(timezone.utc),
-            "model_version": "1.0.0-phase1",
+            "model_version": "1.0.1-phase1",
             "demo_case": demo_case,
             "input_signature": input_signature,
         },

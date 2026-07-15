@@ -45,6 +45,8 @@ The included narrowbody scenario is fully illustrative and is not a market bench
 
 All dates, utilization, costs, reserve rates and escalation assumptions can be edited in the dashboard.
 
+The synthetic reserve rates are calibrated to demonstrate different funding outcomes: fully funded events, a near-threshold event and material component shortfalls. They are illustrative inputs, not market quotations.
+
 ## Run locally
 
 Python 3.11 or newer is required.
