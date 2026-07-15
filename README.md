@@ -2,6 +2,10 @@
 
 A deterministic Python model and local dashboard for forecasting aircraft utilization, maintenance events, maintenance reserve collections, reimbursements, component balances and funding shortfalls.
 
+[Open the hosted dashboard](https://phaywang.github.io/aircraft-maintenance-reserve-model/) — the GitHub Pages version is a read-only demonstration; clone the repository to recalculate edited scenarios.
+
+![Dashboard overview](docs/images/dashboard-overview.png)
+
 ## What the model does
 
 The model calculates a complete monthly history from manufacture through lease expiry and exposes the forecast from the selected analysis date.
@@ -26,6 +30,8 @@ The local dashboard provides editable inputs and eight analysis views:
 - Event Settlement
 - Reserve Adequacy
 - Model Validation
+
+![Model validation](docs/images/model-validation.png)
 
 ## Demonstration assumptions
 

@@ -1,10 +1,11 @@
 const COMPONENTS = ["All", "6Y", "12Y", "LDG", "E1", "E2"];
 const VIEWS = ["overview", "assumptions", "utilization", "events", "inflows", "cashflow", "risk", "audit"];
 const STORAGE_KEY = "aircraft-reserve-model-draft-v1";
+const IS_STATIC_DEMO = location.hostname.endsWith(".github.io");
 
 const demoData = structuredClone(window.DASHBOARD_DATA);
 let currentData = structuredClone(demoData);
-let draftCase = loadDraft() || structuredClone(demoData.case);
+let draftCase = IS_STATIC_DEMO ? structuredClone(demoData.case) : loadDraft() || structuredClone(demoData.case);
 let currentView = location.hash.slice(1) || "overview";
 let selectedComponent = "All";
 let isDirty = JSON.stringify(draftCase) !== JSON.stringify(currentData.case);
@@ -81,6 +82,14 @@ function updateStateIndicators() {
   const state = document.querySelector("#calculation-state");
   const modelState = document.querySelector("#model-state");
   const runButton = document.querySelector("#run-model");
+  if (IS_STATIC_DEMO) {
+    state.className = "";
+    state.innerHTML = "<i></i> Validated";
+    modelState.textContent = "Model validated";
+    runButton.textContent = "Run locally";
+    runButton.title = "Clone the repository and start the Python service to recalculate scenarios.";
+    return;
+  }
   if (isDirty) {
     state.className = "pending-state";
     state.innerHTML = "<i></i> Inputs changed";
@@ -391,6 +400,10 @@ function bindViewActions() {
   document.querySelectorAll("[data-export-validation]").forEach((button) => button.addEventListener("click", exportValidation));
   if (currentView !== "assumptions") return;
   const form = document.querySelector("#assumptions-form");
+  if (IS_STATIC_DEMO) {
+    form.querySelectorAll("input, select, button").forEach((control) => { control.disabled = true; });
+    return;
+  }
   form.addEventListener("input", syncDraftFromForm);
   form.addEventListener("change", (event) => {
     syncDraftFromForm();
@@ -412,6 +425,10 @@ function bindViewActions() {
 }
 
 async function runModel() {
+  if (IS_STATIC_DEMO) {
+    showToast("This hosted site is a read-only demonstration. Run the project locally to recalculate scenarios.", "error");
+    return;
+  }
   if (currentView === "assumptions") syncDraftFromForm();
   const buttons = document.querySelectorAll("#run-model, [data-run-from-form]");
   buttons.forEach((button) => { button.disabled = true; button.textContent = "Calculating…"; });
