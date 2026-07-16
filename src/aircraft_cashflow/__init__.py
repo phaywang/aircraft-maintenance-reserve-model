@@ -38,6 +38,7 @@ from .lifecycle import (
     TerminalValue,
     TerminalValueBasis,
     TransitionPeriod,
+    TransitionCost,
     UtilizationPattern,
     UtilizationRegime,
     build_contract_periods,
@@ -67,6 +68,15 @@ from .settlement import (
     build_lifecycle_maintenance_events,
     build_lifecycle_settlement,
 )
+from .transitions import (
+    ECONOMIC_CASHFLOW_COLUMNS,
+    TRANSITION_CASHFLOW_COLUMNS,
+    AlternativeSet,
+    LifecycleEconomicsResult,
+    ScenarioAlternative,
+    build_lifecycle_economics,
+    build_transition_cashflows,
+)
 
 __all__ = [
     "CaseInputs",
@@ -89,6 +99,7 @@ __all__ = [
     "TerminalValue",
     "TerminalValueBasis",
     "TransitionPeriod",
+    "TransitionCost",
     "UtilizationPattern",
     "UtilizationRegime",
     "build_contract_periods",
@@ -110,6 +121,13 @@ __all__ = [
     "SettlementResult",
     "build_lifecycle_maintenance_events",
     "build_lifecycle_settlement",
+    "ECONOMIC_CASHFLOW_COLUMNS",
+    "TRANSITION_CASHFLOW_COLUMNS",
+    "AlternativeSet",
+    "LifecycleEconomicsResult",
+    "ScenarioAlternative",
+    "build_lifecycle_economics",
+    "build_transition_cashflows",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",

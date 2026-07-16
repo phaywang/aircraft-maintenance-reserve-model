@@ -9,7 +9,7 @@ Version: `2.0.0a0`
 | V2.1 Variable utilization | Implemented | `lifecycle_utilization.py`, utilization contract and full V1 regression |
 | V2.2 Multi-lease contract engine | Implemented | `contracts.py`, contract cash-flow contract and multi-lease tests |
 | V2.3 Redelivery settlement | Implemented | `settlement.py`, settlement contract and expiry-order tests |
-| V2.4 Transition economics | Not started | — |
+| V2.4 Transition economics | Implemented | `transitions.py`, transition contract and alternative tests |
 | V2.5 Common-horizon valuation | Not started | — |
 | V2.6 Scenario dashboard | Not started | — |
 | V2.7 Conclusions and explanation | Not started | — |
@@ -109,6 +109,27 @@ Verification:
 
 Detailed rules are recorded in `V2_SETTLEMENT_CONTRACT.md`.
 
+## V2.4 implementation record
+
+Implemented:
+
+- actual-day monthly transition cost;
+- one-time transition commencement cost;
+- arbitrary dated and categorized ferry, preparation, maintenance and remarketing costs;
+- combined owner cash flow including transition outflows;
+- complete scenario alternatives with arbitrary follow-on lease dates and durations;
+- comparison-set validation for common asset, valuation date and currency.
+
+Verification:
+
+- partial-month transition costs reconcile by actual calendar days;
+- fixed, monthly and dated costs remain separately auditable;
+- transition costs reduce combined owner cash flow exactly once;
+- alternative sets accept different follow-on durations rather than fixed 3Y/4Y choices;
+- duplicated alternatives and incompatible comparison bases fail clearly.
+
+Detailed rules are recorded in `V2_TRANSITION_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.4 will add transition-specific costs, downtime, ferry and preparation assumptions, then package alternative follow-on lease paths as comparable complete lifecycle scenarios.
+V2.5 will normalize alternative cash flows to a common comparison horizon, add terminal value and calculate NPV and incremental NPV from one shared valuation date.

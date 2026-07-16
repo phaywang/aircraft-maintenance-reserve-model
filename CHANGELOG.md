@@ -8,6 +8,7 @@
 - Added a continuous variable-utilization timeline with fixed, seasonal and explicit-month inputs, actual-day stub proration and explicit zero-flight transitions.
 - Added lease-specific rent and maintenance-reserve accounts with arbitrary-date periods, contract-specific escalation and expiry-period collection.
 - Added physical maintenance-event settlement, component reserve ledgers, redelivery condition compensation and contractual account close-out.
+- Added transition storage, fixed and dated costs plus complete arbitrary-duration follow-on lifecycle alternatives.
 
 ## 1.0.1 — in development
 

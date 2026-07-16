@@ -272,6 +272,23 @@ class UtilizationRegime:
 
 
 @dataclass(frozen=True)
+class TransitionCost:
+    """One dated transition outflow such as ferry, preparation or remarketing."""
+
+    cost_id: str
+    payment_date: date
+    amount: Decimal | int | float | str
+    category: str = "other"
+
+    def __post_init__(self) -> None:
+        _require_identifier("transition cost_id", self.cost_id)
+        _require_identifier("transition cost category", self.category)
+        amount = to_decimal(self.amount, "transition cost amount")
+        _require_nonnegative("transition cost amount", amount)
+        object.__setattr__(self, "amount", amount)
+
+
+@dataclass(frozen=True)
 class TransitionPeriod:
     """Explicit non-lease lifecycle segment such as storage or preparation."""
 
@@ -279,12 +296,27 @@ class TransitionPeriod:
     start_date: date
     end_date: date
     description: str = "Transition"
+    monthly_cost: Decimal | int | float | str = Decimal("0")
+    fixed_cost: Decimal | int | float | str = Decimal("0")
+    costs: tuple[TransitionCost, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
         _require_identifier("transition_id", self.transition_id)
         _require_identifier("description", self.description)
         if self.start_date > self.end_date:
             raise ValueError("transition start_date must not be after end_date")
+        monthly_cost = to_decimal(self.monthly_cost, "transition monthly_cost")
+        fixed_cost = to_decimal(self.fixed_cost, "transition fixed_cost")
+        _require_nonnegative("transition monthly_cost", monthly_cost)
+        _require_nonnegative("transition fixed_cost", fixed_cost)
+        cost_ids = [cost.cost_id for cost in self.costs]
+        if len(cost_ids) != len(set(cost_ids)):
+            raise ValueError("transition cost identifiers must be unique")
+        for cost in self.costs:
+            if not self.start_date <= cost.payment_date <= self.end_date:
+                raise ValueError("transition cost date must fall within transition")
+        object.__setattr__(self, "monthly_cost", monthly_cost)
+        object.__setattr__(self, "fixed_cost", fixed_cost)
 
 
 @dataclass(frozen=True)
