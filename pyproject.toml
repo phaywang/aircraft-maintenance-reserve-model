@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aircraft-maintenance-cashflow"
-version = "2.0.0"
+version = "2.1.0"
 description = "Deterministic aircraft maintenance reserve cash-flow engine and dashboard"
 readme = "README.md"
 authors = [{ name = "Fei Wang" }]

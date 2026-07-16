@@ -65,6 +65,11 @@ class SettlementTests(unittest.TestCase):
         self.assertEqual(event["available_reserve"], Decimal("600"))
         self.assertEqual(event["reserve_reimbursement"], Decimal("600"))
         self.assertEqual(event["unfunded_amount"], Decimal("400"))
+        self.assertEqual(event["lessee_unfunded_amount"], Decimal("400"))
+        self.assertEqual(event["lessor_direct_maintenance_amount"], Decimal("0"))
+        self.assertEqual(
+            result.cashflows.iloc[0]["net_owner_cashflow"], Decimal("0")
+        )
         self.assertEqual(ledger["reserve_inflow"], Decimal("600"))
         self.assertTrue(ledger["account_closed"])
 
@@ -129,6 +134,14 @@ class SettlementTests(unittest.TestCase):
         self.assertEqual(event["segment_type"], "transition")
         self.assertIsNone(event["account_id"])
         self.assertEqual(event["unfunded_amount"], Decimal("1000"))
+        self.assertEqual(event["lessee_unfunded_amount"], Decimal("0"))
+        self.assertEqual(event["lessor_direct_maintenance_amount"], Decimal("1000"))
+        self.assertEqual(
+            result.cashflows.loc[
+                result.cashflows["date"] == event["date"], "maintenance_cost"
+            ].iloc[0],
+            Decimal("1000"),
+        )
 
     def test_calendar_event_on_expiry_resets_redelivery_state(self) -> None:
         component = ComponentConfig(

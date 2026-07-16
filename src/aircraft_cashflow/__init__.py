@@ -84,6 +84,12 @@ from .valuation import (
     compare_alternatives,
 )
 from .v2_dashboard_service import build_v2_dashboard_payload
+from .scenario_builder import (
+    build_scenario_payload,
+    compare_scenario_payloads,
+    default_scenario_input,
+    scenario_from_input,
+)
 from .analysis import (
     AlternativeDiagnostic,
     DecisionAnalysis,
@@ -154,6 +160,10 @@ __all__ = [
     "ValuationResult",
     "compare_alternatives",
     "build_v2_dashboard_payload",
+    "build_scenario_payload",
+    "compare_scenario_payloads",
+    "default_scenario_input",
+    "scenario_from_input",
     "AlternativeDiagnostic",
     "DecisionAnalysis",
     "build_decision_analysis",
@@ -177,4 +187,4 @@ __all__ = [
     "escalated_event_cost",
 ]
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the embedded V2 scenario-comparison dashboard payload."""
+"""Generate the embedded V2 lessor scenario-builder dashboard payload."""
 
 from __future__ import annotations
 
@@ -12,14 +12,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from aircraft_cashflow.v2_dashboard_service import build_v2_dashboard_payload  # noqa: E402
+from aircraft_cashflow.scenario_builder import build_scenario_payload  # noqa: E402
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--static-root", type=Path, default=ROOT / "dashboard" / "v2")
     args = parser.parse_args()
-    payload = build_v2_dashboard_payload(
+    payload = build_scenario_payload(
         calculated_at=datetime(2026, 7, 15, 0, 0, tzinfo=timezone.utc)
     )
     serialized = json.dumps(payload, indent=2, sort_keys=True)

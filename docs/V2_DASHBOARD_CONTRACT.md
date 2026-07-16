@@ -1,22 +1,28 @@
-# V2.6 Scenario Dashboard Contract
+# V2.1 Lessor Scenario Builder Dashboard Contract
 
-The V2 workspace is independent of the released V1 interface. V1 remains the detailed single-lease reserve model; V2 presents complete multi-lease lifecycle alternatives.
+The V2 workspace is independent of V1. V1 remains the detailed recruitment-case
+reserve model at `/`; V2 is the lessor lifecycle scenario builder at `/v2/`.
 
 ## Views
 
-1. Decision summary — common-horizon NPV and major drivers.
-2. Alternatives — arbitrary follow-on end date, rent, FH, FC, discount rate and baseline.
-3. Utilization — continuous segment and regime timeline with TTSN/TCSN.
-4. Events and settlement — maintenance funding, reserve reimbursement and redelivery.
-5. Cash flow and valuation — owner cash-flow schedule, terminal value and incremental NPV.
-6. Model audit — calculation scope and mandatory expiry sequence.
+1. Aircraft position — scenario identity, analysis date and authoritative known state.
+2. Lease timeline — arbitrary lease and transition segments.
+3. Forecast overview — nominal lessor cash and maintenance exposure.
+4. Maintenance funding — event cost, reserve reimbursement, lessee unfunded and off-lease cost.
+5. Reserve accounts — lease-component roll-forward and close-out.
+6. Lessor cash flow — dated nominal cash ledger without mandatory discounting.
+7. Scenario comparison — optional comparison of any number of independent scenarios.
+8. Model audit — calculation scope and mandatory expiry sequence.
 
 ## Recalculation
 
-The local `Run comparison` action posts the complete editable alternative set to `/api/v2/runs`. Python rebuilds every downstream table; the browser does not calculate financial results. GitHub Pages uses the same precomputed payload and clearly remains a demonstration.
+`Run forecast` posts one complete scenario to `/api/v2/runs`. Python validates
+and rebuilds every downstream table. The browser performs no financial or
+maintenance calculations. `/api/v2/compare` accepts two or more independent
+scenario payloads and returns nominal summary metrics without mutating them.
 
 ## Deployment
 
 - Local runtime: `/v2/` served by the Python dashboard API.
-- GitHub Pages: `docs/v2/` with synchronized HTML, CSS, JavaScript and payload.
-- V1 remains at the root URL.
+- Static demonstration: embedded deterministic payload.
+- V1 remains at the root URL and is not changed by V2.

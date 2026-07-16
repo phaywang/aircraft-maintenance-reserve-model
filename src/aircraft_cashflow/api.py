@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 
 from .config import build_default_case
 from .dashboard_service import case_from_payload, run_dashboard_case
-from .v2_dashboard_service import build_v2_dashboard_payload
+from .scenario_builder import build_scenario_payload, compare_scenario_payloads
 
 
 class DashboardRunStore:
@@ -129,7 +129,7 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
             self._send_json(HTTPStatus.OK, {"case": build_default_case().to_dict()})
             return
         if parts == ["api", "v2", "demo"]:
-            self._send_json(HTTPStatus.OK, build_v2_dashboard_payload())
+            self._send_json(HTTPStatus.OK, build_scenario_payload())
             return
         if len(parts) in (3, 4) and parts[:2] == ["api", "runs"]:
             self._run_section(parts[2], parts[3] if len(parts) == 4 else None)
@@ -138,7 +138,7 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         request_path = urlparse(self.path).path
-        if request_path not in ("/api/runs", "/api/v2/runs"):
+        if request_path not in ("/api/runs", "/api/v2/runs", "/api/v2/compare"):
             self._not_found()
             return
         try:
@@ -150,14 +150,17 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
             if not isinstance(request_payload, dict):
                 raise ValueError("request body must be a JSON object")
             if request_path == "/api/v2/runs":
-                inputs = request_payload.get("alternative_inputs")
-                if inputs is not None and not isinstance(inputs, dict):
-                    raise ValueError("alternative_inputs must be an object")
-                result = build_v2_dashboard_payload(
-                    request_payload.get("annual_discount_rate", "0.09"),
-                    str(request_payload.get("baseline_id", "30-month")),
-                    inputs,
-                )
+                scenario = request_payload.get("scenario", request_payload)
+                if not isinstance(scenario, dict):
+                    raise ValueError("scenario must be an object")
+                result = build_scenario_payload(scenario)
+            elif request_path == "/api/v2/compare":
+                scenarios = request_payload.get("scenarios")
+                if not isinstance(scenarios, list) or not all(
+                    isinstance(item, dict) for item in scenarios
+                ):
+                    raise ValueError("scenarios must be an array of objects")
+                result = compare_scenario_payloads(scenarios)
             else:
                 case_payload = request_payload.get("case", request_payload)
                 if not isinstance(case_payload, dict):

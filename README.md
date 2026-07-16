@@ -104,7 +104,7 @@ The tests cover threshold crossing, calendar-versus-usage event behavior, rate e
 ```text
 src/aircraft_cashflow/   Calculation engine and local API
 dashboard/static/        Dashboard application
-dashboard/v2/            V2 lifecycle comparison application
+dashboard/v2/            V2 lessor lifecycle scenario builder
 tests/                   Unit, regression and interface tests
 scripts/                 CLI and payload utilities
 docs/v2/                 GitHub Pages V2 application
@@ -113,7 +113,7 @@ docs/images/             Dashboard screenshots
 
 ## V2 lifecycle model
 
-Version 2.0 supports arbitrary analysis dates, variable utilization, multiple leases, transition economics, physical maintenance events, contract-specific reserve accounts, redelivery settlement, common-horizon NPV, deterministic conclusions, guarded LLM explanation payloads and sensitivity ranges.
+Version 2.1 keeps V1 unchanged and provides an independent lessor lifecycle scenario builder. One scenario can start at an arbitrary analysis date and contain a current lease, any number of future leases, and explicit transition or storage periods. Physical component state continues across leases while contract reserve accounts close separately. The primary output is nominal rent, maintenance-reserve, reimbursement, lessee-unfunded, redelivery and transition cash flow; multi-scenario comparison is optional and is not based on a mandatory NPV ranking.
 
 ## License
 

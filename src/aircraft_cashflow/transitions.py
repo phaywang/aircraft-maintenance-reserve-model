@@ -16,7 +16,9 @@ TRANSITION_CASHFLOW_COLUMNS = (
     "fixed_cost", "explicit_cost", "total_transition_cost",
 )
 ECONOMIC_CASHFLOW_COLUMNS = (
-    "date", "rent_inflow", "maintenance_reserve_inflow", "maintenance_cost",
+    "date", "rent_inflow", "maintenance_reserve_inflow", "maintenance_event_cost",
+    "reserve_reimbursement_outflow", "lessor_direct_maintenance_outflow",
+    "maintenance_cost",
     "redelivery_cash_inflow", "reserve_refund_outflow", "transition_cost",
     "net_owner_cashflow",
 )
@@ -117,6 +119,9 @@ def build_lifecycle_economics(scenario: Scenario) -> LifecycleEconomicsResult:
             "date": current,
             "rent_inflow": total("rent_inflow"),
             "maintenance_reserve_inflow": total("maintenance_reserve_inflow"),
+            "maintenance_event_cost": total("maintenance_event_cost"),
+            "reserve_reimbursement_outflow": total("reserve_reimbursement_outflow"),
+            "lessor_direct_maintenance_outflow": total("lessor_direct_maintenance_outflow"),
             "maintenance_cost": total("maintenance_cost"),
             "redelivery_cash_inflow": total("redelivery_cash_inflow"),
             "reserve_refund_outflow": total("reserve_refund_outflow"),

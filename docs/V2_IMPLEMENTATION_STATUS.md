@@ -1,7 +1,30 @@
 # V2 Implementation Status
 
 Branch: `v2-lifecycle`
-Version: `2.0.0`
+Version: `2.1.0`
+
+## V2.1 scenario-builder redesign
+
+Implemented after business-scope review:
+
+- V1 remains unchanged at the root route and V2 remains independent at `/v2/`;
+- fixed two-alternative `30-month` / `42-month` workflow removed from the active V2 dashboard;
+- one scenario now contains an arbitrary analysis date, known technical state,
+  any number of leases and explicit transition/storage periods;
+- physical TTSN/TCSN and component state continue across leases while each
+  lease creates and closes separate component reserve accounts;
+- lease-event cost is split into reserve reimbursement paid by the lessor and
+  unfunded amount paid by the lessee;
+- maintenance during a non-lease transition is identified as direct lessor cost;
+- the primary output is nominal lessor cash flow; discount rate, baseline and
+  mandatory NPV ranking were removed from the core workflow;
+- scenario duplication and optional comparison support any number of independent paths;
+- Python remains authoritative and the browser only edits and renders inputs/results.
+
+Verification: 133 tests pass; one local HTTP socket test is skipped by the
+execution sandbox. The suite covers arbitrary future leases, scenario
+independence, gap/overlap rejection, lessor/lessee maintenance responsibility,
+expiry ordering, V1 regression and V1/V2 route separation.
 
 | Stage | Status | Evidence |
 |---|---|---|
@@ -222,7 +245,9 @@ Detailed rules are recorded in `V2_SENSITIVITY_CONTRACT.md`.
 
 ## Completion gate
 
-V2.0 through V2.8 are implemented and released as version `2.0.0`.
+V2.0 through V2.8 remain as the historical engine implementation record. The
+business-facing scenario-builder redesign is complete locally as version
+`2.1.0`; it has not been published.
 
 Final audit evidence:
 

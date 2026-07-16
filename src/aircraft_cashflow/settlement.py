@@ -25,6 +25,7 @@ MAINTENANCE_EVENT_COLUMNS = (
     "date", "event_id", "component_code", "component_name", "driver",
     "interval", "segment_id", "segment_type", "lease_id", "account_id",
     "event_cost", "available_reserve", "reserve_reimbursement", "unfunded_amount",
+    "lessee_unfunded_amount", "lessor_direct_maintenance_amount",
 )
 COMPONENT_STATE_COLUMNS = (
     "date", "lease_id", "component_code", "driver", "interval",
@@ -44,7 +45,9 @@ RESERVE_LEDGER_COLUMNS = (
     "refund_to_lessee", "retained_by_lessor", "closing_balance", "account_closed",
 )
 LIFECYCLE_CASHFLOW_COLUMNS = (
-    "date", "rent_inflow", "maintenance_reserve_inflow", "maintenance_cost",
+    "date", "rent_inflow", "maintenance_reserve_inflow", "maintenance_event_cost",
+    "reserve_reimbursement_outflow", "lessor_direct_maintenance_outflow",
+    "maintenance_cost",
     "redelivery_cash_inflow", "reserve_refund_outflow", "net_owner_cashflow",
 )
 
@@ -115,6 +118,8 @@ def _new_event(
         "available_reserve": Decimal("0"),
         "reserve_reimbursement": Decimal("0"),
         "unfunded_amount": Decimal("0"),
+        "lessee_unfunded_amount": Decimal("0"),
+        "lessor_direct_maintenance_amount": Decimal("0"),
     }
 
 
@@ -314,15 +319,28 @@ def _cashflow_table(
         l = ledger.loc[ledger["date"] == current]
         rent = sum(c["rent_inflow"], Decimal("0"))
         reserves = sum(c["maintenance_reserve_inflow"], Decimal("0"))
-        cost = sum(e["event_cost"], Decimal("0"))
+        event_cost = sum(e["event_cost"], Decimal("0"))
+        reimbursement = sum(e["reserve_reimbursement"], Decimal("0"))
+        direct_maintenance = sum(
+            e["lessor_direct_maintenance_amount"], Decimal("0")
+        )
         compensation = sum(r["net_cash_compensation"], Decimal("0"))
         refunds = sum(l["refund_to_lessee"], Decimal("0"))
         rows.append({
             "date": current, "rent_inflow": rent,
-            "maintenance_reserve_inflow": reserves, "maintenance_cost": cost,
+            "maintenance_reserve_inflow": reserves,
+            "maintenance_event_cost": event_cost,
+            "reserve_reimbursement_outflow": reimbursement,
+            "lessor_direct_maintenance_outflow": direct_maintenance,
+            # Compatibility alias. In lessor reporting, maintenance cash outflow
+            # means the contractual reserve reimbursement, not the full event cost.
+            "maintenance_cost": reimbursement + direct_maintenance,
             "redelivery_cash_inflow": compensation,
             "reserve_refund_outflow": refunds,
-            "net_owner_cashflow": rent + reserves + compensation - cost - refunds,
+            "net_owner_cashflow": (
+                rent + reserves + compensation
+                - reimbursement - direct_maintenance - refunds
+            ),
         })
     return pd.DataFrame(rows, columns=LIFECYCLE_CASHFLOW_COLUMNS)
 
@@ -363,6 +381,8 @@ def build_lifecycle_settlement(scenario: Scenario) -> SettlementResult:
                         "available_reserve": available,
                         "reserve_reimbursement": paid,
                         "unfunded_amount": cost - paid,
+                        "lessee_unfunded_amount": cost - paid,
+                        "lessor_direct_maintenance_amount": Decimal("0"),
                     })
                     available -= paid
                     event_cost += cost
@@ -401,8 +421,13 @@ def build_lifecycle_settlement(scenario: Scenario) -> SettlementResult:
                 "account_closed": bool(period.is_expiry_period),
             })
     for event in event_rows:
-        if not Decimal(str(event["reserve_reimbursement"])):
+        if event["segment_type"] == "transition":
             event["unfunded_amount"] = event["event_cost"]
+            event["lessee_unfunded_amount"] = Decimal("0")
+            event["lessor_direct_maintenance_amount"] = event["event_cost"]
+        elif not Decimal(str(event["reserve_reimbursement"])):
+            event["unfunded_amount"] = event["event_cost"]
+            event["lessee_unfunded_amount"] = event["event_cost"]
     settled_events = pd.DataFrame(event_rows, columns=MAINTENANCE_EVENT_COLUMNS)
     settled_redelivery = pd.DataFrame(redelivery_rows, columns=REDELIVERY_SETTLEMENT_COLUMNS)
     ledger = pd.DataFrame(ledger_rows, columns=RESERVE_LEDGER_COLUMNS)
