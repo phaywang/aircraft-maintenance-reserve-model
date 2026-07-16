@@ -113,7 +113,7 @@ docs/images/             Dashboard screenshots
 
 ## V2 lifecycle model
 
-Version 2.1 keeps V1 unchanged and provides an independent lessor lifecycle scenario builder. One scenario can start at an arbitrary analysis date and contain a current lease, any number of future leases, and explicit transition or storage periods. Physical component state continues across leases while contract reserve accounts close separately. The primary output is nominal rent, maintenance-reserve, reimbursement, lessee-unfunded, redelivery and transition cash flow; multi-scenario comparison is optional and is not based on a mandatory NPV ranking.
+Version 2.1 keeps V1 unchanged and provides an independent lessor lifecycle scenario builder. One scenario can start at an arbitrary analysis date and contain a current lease, any number of future leases, and explicit transition or storage periods. Physical component state continues across leases while contract reserve accounts close separately. The primary output covers maintenance-reserve collections, event cost, reserve reimbursement, lessee-unfunded exposure and lease-end reserve close-out. Rent and whole-aircraft investment returns are outside the model; multi-scenario comparison is optional and is not based on a mandatory NPV ranking.
 
 ## License
 

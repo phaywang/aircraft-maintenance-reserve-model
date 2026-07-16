@@ -16,8 +16,8 @@ Implemented after business-scope review:
 - lease-event cost is split into reserve reimbursement paid by the lessor and
   unfunded amount paid by the lessee;
 - maintenance during a non-lease transition is identified as direct lessor cost;
-- the primary output is nominal lessor cash flow; discount rate, baseline and
-  mandatory NPV ranking were removed from the core workflow;
+- the primary output is maintenance-reserve cash movement and event funding;
+  rent, discount rate, baseline and mandatory NPV ranking are outside the core workflow;
 - scenario duplication and optional comparison support any number of independent paths;
 - Python remains authoritative and the browser only edits and renders inputs/results.
 
@@ -251,7 +251,7 @@ business-facing scenario-builder redesign is complete locally as version
 
 Final audit evidence:
 
-- 129 automated tests pass, with one socket-only test skipped by the execution sandbox;
+- 133 automated tests pass, with one socket-only test skipped by the execution sandbox;
 - Python modules and scripts compile and V2 JavaScript passes syntax validation;
 - runtime and GitHub Pages V2 assets are byte-identical;
 - rebuilding the static V2 payload produces no repository difference;

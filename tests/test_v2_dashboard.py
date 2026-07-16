@@ -23,7 +23,9 @@ class ScenarioBuilderTests(unittest.TestCase):
 
     def test_default_is_one_independent_multi_lease_scenario(self) -> None:
         self.assertEqual(self.payload["run"]["perspective"], "lessor")
-        self.assertEqual(self.payload["run"]["valuation_basis"], "nominal_cashflow")
+        self.assertEqual(
+            self.payload["run"]["valuation_basis"], "maintenance_reserve_cashflow"
+        )
         self.assertEqual(self.payload["summary"]["lease_count"], 2)
         self.assertEqual(self.payload["summary"]["transition_count"], 2)
         self.assertNotIn("valuation_summary", self.payload)
@@ -33,28 +35,27 @@ class ScenarioBuilderTests(unittest.TestCase):
         for section in (
             "scenario", "utilization", "contract_periods", "reserve_accounts",
             "events", "component_states", "redelivery", "reserve_ledger",
-            "transition_cashflows", "cashflows",
+            "reserve_cashflows",
         ):
             self.assertIn(section, self.payload)
         self.assertTrue(self.payload["utilization"])
-        self.assertTrue(self.payload["cashflows"])
+        self.assertTrue(self.payload["reserve_cashflows"])
 
-    def test_lease_unfunded_is_not_lessor_cash_outflow(self) -> None:
-        cash = self.payload["cashflows"]
+    def test_reserve_cash_movement_reconciles_without_rent(self) -> None:
+        cash = self.payload["reserve_cashflows"]
         expected = sum(
-            Decimal(row["rent_inflow"])
-            + Decimal(row["maintenance_reserve_inflow"])
-            + Decimal(row["redelivery_cash_inflow"])
-            - Decimal(row["reserve_reimbursement_outflow"])
-            - Decimal(row["lessor_direct_maintenance_outflow"])
-            - Decimal(row["reserve_refund_outflow"])
-            - Decimal(row["transition_cost"])
+            Decimal(row["reserve_inflow"])
+            - Decimal(row["reserve_outflow"])
+            - Decimal(row["refund_to_lessee"])
             for row in cash
         )
         self.assertEqual(
-            expected, Decimal(self.payload["summary"]["nominal_net_lessor_cashflow"])
+            expected, Decimal(self.payload["summary"]["net_reserve_cash_movement"])
         )
         self.assertGreater(Decimal(self.payload["summary"]["total_lessee_unfunded"]), 0)
+        self.assertNotIn("total_rent", self.payload["summary"])
+        self.assertNotIn("monthly_rent", self.payload["scenario_input"]["segments"][0])
+        self.assertNotIn("monthly_rent", self.payload["scenario"]["leases"][0])
 
     def test_arbitrary_future_lease_can_be_added(self) -> None:
         inputs = default_scenario_input()
@@ -63,7 +64,7 @@ class ScenarioBuilderTests(unittest.TestCase):
             {
                 "type": "lease", "id": "follow-on-2", "lessee": "Airline B",
                 "start_date": "2032-03-01", "end_date": "2033-06-30",
-                "monthly_rent": "320000", "monthly_fh": "230", "monthly_fc": "85",
+                "monthly_fh": "230", "monthly_fc": "85",
                 "reserve_rate_multiplier": "1.1", "redelivery_minimum_ratio": "0.4",
                 "closeout_rule": "retain_by_lessor",
             },
@@ -104,7 +105,7 @@ class ScenarioBuilderTests(unittest.TestCase):
     def test_payload_is_json_serializable_without_financial_floats(self) -> None:
         encoded = json.dumps(self.payload)
         self.assertIn('"perspective": "lessor"', encoded)
-        self.assertIsInstance(self.payload["summary"]["total_rent"], str)
+        self.assertIsInstance(self.payload["summary"]["total_reserve_collections"], str)
 
 
 class V2DashboardFrontendTests(unittest.TestCase):
@@ -121,6 +122,9 @@ class V2DashboardFrontendTests(unittest.TestCase):
         self.assertIn("Add lease", script)
         self.assertIn("Duplicate scenario", html)
         self.assertIn("Lessee unfunded", script)
+        self.assertIn("reserve_cashflows", script)
+        self.assertNotIn("Rent collected", script)
+        self.assertNotIn("Monthly rent", script)
         self.assertNotIn("annual_discount_rate", script)
         self.assertNotIn("baseline_id", script)
 

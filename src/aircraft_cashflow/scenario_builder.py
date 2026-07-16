@@ -97,7 +97,7 @@ def default_scenario_input() -> dict[str, object]:
                 "type": "lease", "id": "lease-1", "lessee": case.lessee,
                 "start_date": case.lease_start_date.isoformat(),
                 "end_date": case.lease_expiry_date.isoformat(),
-                "monthly_rent": "300000", "monthly_fh": str(case.default_monthly_fh),
+                "monthly_fh": str(case.default_monthly_fh),
                 "monthly_fc": str(case.default_monthly_fc),
                 "reserve_rate_multiplier": "1", "redelivery_minimum_ratio": "0.35",
                 "closeout_rule": ReserveCloseoutRule.RETAIN_BY_LESSOR.value,
@@ -107,12 +107,12 @@ def default_scenario_input() -> dict[str, object]:
                 "description": "Remarketing and delivery preparation",
                 "start_date": "2029-07-01", "end_date": "2029-07-31",
                 "monthly_fh": "0", "monthly_fc": "0",
-                "monthly_cost": "85000", "fixed_cost": "370000",
+                "monthly_cost": "0", "fixed_cost": "0",
             },
             {
                 "type": "lease", "id": "follow-on-1",
                 "lessee": "Follow-on Airline", "start_date": "2029-08-01",
-                "end_date": "2032-01-31", "monthly_rent": "335000",
+                "end_date": "2032-01-31",
                 "monthly_fh": "250", "monthly_fc": "95",
                 "reserve_rate_multiplier": "1.05",
                 "redelivery_minimum_ratio": "0.50",
@@ -123,7 +123,7 @@ def default_scenario_input() -> dict[str, object]:
                 "description": "Post-lease holding",
                 "start_date": "2032-02-01", "end_date": "2033-12-31",
                 "monthly_fh": "0", "monthly_fc": "0",
-                "monthly_cost": "45000", "fixed_cost": "0",
+                "monthly_cost": "0", "fixed_cost": "0",
             },
         ],
     }
@@ -198,8 +198,7 @@ def scenario_from_input(payload: dict[str, object]) -> Scenario:
             leases.append(
                 LeaseContract(
                     segment_id, str(raw.get("lessee", "Future Lessee")), start, end,
-                    accounts, monthly_rent=raw.get("monthly_rent", "0"),
-                    annual_rent_escalation=raw.get("annual_rent_escalation", "0"),
+                    accounts, monthly_rent=Decimal("0"),
                     redelivery_conditions=conditions,
                 )
             )
@@ -208,7 +207,7 @@ def scenario_from_input(payload: dict[str, object]) -> Scenario:
                 TransitionPeriod(
                     segment_id, start, end,
                     str(raw.get("description", "Transition")),
-                    raw.get("monthly_cost", "0"), raw.get("fixed_cost", "0"),
+                    Decimal("0"), Decimal("0"),
                 )
             )
         else:
@@ -276,12 +275,37 @@ def build_scenario_payload(
     events = economics.settlement.events
     ledger = economics.settlement.reserve_ledger
     cash = economics.cashflows
+    reserve_cashflow_rows: list[dict[str, object]] = []
+    for current_date in sorted(set(ledger["date"])):
+        dated = ledger.loc[ledger["date"] == current_date]
+        inflow = sum(dated["reserve_inflow"], Decimal("0"))
+        reimbursement = sum(dated["reserve_reimbursement"], Decimal("0"))
+        refund = sum(dated["refund_to_lessee"], Decimal("0"))
+        reserve_cashflow_rows.append({
+            "date": current_date,
+            "reserve_inflow": inflow,
+            "event_cost": sum(dated["event_cost"], Decimal("0")),
+            "reserve_outflow": reimbursement,
+            "unfunded_amount": sum(dated["unfunded_amount"], Decimal("0")),
+            "refund_to_lessee": refund,
+            "retained_by_lessor": sum(dated["retained_by_lessor"], Decimal("0")),
+            "closing_balance": sum(dated["closing_balance"], Decimal("0")),
+            "net_reserve_cash_movement": inflow - reimbursement - refund,
+        })
+    scenario_output = scenario.to_dict()
+    for lease in scenario_output["leases"]:
+        lease.pop("monthly_rent", None)
+        lease.pop("rent_base_date", None)
+        lease.pop("annual_rent_escalation", None)
+    contract_periods = contracts.periods.drop(
+        columns=["rent_rate", "rent_inflow", "total_contract_inflow"],
+        errors="ignore",
+    )
     summary = {
         "forecast_start": scenario.analysis_date,
         "forecast_end": scenario.comparison_horizon,
         "lease_count": len(scenario.leases),
         "transition_count": len(scenario.transitions),
-        "total_rent": sum(cash["rent_inflow"], Decimal("0")),
         "total_reserve_collections": sum(cash["maintenance_reserve_inflow"], Decimal("0")),
         "total_event_cost": sum(events["event_cost"], Decimal("0")),
         "total_reserve_reimbursement": sum(events["reserve_reimbursement"], Decimal("0")),
@@ -289,10 +313,11 @@ def build_scenario_payload(
         "total_lessor_direct_maintenance": sum(events["lessor_direct_maintenance_amount"], Decimal("0")),
         "total_redelivery_cash": sum(cash["redelivery_cash_inflow"], Decimal("0")),
         "total_reserve_refunds": sum(cash["reserve_refund_outflow"], Decimal("0")),
-        "total_transition_cost": sum(cash["transition_cost"], Decimal("0")),
-        "nominal_net_lessor_cashflow": sum(cash["net_owner_cashflow"], Decimal("0")),
+        "net_reserve_cash_movement": sum(
+            (row["net_reserve_cash_movement"] for row in reserve_cashflow_rows),
+            Decimal("0"),
+        ),
         "maintenance_event_count": len(events),
-        "minimum_dated_cashflow": min(cash["net_owner_cashflow"], default=Decimal("0")),
         "retained_reserve": sum(ledger["retained_by_lessor"], Decimal("0")),
     }
     return _serialize({
@@ -301,20 +326,21 @@ def build_scenario_payload(
             "model_version": "2.1.0",
             "calculation_engine": "deterministic",
             "perspective": "lessor",
-            "valuation_basis": "nominal_cashflow",
+            "valuation_basis": "maintenance_reserve_cashflow",
         },
         "scenario_input": input_payload,
-        "scenario": scenario.to_dict(),
+        "scenario": scenario_output,
         "summary": summary,
         "utilization": _records(utilization),
-        "contract_periods": _records(contracts.periods),
+        "contract_periods": _records(contract_periods),
         "reserve_accounts": _records(contracts.reserve_accounts),
         "events": _records(events),
         "component_states": _records(economics.settlement.component_states),
         "redelivery": _records(economics.settlement.redelivery),
         "reserve_ledger": _records(ledger),
-        "transition_cashflows": _records(economics.transition_cashflows),
-        "cashflows": _records(cash),
+        "reserve_cashflows": _records(
+            pd.DataFrame(reserve_cashflow_rows)
+        ),
     })
 
 
@@ -330,7 +356,7 @@ def compare_scenario_payloads(
     if len(ids) != len(set(ids)):
         raise ValueError("scenario identifiers must be unique for comparison")
     return {
-        "comparison_basis": "nominal_lessor_cashflow_and_technical_exposure",
+        "comparison_basis": "maintenance_reserve_funding_and_technical_exposure",
         "scenario_count": len(results),
         "summaries": [
             {"scenario_id": result["scenario"]["scenario_id"],
@@ -338,4 +364,3 @@ def compare_scenario_payloads(
             for result in results
         ],
     }
-

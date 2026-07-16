@@ -1,1215 +1,4 @@
 {
-  "cashflows": [
-    {
-      "date": "2026-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "236637.3193847272898327168320",
-      "net_owner_cashflow": "536637.3193847272898327168320",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2026-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "236637.3193847272898327168320",
-      "net_owner_cashflow": "536637.3193847272898327168320",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2026-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "236637.3193847272898327168320",
-      "net_owner_cashflow": "536637.3193847272898327168320",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2026-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "236637.3193847272898327168320",
-      "net_owner_cashflow": "536637.3193847272898327168320",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2026-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "236637.3193847272898327168320",
-      "net_owner_cashflow": "536637.3193847272898327168320",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2026-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "236637.3193847272898327168320",
-      "net_owner_cashflow": "536637.3193847272898327168320",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-02-11",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "11014520.30357987695405624798",
-      "maintenance_event_cost": "11769873.42298289623635562390",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-11014520.30357987695405624798",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "11014520.30357987695405624798",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-02-28",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2027-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "246756.1424279656843214555999",
-      "net_owner_cashflow": "546756.1424279656843214555999",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-02-29",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-11-26",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "700785.4642765735002720596016",
-      "maintenance_event_cost": "700785.4642765735002720596016",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-700785.4642765735002720596016",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "700785.4642765735002720596016",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2028-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "257315.3017565677512953711820",
-      "net_owner_cashflow": "557315.3017565677512953711820",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "268334.1869590995192510063176",
-      "net_owner_cashflow": "568334.1869590995192510063176",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-02-28",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "268334.1869590995192510063176",
-      "net_owner_cashflow": "568334.1869590995192510063176",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "268334.1869590995192510063176",
-      "net_owner_cashflow": "568334.1869590995192510063176",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "268334.1869590995192510063176",
-      "net_owner_cashflow": "568334.1869590995192510063176",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "268334.1869590995192510063176",
-      "net_owner_cashflow": "568334.1869590995192510063176",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "2553232.488287242165855993445",
-      "maintenance_event_cost": "2583031.092234659031403890681",
-      "maintenance_reserve_inflow": "268334.1869590995192510063176",
-      "net_owner_cashflow": "-1984898.301328142646604987127",
-      "redelivery_cash_inflow": "0E-22",
-      "rent_inflow": "300000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "2553232.488287242165855993445",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-07-01",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-370000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "370000"
-    },
-    {
-      "date": "2029-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-85000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "85000"
-    },
-    {
-      "date": "2029-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "272313.3161337013154557930009",
-      "net_owner_cashflow": "607313.3161337013154557930009",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "272313.3161337013154557930009",
-      "net_owner_cashflow": "607313.3161337013154557930009",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "272313.3161337013154557930009",
-      "net_owner_cashflow": "607313.3161337013154557930009",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "272313.3161337013154557930009",
-      "net_owner_cashflow": "607313.3161337013154557930009",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2029-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "272313.3161337013154557930009",
-      "net_owner_cashflow": "607313.3161337013154557930009",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-02-28",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2030-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "283962.4292060755668824867404",
-      "net_owner_cashflow": "618962.4292060755668824867404",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-02-28",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2031-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "296118.6122247003423079015940",
-      "net_owner_cashflow": "631118.6122247003423079015940",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2032-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "308804.1973972896084462079716",
-      "net_owner_cashflow": "7815007.975053729414845896474",
-      "redelivery_cash_inflow": "7171203.777656439806399688502",
-      "rent_inflow": "335000",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "0"
-    },
-    {
-      "date": "2032-02-29",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2032-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-01-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-02-28",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-03-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-04-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-05-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-06-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-07-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-08-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-09-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-10-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-11-30",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    },
-    {
-      "date": "2033-12-31",
-      "lessor_direct_maintenance_outflow": "0",
-      "maintenance_cost": "0",
-      "maintenance_event_cost": "0",
-      "maintenance_reserve_inflow": "0",
-      "net_owner_cashflow": "-45000",
-      "redelivery_cash_inflow": "0",
-      "rent_inflow": "0",
-      "reserve_refund_outflow": "0",
-      "reserve_reimbursement_outflow": "0",
-      "transition_cost": "45000"
-    }
-  ],
   "component_states": [
     {
       "component_code": "6Y",
@@ -1348,10 +137,7 @@
       "modeled_day_count": 31,
       "period": 1,
       "period_end": "2026-07-31",
-      "period_start": "2026-07-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "536637.3193847272898327168320"
+      "period_start": "2026-07-01"
     },
     {
       "contractual_due_date": "2026-08-31",
@@ -1368,10 +154,7 @@
       "modeled_day_count": 31,
       "period": 2,
       "period_end": "2026-08-31",
-      "period_start": "2026-08-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "536637.3193847272898327168320"
+      "period_start": "2026-08-01"
     },
     {
       "contractual_due_date": "2026-09-30",
@@ -1388,10 +171,7 @@
       "modeled_day_count": 30,
       "period": 3,
       "period_end": "2026-09-30",
-      "period_start": "2026-09-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "536637.3193847272898327168320"
+      "period_start": "2026-09-01"
     },
     {
       "contractual_due_date": "2026-10-31",
@@ -1408,10 +188,7 @@
       "modeled_day_count": 31,
       "period": 4,
       "period_end": "2026-10-31",
-      "period_start": "2026-10-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "536637.3193847272898327168320"
+      "period_start": "2026-10-01"
     },
     {
       "contractual_due_date": "2026-11-30",
@@ -1428,10 +205,7 @@
       "modeled_day_count": 30,
       "period": 5,
       "period_end": "2026-11-30",
-      "period_start": "2026-11-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "536637.3193847272898327168320"
+      "period_start": "2026-11-01"
     },
     {
       "contractual_due_date": "2026-12-31",
@@ -1448,10 +222,7 @@
       "modeled_day_count": 31,
       "period": 6,
       "period_end": "2026-12-31",
-      "period_start": "2026-12-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "536637.3193847272898327168320"
+      "period_start": "2026-12-01"
     },
     {
       "contractual_due_date": "2027-01-31",
@@ -1468,10 +239,7 @@
       "modeled_day_count": 31,
       "period": 7,
       "period_end": "2027-01-31",
-      "period_start": "2027-01-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-01-01"
     },
     {
       "contractual_due_date": "2027-02-28",
@@ -1488,10 +256,7 @@
       "modeled_day_count": 28,
       "period": 8,
       "period_end": "2027-02-28",
-      "period_start": "2027-02-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-02-01"
     },
     {
       "contractual_due_date": "2027-03-31",
@@ -1508,10 +273,7 @@
       "modeled_day_count": 31,
       "period": 9,
       "period_end": "2027-03-31",
-      "period_start": "2027-03-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-03-01"
     },
     {
       "contractual_due_date": "2027-04-30",
@@ -1528,10 +290,7 @@
       "modeled_day_count": 30,
       "period": 10,
       "period_end": "2027-04-30",
-      "period_start": "2027-04-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-04-01"
     },
     {
       "contractual_due_date": "2027-05-31",
@@ -1548,10 +307,7 @@
       "modeled_day_count": 31,
       "period": 11,
       "period_end": "2027-05-31",
-      "period_start": "2027-05-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-05-01"
     },
     {
       "contractual_due_date": "2027-06-30",
@@ -1568,10 +324,7 @@
       "modeled_day_count": 30,
       "period": 12,
       "period_end": "2027-06-30",
-      "period_start": "2027-06-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-06-01"
     },
     {
       "contractual_due_date": "2027-07-31",
@@ -1588,10 +341,7 @@
       "modeled_day_count": 31,
       "period": 13,
       "period_end": "2027-07-31",
-      "period_start": "2027-07-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-07-01"
     },
     {
       "contractual_due_date": "2027-08-31",
@@ -1608,10 +358,7 @@
       "modeled_day_count": 31,
       "period": 14,
       "period_end": "2027-08-31",
-      "period_start": "2027-08-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-08-01"
     },
     {
       "contractual_due_date": "2027-09-30",
@@ -1628,10 +375,7 @@
       "modeled_day_count": 30,
       "period": 15,
       "period_end": "2027-09-30",
-      "period_start": "2027-09-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-09-01"
     },
     {
       "contractual_due_date": "2027-10-31",
@@ -1648,10 +392,7 @@
       "modeled_day_count": 31,
       "period": 16,
       "period_end": "2027-10-31",
-      "period_start": "2027-10-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-10-01"
     },
     {
       "contractual_due_date": "2027-11-30",
@@ -1668,10 +409,7 @@
       "modeled_day_count": 30,
       "period": 17,
       "period_end": "2027-11-30",
-      "period_start": "2027-11-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-11-01"
     },
     {
       "contractual_due_date": "2027-12-31",
@@ -1688,10 +426,7 @@
       "modeled_day_count": 31,
       "period": 18,
       "period_end": "2027-12-31",
-      "period_start": "2027-12-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "546756.1424279656843214555999"
+      "period_start": "2027-12-01"
     },
     {
       "contractual_due_date": "2028-01-31",
@@ -1708,10 +443,7 @@
       "modeled_day_count": 31,
       "period": 19,
       "period_end": "2028-01-31",
-      "period_start": "2028-01-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-01-01"
     },
     {
       "contractual_due_date": "2028-02-29",
@@ -1728,10 +460,7 @@
       "modeled_day_count": 29,
       "period": 20,
       "period_end": "2028-02-29",
-      "period_start": "2028-02-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-02-01"
     },
     {
       "contractual_due_date": "2028-03-31",
@@ -1748,10 +477,7 @@
       "modeled_day_count": 31,
       "period": 21,
       "period_end": "2028-03-31",
-      "period_start": "2028-03-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-03-01"
     },
     {
       "contractual_due_date": "2028-04-30",
@@ -1768,10 +494,7 @@
       "modeled_day_count": 30,
       "period": 22,
       "period_end": "2028-04-30",
-      "period_start": "2028-04-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-04-01"
     },
     {
       "contractual_due_date": "2028-05-31",
@@ -1788,10 +511,7 @@
       "modeled_day_count": 31,
       "period": 23,
       "period_end": "2028-05-31",
-      "period_start": "2028-05-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-05-01"
     },
     {
       "contractual_due_date": "2028-06-30",
@@ -1808,10 +528,7 @@
       "modeled_day_count": 30,
       "period": 24,
       "period_end": "2028-06-30",
-      "period_start": "2028-06-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-06-01"
     },
     {
       "contractual_due_date": "2028-07-31",
@@ -1828,10 +545,7 @@
       "modeled_day_count": 31,
       "period": 25,
       "period_end": "2028-07-31",
-      "period_start": "2028-07-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-07-01"
     },
     {
       "contractual_due_date": "2028-08-31",
@@ -1848,10 +562,7 @@
       "modeled_day_count": 31,
       "period": 26,
       "period_end": "2028-08-31",
-      "period_start": "2028-08-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-08-01"
     },
     {
       "contractual_due_date": "2028-09-30",
@@ -1868,10 +579,7 @@
       "modeled_day_count": 30,
       "period": 27,
       "period_end": "2028-09-30",
-      "period_start": "2028-09-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-09-01"
     },
     {
       "contractual_due_date": "2028-10-31",
@@ -1888,10 +596,7 @@
       "modeled_day_count": 31,
       "period": 28,
       "period_end": "2028-10-31",
-      "period_start": "2028-10-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-10-01"
     },
     {
       "contractual_due_date": "2028-11-30",
@@ -1908,10 +613,7 @@
       "modeled_day_count": 30,
       "period": 29,
       "period_end": "2028-11-30",
-      "period_start": "2028-11-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-11-01"
     },
     {
       "contractual_due_date": "2028-12-31",
@@ -1928,10 +630,7 @@
       "modeled_day_count": 31,
       "period": 30,
       "period_end": "2028-12-31",
-      "period_start": "2028-12-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "557315.3017565677512953711820"
+      "period_start": "2028-12-01"
     },
     {
       "contractual_due_date": "2029-01-31",
@@ -1948,10 +647,7 @@
       "modeled_day_count": 31,
       "period": 31,
       "period_end": "2029-01-31",
-      "period_start": "2029-01-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "568334.1869590995192510063176"
+      "period_start": "2029-01-01"
     },
     {
       "contractual_due_date": "2029-02-28",
@@ -1968,10 +664,7 @@
       "modeled_day_count": 28,
       "period": 32,
       "period_end": "2029-02-28",
-      "period_start": "2029-02-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "568334.1869590995192510063176"
+      "period_start": "2029-02-01"
     },
     {
       "contractual_due_date": "2029-03-31",
@@ -1988,10 +681,7 @@
       "modeled_day_count": 31,
       "period": 33,
       "period_end": "2029-03-31",
-      "period_start": "2029-03-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "568334.1869590995192510063176"
+      "period_start": "2029-03-01"
     },
     {
       "contractual_due_date": "2029-04-30",
@@ -2008,10 +698,7 @@
       "modeled_day_count": 30,
       "period": 34,
       "period_end": "2029-04-30",
-      "period_start": "2029-04-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "568334.1869590995192510063176"
+      "period_start": "2029-04-01"
     },
     {
       "contractual_due_date": "2029-05-31",
@@ -2028,10 +715,7 @@
       "modeled_day_count": 31,
       "period": 35,
       "period_end": "2029-05-31",
-      "period_start": "2029-05-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "568334.1869590995192510063176"
+      "period_start": "2029-05-01"
     },
     {
       "contractual_due_date": "2029-06-30",
@@ -2048,10 +732,7 @@
       "modeled_day_count": 30,
       "period": 36,
       "period_end": "2029-06-30",
-      "period_start": "2029-06-01",
-      "rent_inflow": "300000",
-      "rent_rate": "300000",
-      "total_contract_inflow": "568334.1869590995192510063176"
+      "period_start": "2029-06-01"
     },
     {
       "contractual_due_date": "2029-08-31",
@@ -2068,10 +749,7 @@
       "modeled_day_count": 31,
       "period": 37,
       "period_end": "2029-08-31",
-      "period_start": "2029-08-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "607313.3161337013154557930009"
+      "period_start": "2029-08-01"
     },
     {
       "contractual_due_date": "2029-09-30",
@@ -2088,10 +766,7 @@
       "modeled_day_count": 30,
       "period": 38,
       "period_end": "2029-09-30",
-      "period_start": "2029-09-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "607313.3161337013154557930009"
+      "period_start": "2029-09-01"
     },
     {
       "contractual_due_date": "2029-10-31",
@@ -2108,10 +783,7 @@
       "modeled_day_count": 31,
       "period": 39,
       "period_end": "2029-10-31",
-      "period_start": "2029-10-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "607313.3161337013154557930009"
+      "period_start": "2029-10-01"
     },
     {
       "contractual_due_date": "2029-11-30",
@@ -2128,10 +800,7 @@
       "modeled_day_count": 30,
       "period": 40,
       "period_end": "2029-11-30",
-      "period_start": "2029-11-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "607313.3161337013154557930009"
+      "period_start": "2029-11-01"
     },
     {
       "contractual_due_date": "2029-12-31",
@@ -2148,10 +817,7 @@
       "modeled_day_count": 31,
       "period": 41,
       "period_end": "2029-12-31",
-      "period_start": "2029-12-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "607313.3161337013154557930009"
+      "period_start": "2029-12-01"
     },
     {
       "contractual_due_date": "2030-01-31",
@@ -2168,10 +834,7 @@
       "modeled_day_count": 31,
       "period": 42,
       "period_end": "2030-01-31",
-      "period_start": "2030-01-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-01-01"
     },
     {
       "contractual_due_date": "2030-02-28",
@@ -2188,10 +851,7 @@
       "modeled_day_count": 28,
       "period": 43,
       "period_end": "2030-02-28",
-      "period_start": "2030-02-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-02-01"
     },
     {
       "contractual_due_date": "2030-03-31",
@@ -2208,10 +868,7 @@
       "modeled_day_count": 31,
       "period": 44,
       "period_end": "2030-03-31",
-      "period_start": "2030-03-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-03-01"
     },
     {
       "contractual_due_date": "2030-04-30",
@@ -2228,10 +885,7 @@
       "modeled_day_count": 30,
       "period": 45,
       "period_end": "2030-04-30",
-      "period_start": "2030-04-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-04-01"
     },
     {
       "contractual_due_date": "2030-05-31",
@@ -2248,10 +902,7 @@
       "modeled_day_count": 31,
       "period": 46,
       "period_end": "2030-05-31",
-      "period_start": "2030-05-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-05-01"
     },
     {
       "contractual_due_date": "2030-06-30",
@@ -2268,10 +919,7 @@
       "modeled_day_count": 30,
       "period": 47,
       "period_end": "2030-06-30",
-      "period_start": "2030-06-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-06-01"
     },
     {
       "contractual_due_date": "2030-07-31",
@@ -2288,10 +936,7 @@
       "modeled_day_count": 31,
       "period": 48,
       "period_end": "2030-07-31",
-      "period_start": "2030-07-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-07-01"
     },
     {
       "contractual_due_date": "2030-08-31",
@@ -2308,10 +953,7 @@
       "modeled_day_count": 31,
       "period": 49,
       "period_end": "2030-08-31",
-      "period_start": "2030-08-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-08-01"
     },
     {
       "contractual_due_date": "2030-09-30",
@@ -2328,10 +970,7 @@
       "modeled_day_count": 30,
       "period": 50,
       "period_end": "2030-09-30",
-      "period_start": "2030-09-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-09-01"
     },
     {
       "contractual_due_date": "2030-10-31",
@@ -2348,10 +987,7 @@
       "modeled_day_count": 31,
       "period": 51,
       "period_end": "2030-10-31",
-      "period_start": "2030-10-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-10-01"
     },
     {
       "contractual_due_date": "2030-11-30",
@@ -2368,10 +1004,7 @@
       "modeled_day_count": 30,
       "period": 52,
       "period_end": "2030-11-30",
-      "period_start": "2030-11-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-11-01"
     },
     {
       "contractual_due_date": "2030-12-31",
@@ -2388,10 +1021,7 @@
       "modeled_day_count": 31,
       "period": 53,
       "period_end": "2030-12-31",
-      "period_start": "2030-12-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "618962.4292060755668824867404"
+      "period_start": "2030-12-01"
     },
     {
       "contractual_due_date": "2031-01-31",
@@ -2408,10 +1038,7 @@
       "modeled_day_count": 31,
       "period": 54,
       "period_end": "2031-01-31",
-      "period_start": "2031-01-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-01-01"
     },
     {
       "contractual_due_date": "2031-02-28",
@@ -2428,10 +1055,7 @@
       "modeled_day_count": 28,
       "period": 55,
       "period_end": "2031-02-28",
-      "period_start": "2031-02-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-02-01"
     },
     {
       "contractual_due_date": "2031-03-31",
@@ -2448,10 +1072,7 @@
       "modeled_day_count": 31,
       "period": 56,
       "period_end": "2031-03-31",
-      "period_start": "2031-03-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-03-01"
     },
     {
       "contractual_due_date": "2031-04-30",
@@ -2468,10 +1089,7 @@
       "modeled_day_count": 30,
       "period": 57,
       "period_end": "2031-04-30",
-      "period_start": "2031-04-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-04-01"
     },
     {
       "contractual_due_date": "2031-05-31",
@@ -2488,10 +1106,7 @@
       "modeled_day_count": 31,
       "period": 58,
       "period_end": "2031-05-31",
-      "period_start": "2031-05-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-05-01"
     },
     {
       "contractual_due_date": "2031-06-30",
@@ -2508,10 +1123,7 @@
       "modeled_day_count": 30,
       "period": 59,
       "period_end": "2031-06-30",
-      "period_start": "2031-06-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-06-01"
     },
     {
       "contractual_due_date": "2031-07-31",
@@ -2528,10 +1140,7 @@
       "modeled_day_count": 31,
       "period": 60,
       "period_end": "2031-07-31",
-      "period_start": "2031-07-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-07-01"
     },
     {
       "contractual_due_date": "2031-08-31",
@@ -2548,10 +1157,7 @@
       "modeled_day_count": 31,
       "period": 61,
       "period_end": "2031-08-31",
-      "period_start": "2031-08-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-08-01"
     },
     {
       "contractual_due_date": "2031-09-30",
@@ -2568,10 +1174,7 @@
       "modeled_day_count": 30,
       "period": 62,
       "period_end": "2031-09-30",
-      "period_start": "2031-09-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-09-01"
     },
     {
       "contractual_due_date": "2031-10-31",
@@ -2588,10 +1191,7 @@
       "modeled_day_count": 31,
       "period": 63,
       "period_end": "2031-10-31",
-      "period_start": "2031-10-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-10-01"
     },
     {
       "contractual_due_date": "2031-11-30",
@@ -2608,10 +1208,7 @@
       "modeled_day_count": 30,
       "period": 64,
       "period_end": "2031-11-30",
-      "period_start": "2031-11-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-11-01"
     },
     {
       "contractual_due_date": "2031-12-31",
@@ -2628,10 +1225,7 @@
       "modeled_day_count": 31,
       "period": 65,
       "period_end": "2031-12-31",
-      "period_start": "2031-12-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "631118.6122247003423079015940"
+      "period_start": "2031-12-01"
     },
     {
       "contractual_due_date": "2032-01-31",
@@ -2648,10 +1242,7 @@
       "modeled_day_count": 31,
       "period": 66,
       "period_end": "2032-01-31",
-      "period_start": "2032-01-01",
-      "rent_inflow": "335000",
-      "rent_rate": "335000",
-      "total_contract_inflow": "643804.1973972896084462079716"
+      "period_start": "2032-01-01"
     }
   ],
   "events": [
@@ -10140,6 +8731,734 @@
       "reserve_units": "250"
     }
   ],
+  "reserve_cashflows": [
+    {
+      "closing_balance": "11766212.94915805381351535876",
+      "date": "2026-07-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "236637.3193847272898327168320",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "236637.3193847272898327168320",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "12002850.26854278110334807559",
+      "date": "2026-08-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "236637.3193847272898327168320",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "236637.3193847272898327168320",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "12239487.58792750839318079242",
+      "date": "2026-09-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "236637.3193847272898327168320",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "236637.3193847272898327168320",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "12476124.90731223568301350925",
+      "date": "2026-10-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "236637.3193847272898327168320",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "236637.3193847272898327168320",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "12712762.22669696297284622608",
+      "date": "2026-11-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "236637.3193847272898327168320",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "236637.3193847272898327168320",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "12949399.54608169026267894291",
+      "date": "2026-12-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "236637.3193847272898327168320",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "236637.3193847272898327168320",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "13196155.68850965594700039851",
+      "date": "2027-01-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "2428391.527357744677265606128",
+      "date": "2027-02-28",
+      "event_cost": "11769873.42298289623635562390",
+      "net_reserve_cash_movement": "-10767764.16115191126973479238",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "11014520.30357987695405624798",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "755353.119403019282299375920"
+    },
+    {
+      "closing_balance": "2675147.669785710361587061728",
+      "date": "2027-03-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "2921903.812213676045908517328",
+      "date": "2027-04-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3168659.954641641730229972928",
+      "date": "2027-05-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3415416.097069607414551428528",
+      "date": "2027-06-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3662172.239497573098872884128",
+      "date": "2027-07-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3908928.381925538783194339730",
+      "date": "2027-08-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4155684.524353504467515795330",
+      "date": "2027-09-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4402440.666781470151837250929",
+      "date": "2027-10-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4649196.809209435836158706529",
+      "date": "2027-11-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4895952.951637401520480162129",
+      "date": "2027-12-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "246756.1424279656843214555999",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "246756.1424279656843214555999",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5153268.253393969271775533312",
+      "date": "2028-01-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5410583.555150537023070904495",
+      "date": "2028-02-29",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5667898.856907104774366275678",
+      "date": "2028-03-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5925214.158663672525661646861",
+      "date": "2028-04-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6182529.460420240276957018044",
+      "date": "2028-05-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6439844.762176808028252389227",
+      "date": "2028-06-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6697160.063933375779547760410",
+      "date": "2028-07-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6954475.365689943530843131592",
+      "date": "2028-08-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7211790.667446511282138502776",
+      "date": "2028-09-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7469105.969203079033433873958",
+      "date": "2028-10-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7025635.806683073284457185540",
+      "date": "2028-11-30",
+      "event_cost": "700785.4642765735002720596016",
+      "net_reserve_cash_movement": "-443470.1625200057489766884196",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "700785.4642765735002720596016",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0E-22"
+    },
+    {
+      "closing_balance": "7282951.108439641035752556722",
+      "date": "2028-12-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "257315.3017565677512953711820",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "257315.3017565677512953711820",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7551285.295398740555003563040",
+      "date": "2029-01-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "268334.1869590995192510063176",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "268334.1869590995192510063176",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7819619.482357840074254569359",
+      "date": "2029-02-28",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "268334.1869590995192510063176",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "268334.1869590995192510063176",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "8087953.669316939593505575677",
+      "date": "2029-03-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "268334.1869590995192510063176",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "268334.1869590995192510063176",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "8356287.856276039112756581995",
+      "date": "2029-04-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "268334.1869590995192510063176",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "268334.1869590995192510063176",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "8624622.043235138632007588313",
+      "date": "2029-05-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "268334.1869590995192510063176",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "268334.1869590995192510063176",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "0",
+      "date": "2029-06-30",
+      "event_cost": "2583031.092234659031403890681",
+      "net_reserve_cash_movement": "-2284898.301328142646604987127",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "268334.1869590995192510063176",
+      "reserve_outflow": "2553232.488287242165855993445",
+      "retained_by_lessor": "6339723.741906995985402601186",
+      "unfunded_amount": "29798.603947416865547897236"
+    },
+    {
+      "closing_balance": "272313.3161337013154557930009",
+      "date": "2029-08-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "272313.3161337013154557930009",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "272313.3161337013154557930009",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "544626.6322674026309115860017",
+      "date": "2029-09-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "272313.3161337013154557930009",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "272313.3161337013154557930009",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "816939.9484011039463673790026",
+      "date": "2029-10-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "272313.3161337013154557930009",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "272313.3161337013154557930009",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "1089253.264534805261823172004",
+      "date": "2029-11-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "272313.3161337013154557930009",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "272313.3161337013154557930009",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "1361566.580668506577278965004",
+      "date": "2029-12-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "272313.3161337013154557930009",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "272313.3161337013154557930009",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "1645529.009874582144161451745",
+      "date": "2030-01-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "1929491.439080657711043938485",
+      "date": "2030-02-28",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "2213453.868286733277926425226",
+      "date": "2030-03-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "2497416.297492808844808911967",
+      "date": "2030-04-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "2781378.726698884411691398707",
+      "date": "2030-05-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3065341.155904959978573885446",
+      "date": "2030-06-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3349303.585111035545456372186",
+      "date": "2030-07-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3633266.014317111112338858926",
+      "date": "2030-08-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "3917228.443523186679221345665",
+      "date": "2030-09-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4201190.872729262246103832405",
+      "date": "2030-10-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4485153.301935337812986319145",
+      "date": "2030-11-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "4769115.731141413379868805884",
+      "date": "2030-12-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "283962.4292060755668824867404",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "283962.4292060755668824867404",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5065234.343366113722176707479",
+      "date": "2031-01-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5361352.955590814064484609073",
+      "date": "2031-02-28",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5657471.567815514406792510668",
+      "date": "2031-03-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "5953590.180040214749100412262",
+      "date": "2031-04-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6249708.792264915091408313857",
+      "date": "2031-05-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6545827.404489615433716215451",
+      "date": "2031-06-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "6841946.016714315776024117045",
+      "date": "2031-07-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7138064.628939016118332018640",
+      "date": "2031-08-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7434183.241163716460639920234",
+      "date": "2031-09-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "7730301.853388416802947821828",
+      "date": "2031-10-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "8026420.465613117145255723423",
+      "date": "2031-11-30",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "8322539.077837817487563625017",
+      "date": "2031-12-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "296118.6122247003423079015940",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "296118.6122247003423079015940",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "0",
+      "unfunded_amount": "0"
+    },
+    {
+      "closing_balance": "0",
+      "date": "2032-01-31",
+      "event_cost": "0",
+      "net_reserve_cash_movement": "308804.1973972896084462079716",
+      "refund_to_lessee": "0",
+      "reserve_inflow": "308804.1973972896084462079716",
+      "reserve_outflow": "0",
+      "retained_by_lessor": "8631343.275235107096009832990",
+      "unfunded_amount": "0"
+    }
+  ],
   "reserve_ledger": [
     {
       "account_closed": false,
@@ -16417,7 +15736,7 @@
     "calculation_engine": "deterministic",
     "model_version": "2.1.0",
     "perspective": "lessor",
-    "valuation_basis": "nominal_cashflow"
+    "valuation_basis": "maintenance_reserve_cashflow"
   },
   "scenario": {
     "analysis_date": "2026-06-30",
@@ -16528,13 +15847,11 @@
     },
     "leases": [
       {
-        "annual_rent_escalation": "0",
         "contract_id": "lease-1",
         "due_day": null,
         "end_date": "2029-06-30",
         "fixed_cash_proration": "actual_days",
         "lessee": "Demo Airline",
-        "monthly_rent": "300000",
         "redelivery_conditions": [
           {
             "component_code": "6Y",
@@ -16557,7 +15874,6 @@
             "minimum_remaining_ratio": "0.35"
           }
         ],
-        "rent_base_date": "2017-06-30",
         "reserve_accounts": [
           {
             "account_id": "lease-1:6Y",
@@ -16608,13 +15924,11 @@
         "start_date": "2017-06-30"
       },
       {
-        "annual_rent_escalation": "0",
         "contract_id": "follow-on-1",
         "due_day": null,
         "end_date": "2032-01-31",
         "fixed_cash_proration": "actual_days",
         "lessee": "Follow-on Airline",
-        "monthly_rent": "335000",
         "redelivery_conditions": [
           {
             "component_code": "6Y",
@@ -16637,7 +15951,6 @@
             "minimum_remaining_ratio": "0.50"
           }
         ],
-        "rent_base_date": "2029-08-01",
         "reserve_accounts": [
           {
             "account_id": "follow-on-1:6Y",
@@ -16697,8 +16010,8 @@
         "costs": [],
         "description": "Remarketing and delivery preparation",
         "end_date": "2029-07-31",
-        "fixed_cost": "370000",
-        "monthly_cost": "85000",
+        "fixed_cost": "0",
+        "monthly_cost": "0",
         "start_date": "2029-07-01",
         "transition_id": "preparation"
       },
@@ -16707,7 +16020,7 @@
         "description": "Post-lease holding",
         "end_date": "2033-12-31",
         "fixed_cost": "0",
-        "monthly_cost": "45000",
+        "monthly_cost": "0",
         "start_date": "2032-02-01",
         "transition_id": "terminal-holding"
       }
@@ -16807,7 +16120,6 @@
         "lessee": "Demo Airline",
         "monthly_fc": "95",
         "monthly_fh": "260",
-        "monthly_rent": "300000",
         "redelivery_minimum_ratio": "0.35",
         "reserve_rate_multiplier": "1",
         "start_date": "2017-06-30",
@@ -16816,9 +16128,9 @@
       {
         "description": "Remarketing and delivery preparation",
         "end_date": "2029-07-31",
-        "fixed_cost": "370000",
+        "fixed_cost": "0",
         "id": "preparation",
-        "monthly_cost": "85000",
+        "monthly_cost": "0",
         "monthly_fc": "0",
         "monthly_fh": "0",
         "start_date": "2029-07-01",
@@ -16831,7 +16143,6 @@
         "lessee": "Follow-on Airline",
         "monthly_fc": "95",
         "monthly_fh": "250",
-        "monthly_rent": "335000",
         "redelivery_minimum_ratio": "0.50",
         "reserve_rate_multiplier": "1.05",
         "start_date": "2029-08-01",
@@ -16842,7 +16153,7 @@
         "end_date": "2033-12-31",
         "fixed_cost": "0",
         "id": "terminal-holding",
-        "monthly_cost": "45000",
+        "monthly_cost": "0",
         "monthly_fc": "0",
         "monthly_fh": "0",
         "start_date": "2032-02-01",
@@ -16855,247 +16166,17 @@
     "forecast_start": "2026-06-30",
     "lease_count": 2,
     "maintenance_event_count": 5,
-    "minimum_dated_cashflow": "-11014520.30357987695405624798",
-    "nominal_net_lessor_cashflow": "29972695.16502521636412948069",
+    "net_reserve_cash_movement": "3441491.387368776557729792243",
     "retained_reserve": "14971067.01714210308141243418",
     "total_event_cost": "15053689.97949412876803157418",
     "total_lessee_unfunded": "785151.7233504361478472731560",
     "total_lessor_direct_maintenance": "0",
     "total_redelivery_cash": "7171203.777656439806399688502",
-    "total_rent": "20850000",
     "total_reserve_collections": "17710029.64351246917791409322",
     "total_reserve_refunds": "0",
     "total_reserve_reimbursement": "14268538.25614369262018430103",
-    "total_transition_cost": "1490000",
     "transition_count": 2
   },
-  "transition_cashflows": [
-    {
-      "date": "2029-07-01",
-      "description": "Remarketing and delivery preparation",
-      "explicit_cost": "0",
-      "fixed_cost": "370000",
-      "monthly_cost": "0",
-      "total_transition_cost": "370000",
-      "transition_id": "preparation"
-    },
-    {
-      "date": "2029-07-31",
-      "description": "Remarketing and delivery preparation",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "85000",
-      "total_transition_cost": "85000",
-      "transition_id": "preparation"
-    },
-    {
-      "date": "2032-02-29",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-03-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-04-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-05-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-06-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-07-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-08-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-09-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-10-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-11-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2032-12-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-01-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-02-28",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-03-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-04-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-05-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-06-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-07-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-08-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-09-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-10-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-11-30",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    },
-    {
-      "date": "2033-12-31",
-      "description": "Post-lease holding",
-      "explicit_cost": "0",
-      "fixed_cost": "0",
-      "monthly_cost": "45000",
-      "total_transition_cost": "45000",
-      "transition_id": "terminal-holding"
-    }
-  ],
   "utilization": [
     {
       "actual": true,
