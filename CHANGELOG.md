@@ -11,6 +11,7 @@
 - Added transition storage, fixed and dated costs plus complete arbitrary-duration follow-on lifecycle alternatives.
 - Added common-horizon discounted cash flow, terminal value, NPV and incremental NPV comparison.
 - Added an independent V2 scenario-comparison dashboard with editable follow-on lease inputs and full lifecycle audit tables.
+- Added deterministic recommendations, alternative diagnostics and a guarded LLM-ready explanation payload.
 
 ## 1.0.1 — in development
 

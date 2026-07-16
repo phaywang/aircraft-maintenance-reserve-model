@@ -39389,6 +39389,44 @@
     "common_horizon": "2033-12-31",
     "comparison_id": "follow-on-lease-comparison"
   },
+  "decision_analysis": {
+    "alternatives": [
+      {
+        "alternative_id": "30-month",
+        "incremental_npv": "0E-20",
+        "maintenance_event_count": 5,
+        "minimum_period_cashflow": "-11769873.42298289623635562390",
+        "net_redelivery_cash": "7171203.777656439806399688502",
+        "npv": "34807623.81435273456891235691",
+        "rank": 1,
+        "terminal_value_pv_share": "0.4248997315750620654548652094",
+        "total_unfunded_exposure": "785151.7233504361478472731560"
+      },
+      {
+        "alternative_id": "42-month",
+        "incremental_npv": "-9563331.20333649265073664582",
+        "maintenance_event_count": 7,
+        "minimum_period_cashflow": "-14458072.13237185444838646875",
+        "net_redelivery_cash": "117222.9239557469274345641555",
+        "npv": "25244292.61101624191817571109",
+        "rank": 2,
+        "terminal_value_pv_share": "0.5858651000198826418478314541",
+        "total_unfunded_exposure": "7459027.240338079489436733502"
+      }
+    ],
+    "calculation_engine": "deterministic",
+    "decision_signal": "clear_npv_lead",
+    "key_findings": [
+      "30-month has the highest modeled NPV by 9563331.20333649265073664582.",
+      "Its modeled unfunded maintenance exposure is 785151.7233504361478472731560.",
+      "Terminal value present value represents 0.4248997315750620654548652094 of its NPV.",
+      "The comparison signal is clear_npv_lead; assumptions should be tested in sensitivity analysis."
+    ],
+    "npv_lead": "9563331.20333649265073664582",
+    "npv_lead_ratio": "0.3788314194695712759902786312",
+    "recommendation_basis": "highest_common_horizon_npv",
+    "recommended_alternative_id": "30-month"
+  },
   "discounted_cashflows": [
     {
       "alternative_id": "30-month",
@@ -41315,8 +41353,102 @@
       "monthly_rent": "315000"
     }
   },
+  "llm_explanation_payload": {
+    "comparison": {
+      "annual_discount_rate": "0.09",
+      "baseline_id": "30-month",
+      "common_horizon": "2033-12-31",
+      "comparison_id": "follow-on-lease-comparison"
+    },
+    "deterministic_analysis": {
+      "alternatives": [
+        {
+          "alternative_id": "30-month",
+          "incremental_npv": "0E-20",
+          "maintenance_event_count": 5,
+          "minimum_period_cashflow": "-11769873.42298289623635562390",
+          "net_redelivery_cash": "7171203.777656439806399688502",
+          "npv": "34807623.81435273456891235691",
+          "rank": 1,
+          "terminal_value_pv_share": "0.4248997315750620654548652094",
+          "total_unfunded_exposure": "785151.7233504361478472731560"
+        },
+        {
+          "alternative_id": "42-month",
+          "incremental_npv": "-9563331.20333649265073664582",
+          "maintenance_event_count": 7,
+          "minimum_period_cashflow": "-14458072.13237185444838646875",
+          "net_redelivery_cash": "117222.9239557469274345641555",
+          "npv": "25244292.61101624191817571109",
+          "rank": 2,
+          "terminal_value_pv_share": "0.5858651000198826418478314541",
+          "total_unfunded_exposure": "7459027.240338079489436733502"
+        }
+      ],
+      "calculation_engine": "deterministic",
+      "decision_signal": "clear_npv_lead",
+      "key_findings": [
+        "30-month has the highest modeled NPV by 9563331.20333649265073664582.",
+        "Its modeled unfunded maintenance exposure is 785151.7233504361478472731560.",
+        "Terminal value present value represents 0.4248997315750620654548652094 of its NPV.",
+        "The comparison signal is clear_npv_lead; assumptions should be tested in sensitivity analysis."
+      ],
+      "npv_lead": "9563331.20333649265073664582",
+      "npv_lead_ratio": "0.3788314194695712759902786312",
+      "recommendation_basis": "highest_common_horizon_npv",
+      "recommended_alternative_id": "30-month"
+    },
+    "guardrails": {
+      "calculations_are_authoritative": true,
+      "may_change_numbers": false,
+      "may_change_ranking": false,
+      "may_invent_market_data": false,
+      "must_distinguish_fact_from_interpretation": true
+    },
+    "query": "Explain the recommendation, value drivers and material risks.",
+    "schema_version": "1.0",
+    "source_tables": [
+      "valuation_summary",
+      "discounted_cashflows",
+      "maintenance_events",
+      "redelivery_settlement",
+      "reserve_ledger",
+      "lifecycle_cashflows"
+    ],
+    "task": "explain_deterministic_aircraft_lifecycle_results",
+    "valuation_facts": [
+      {
+        "alternative_id": "30-month",
+        "alternative_name": "30-month higher-utilization lease",
+        "common_horizon": "2033-12-31",
+        "incremental_npv": "0E-20",
+        "net_terminal_value": "28250000",
+        "npv": "34807623.81435273456891235691",
+        "total_maintenance_cost": "15053689.97949412876803157418",
+        "total_rent": "20850000",
+        "total_reserves": "17710029.64351246917791409322",
+        "total_transition_cost": "1490000",
+        "undiscounted_operating_cashflow": "29187543.44167478021628220754",
+        "valuation_date": "2026-06-30"
+      },
+      {
+        "alternative_id": "42-month",
+        "alternative_name": "42-month lower-utilization lease",
+        "common_horizon": "2033-12-31",
+        "incremental_npv": "-9563331.20333649265073664582",
+        "net_terminal_value": "28250000",
+        "npv": "25244292.61101624191817571109",
+        "total_maintenance_cost": "29511762.11186598321641804293",
+        "total_rent": "24030000",
+        "total_reserves": "20099268.62554780861026720229",
+        "total_transition_cost": "950000",
+        "undiscounted_operating_cashflow": "13784729.43763757232128372350",
+        "valuation_date": "2026-06-30"
+      }
+    ]
+  },
   "run": {
-    "calculated_at": "2026-07-16T00:36:00.932179+00:00",
+    "calculated_at": "2026-07-16T00:40:26.108186+00:00",
     "calculation_engine": "deterministic",
     "model_version": "2.0.0a0"
   },

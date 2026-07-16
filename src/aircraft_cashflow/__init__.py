@@ -84,6 +84,12 @@ from .valuation import (
     compare_alternatives,
 )
 from .v2_dashboard_service import build_v2_dashboard_payload
+from .analysis import (
+    AlternativeDiagnostic,
+    DecisionAnalysis,
+    build_decision_analysis,
+    build_llm_explanation_payload,
+)
 
 __all__ = [
     "CaseInputs",
@@ -140,6 +146,10 @@ __all__ = [
     "ValuationResult",
     "compare_alternatives",
     "build_v2_dashboard_payload",
+    "AlternativeDiagnostic",
+    "DecisionAnalysis",
+    "build_decision_analysis",
+    "build_llm_explanation_payload",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",

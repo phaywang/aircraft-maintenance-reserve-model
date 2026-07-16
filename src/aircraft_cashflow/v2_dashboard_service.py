@@ -10,6 +10,7 @@ from typing import Any
 import pandas as pd
 
 from .contracts import build_contract_cashflows
+from .analysis import build_decision_analysis, build_llm_explanation_payload
 from .lifecycle_utilization import build_lifecycle_utilization
 from .transitions import build_lifecycle_economics
 from .v2_demo import V2_COMMON_HORIZON, V2_DEMO_INPUTS, build_v2_demo_alternatives
@@ -42,6 +43,10 @@ def build_v2_dashboard_payload(
     alternatives = build_v2_demo_alternatives(alternative_inputs)
     valuation = compare_alternatives(
         alternatives, annual_discount_rate, baseline_id, V2_COMMON_HORIZON
+    )
+    analysis = build_decision_analysis(alternatives, valuation)
+    explanation = build_llm_explanation_payload(
+        alternatives, valuation, analysis
     )
     detail: dict[str, object] = {}
     for alternative in alternatives.alternatives:
@@ -76,5 +81,7 @@ def build_v2_dashboard_payload(
         "editable_inputs": alternative_inputs or V2_DEMO_INPUTS,
         "valuation_summary": _records(valuation.summary),
         "discounted_cashflows": _records(valuation.discounted_cashflows),
+        "decision_analysis": analysis.to_dict(),
+        "llm_explanation_payload": explanation,
         "alternatives": detail,
     })

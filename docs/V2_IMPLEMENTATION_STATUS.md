@@ -12,7 +12,7 @@ Version: `2.0.0a0`
 | V2.4 Transition economics | Implemented | `transitions.py`, transition contract and alternative tests |
 | V2.5 Common-horizon valuation | Implemented | `valuation.py`, valuation contract and NPV tests |
 | V2.6 Scenario dashboard | Implemented | `/v2/` workspace, V2 payload/API and frontend tests |
-| V2.7 Conclusions and explanation | Not started | — |
+| V2.7 Conclusions and explanation | Implemented | `analysis.py`, guarded explanation payload and conclusion tests |
 | V2.8 Sensitivity | Not started | — |
 
 ## V2.0 implementation record
@@ -175,6 +175,27 @@ Browser rendering could not be automated in the execution sandbox because local 
 
 Detailed rules are recorded in `V2_DASHBOARD_CONTRACT.md`.
 
+## V2.7 implementation record
+
+Implemented:
+
+- deterministic ranking by common-horizon NPV;
+- NPV lead, lead ratio and clear-lead/close-call signal;
+- per-alternative maintenance, unfunded exposure, redelivery, cash-flow trough and terminal-value diagnostics;
+- reproducible key findings with no language-model dependency;
+- a structured optional LLM payload containing facts, provenance, query and hard guardrails;
+- dashboard presentation of the deterministic recommendation and LLM boundary.
+
+Verification:
+
+- recommended alternative always equals the highest calculated NPV;
+- NPV lead reconciles to first-ranked less second-ranked NPV;
+- changing the explanation query cannot change calculations or conclusions;
+- payload forbids changing numbers, ranking and inventing market data;
+- blank queries fail and the dashboard payload remains JSON serializable.
+
+Detailed rules are recorded in `V2_ANALYSIS_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.7 will generate deterministic decision conclusions and a structured, optional LLM explanation payload that cannot alter calculations.
+V2.8 will run systematic sensitivities, identify recommendation switches and report value-driver ranges without replacing deterministic base-case results.
