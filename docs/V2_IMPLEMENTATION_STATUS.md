@@ -1,6 +1,6 @@
 # V2 Implementation Status
 
-Branch: `v2-lifecycle`  
+Branch: `v2-lifecycle`
 Version: `2.0.0`
 
 | Stage | Status | Evidence |
