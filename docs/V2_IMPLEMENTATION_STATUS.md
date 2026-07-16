@@ -11,7 +11,7 @@ Version: `2.0.0a0`
 | V2.3 Redelivery settlement | Implemented | `settlement.py`, settlement contract and expiry-order tests |
 | V2.4 Transition economics | Implemented | `transitions.py`, transition contract and alternative tests |
 | V2.5 Common-horizon valuation | Implemented | `valuation.py`, valuation contract and NPV tests |
-| V2.6 Scenario dashboard | Not started | — |
+| V2.6 Scenario dashboard | Implemented | `/v2/` workspace, V2 payload/API and frontend tests |
 | V2.7 Conclusions and explanation | Not started | — |
 | V2.8 Sensitivity | Not started | — |
 
@@ -151,6 +151,30 @@ Verification:
 
 Detailed rules are recorded in `V2_VALUATION_CONTRACT.md`.
 
+## V2.6 implementation record
+
+Implemented:
+
+- a separate professional V2 comparison workspace that preserves the V1 dashboard;
+- decision summary, alternative inputs, utilization, event settlement, valuation and audit views;
+- editable follow-on lease end date, rent, FH, FC, discount rate and baseline;
+- one local API action that recalculates the complete V2 lifecycle;
+- a read-only embedded payload for GitHub Pages;
+- complete alternative audit tables covering utilization through discounted cash flow;
+- direct navigation between V1 and V2.
+
+Verification:
+
+- embedded and recalculated payloads contain both alternatives and all V2 tables;
+- edited rent changes full lifecycle NPV;
+- frontend contains all six views and the local V2 run contract;
+- runtime and GitHub Pages V2 assets are complete and synchronized;
+- JavaScript syntax and full Python regression pass.
+
+Browser rendering could not be automated in the execution sandbox because local socket and file URLs are prohibited. The deterministic payload, static assets and DOM contracts are covered by automated tests; final local visual acceptance uses `http://127.0.0.1:8765/v2/`.
+
+Detailed rules are recorded in `V2_DASHBOARD_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.6 will expose lifecycle inputs, alternative assumptions, event settlement and common-horizon valuation through a scenario comparison dashboard.
+V2.7 will generate deterministic decision conclusions and a structured, optional LLM explanation payload that cannot alter calculations.

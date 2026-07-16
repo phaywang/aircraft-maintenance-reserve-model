@@ -4,6 +4,8 @@ A deterministic Python model and local dashboard for forecasting aircraft utiliz
 
 [Open the hosted dashboard](https://phaywang.github.io/aircraft-maintenance-reserve-model/) — the GitHub Pages version is a read-only demonstration; clone the repository to recalculate edited scenarios.
 
+[Open the V2 lifecycle comparison](https://phaywang.github.io/aircraft-maintenance-reserve-model/v2/) — compares arbitrary-duration follow-on leases on one common valuation horizon.
+
 ![Dashboard overview](docs/images/dashboard-overview.png)
 
 ## What the model does

@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 
 from .config import build_default_case
 from .dashboard_service import case_from_payload, run_dashboard_case
+from .v2_dashboard_service import build_v2_dashboard_payload
 
 
 class DashboardRunStore:
@@ -107,6 +108,12 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
             "/dashboard-data.js": ("dashboard-data.js", "text/javascript; charset=utf-8"),
             "/dashboard-data.json": ("dashboard-data.json", "application/json; charset=utf-8"),
             "/demo-payload.json": ("demo-payload.json", "application/json; charset=utf-8"),
+            "/v2": ("../v2/index.html", "text/html; charset=utf-8"),
+            "/v2/": ("../v2/index.html", "text/html; charset=utf-8"),
+            "/v2/styles.css": ("../v2/styles.css", "text/css; charset=utf-8"),
+            "/v2/app.js": ("../v2/app.js", "text/javascript; charset=utf-8"),
+            "/v2/dashboard-data.js": ("../v2/dashboard-data.js", "text/javascript; charset=utf-8"),
+            "/v2/dashboard-data.json": ("../v2/dashboard-data.json", "application/json; charset=utf-8"),
         }
         if request_path in static_routes:
             self._send_static(*static_routes[request_path])
@@ -121,13 +128,17 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
         if parts == ["api", "cases", "demo"]:
             self._send_json(HTTPStatus.OK, {"case": build_default_case().to_dict()})
             return
+        if parts == ["api", "v2", "demo"]:
+            self._send_json(HTTPStatus.OK, build_v2_dashboard_payload())
+            return
         if len(parts) in (3, 4) and parts[:2] == ["api", "runs"]:
             self._run_section(parts[2], parts[3] if len(parts) == 4 else None)
             return
         self._not_found()
 
     def do_POST(self) -> None:
-        if urlparse(self.path).path != "/api/runs":
+        request_path = urlparse(self.path).path
+        if request_path not in ("/api/runs", "/api/v2/runs"):
             self._not_found()
             return
         try:
@@ -138,10 +149,20 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
             request_payload = json.loads(raw)
             if not isinstance(request_payload, dict):
                 raise ValueError("request body must be a JSON object")
-            case_payload = request_payload.get("case", request_payload)
-            if not isinstance(case_payload, dict):
-                raise ValueError("case must be a JSON object")
-            result = self.server.store.create(case_payload)
+            if request_path == "/api/v2/runs":
+                inputs = request_payload.get("alternative_inputs")
+                if inputs is not None and not isinstance(inputs, dict):
+                    raise ValueError("alternative_inputs must be an object")
+                result = build_v2_dashboard_payload(
+                    request_payload.get("annual_discount_rate", "0.09"),
+                    str(request_payload.get("baseline_id", "30-month")),
+                    inputs,
+                )
+            else:
+                case_payload = request_payload.get("case", request_payload)
+                if not isinstance(case_payload, dict):
+                    raise ValueError("case must be a JSON object")
+                result = self.server.store.create(case_payload)
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
             self._send_json(
                 HTTPStatus.BAD_REQUEST,

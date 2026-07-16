@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Aircraft Lifecycle Scenario Analysis</title>
+  <meta name="description" content="Multi-lease aircraft lifecycle scenario comparison">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="../"><span>AL</span><strong>Aircraft Lifecycle<small>Scenario analysis</small></strong></a>
+    <nav>
+      <button class="active" data-view="overview">01 <span>Decision summary</span></button>
+      <button data-view="alternatives">02 <span>Alternatives</span></button>
+      <button data-view="utilization">03 <span>Utilization</span></button>
+      <button data-view="settlement">04 <span>Events &amp; settlement</span></button>
+      <button data-view="valuation">05 <span>Cash flow &amp; valuation</span></button>
+      <button data-view="audit">06 <span>Model audit</span></button>
+    </nav>
+    <div class="version"><i></i><div><strong>Deterministic engine</strong><small>V2.0.0 alpha</small></div></div>
+  </aside>
+  <main>
+    <header>
+      <div><p class="eyebrow">Follow-on lease decision</p><h1>Lifecycle scenario comparison</h1></div>
+      <div class="header-actions"><a class="button secondary" href="../">Open V1</a><button class="button primary" id="run">Run comparison</button></div>
+    </header>
+    <section class="context">
+      <div><span>Analysis date</span><strong>30 Jun 2026</strong></div>
+      <div><span>Existing lease expiry</span><strong>30 Jun 2029</strong></div>
+      <div><span>Common horizon</span><strong id="horizon">—</strong></div>
+      <div><span>Selected alternative</span><select id="selected-alternative"></select></div>
+    </section>
+    <div id="root"></div>
+  </main>
+  <div id="toast" role="status"></div>
+  <script src="dashboard-data.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

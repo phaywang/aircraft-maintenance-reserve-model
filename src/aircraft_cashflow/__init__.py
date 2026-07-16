@@ -83,6 +83,7 @@ from .valuation import (
     ValuationResult,
     compare_alternatives,
 )
+from .v2_dashboard_service import build_v2_dashboard_payload
 
 __all__ = [
     "CaseInputs",
@@ -138,6 +139,7 @@ __all__ = [
     "VALUATION_SUMMARY_COLUMNS",
     "ValuationResult",
     "compare_alternatives",
+    "build_v2_dashboard_payload",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",
