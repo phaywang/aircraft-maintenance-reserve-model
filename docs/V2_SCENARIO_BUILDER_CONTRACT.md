@@ -21,11 +21,17 @@ lease-specific and close according to that lease's close-out rule.
 
 ## Analysis cut-off
 
-The known state is authoritative at the analysis date and contains:
+The analysis-date state may either be entered from authoritative records or
+reconstructed from modeled history. It contains:
 
 - TTSN and TCSN;
 - component usage since the last event or last calendar event date;
 - current-lease component reserve balances.
+
+Reconstruction applies the aircraft maintenance program and every modeled
+historical lease's utilization and reserve terms from the aircraft's modeled
+starting position through the analysis date. The resolved state and its source
+are returned with the forecast so the opening position remains auditable.
 
 Forecast utilization starts on the following day. If the analysis date is a
 lease expiry and settlement is pending, the final day is modeled before account
@@ -66,6 +72,19 @@ closing_balance = opening_balance
                 - refund_to_lessee
                 - retained_by_lessor
 ```
+
+`balance_before_closeout` is the account balance after the expiry-period reserve
+and event settlement but before refund, retention or redelivery offset. This is
+the directly comparable balance used by the single-lease monthly roll-forward;
+`closing_balance` is the contractual post-closeout balance.
+
+## Editable maintenance and reserve terms
+
+The aircraft maintenance program defines each component's event driver,
+interval, base maintenance cost, cost base date and cost escalation. Every lease
+then defines its own component reserve base rate, rate base date, escalation and
+close-out rule. Changing one component's maintenance cost or lease reserve term
+must not change unrelated component accounts.
 
 ## Primary outputs
 

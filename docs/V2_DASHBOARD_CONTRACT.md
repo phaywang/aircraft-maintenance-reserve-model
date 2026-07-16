@@ -5,12 +5,12 @@ reserve model at `/`; V2 is the lessor lifecycle scenario builder at `/v2/`.
 
 ## Views
 
-1. Aircraft position — scenario identity, analysis date and authoritative known state.
+1. Aircraft position — scenario identity, analysis date, actual or reconstructed known state, and editable technical maintenance assumptions.
 2. Lease timeline — any number of consecutive lease contracts.
 3. Forecast overview — reserve collections, event funding and exposure.
 4. Maintenance funding — event cost, reserve reimbursement, lessee unfunded and off-lease cost.
-5. Reserve accounts — lease-component roll-forward and close-out.
-6. Reserve cash flow — dated reserve inflow, reimbursement, refund and balance ledger.
+5. Reserve accounts — lease-component roll-forward with pre-closeout, refund, retention and post-closeout balances.
+6. Reserve cash flow — aggregate or component-specific dated inflow, reimbursement, unfunded amount and balance ledger.
 7. Scenario comparison — optional comparison of any number of independent scenarios.
 8. Model audit — calculation scope and mandatory expiry sequence.
 

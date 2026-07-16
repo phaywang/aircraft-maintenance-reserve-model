@@ -71,6 +71,21 @@ def _add_months(value: date, months: int) -> date:
     return date(year, month, day)
 
 
+def _calendar_anchor(scenario: Scenario, component: ComponentConfig) -> date:
+    """Resolve an actual or theoretically inferred latest calendar event anchor."""
+
+    known = scenario.known_state
+    explicit = known.component_last_event_dates.get(component.code) if known else None
+    if explicit is not None:
+        return explicit
+    anchor = component.last_event_date or scenario.asset.date_of_manufacture
+    if known is None:
+        return anchor
+    while _add_months(anchor, int(component.interval)) <= known.as_of_date:
+        anchor = _add_months(anchor, int(component.interval))
+    return anchor
+
+
 def _segment_for_date(scenario: Scenario, event_date: date) -> object:
     return next(
         segment for segment in lifecycle_segments(scenario)
@@ -128,10 +143,7 @@ def _calendar_events(
 ) -> list[dict[str, object]]:
     if component.interval != component.interval.to_integral_value():
         raise ValueError(f"calendar interval for {component.code} must be whole months")
-    known = scenario.known_state
-    anchor = (
-        known.component_last_event_dates.get(component.code) if known else None
-    ) or component.last_event_date or scenario.asset.date_of_manufacture
+    anchor = _calendar_anchor(scenario, component)
     interval = int(component.interval)
     next_event = _add_months(anchor, interval)
     while next_event < simulation_start:
@@ -212,9 +224,7 @@ def _component_state(
         (events["component_code"] == component.code) & (events["date"] <= state_date)
     ]
     if component.event_driver is EventDriver.CALENDAR_MONTHS:
-        anchor = (
-            known.component_last_event_dates.get(component.code) if known else None
-        ) or component.last_event_date or scenario.asset.date_of_manufacture
+        anchor = _calendar_anchor(scenario, component)
         last_event = component_events.iloc[-1]["date"] if not component_events.empty else anchor
         next_event = _add_months(last_event, int(component.interval))
         ratio = Decimal(max((next_event - state_date).days, 0)) / Decimal(

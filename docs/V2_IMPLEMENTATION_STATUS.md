@@ -22,10 +22,65 @@ Implemented after business-scope review:
 - scenario duplication and optional comparison support any number of independent paths;
 - Python remains authoritative and the browser only edits and renders inputs/results.
 
-Verification: 133 tests pass; one local HTTP socket test is skipped by the
+Verification: 146 tests pass; one local HTTP socket test is skipped by the
 execution sandbox. The suite covers arbitrary future leases, scenario
 independence, gap/overlap rejection, lessor/lessee maintenance responsibility,
 expiry ordering, V1 regression and V1/V2 route separation.
+
+The business input layer now also supports editable component maintenance
+intervals and costs, lease-specific component reserve rates and escalations,
+and an explicit bridge from balance before lease close-out to the post-closeout
+account balance.
+
+Private reference-workbook reconciliation completed with 746 cent-level checks
+and zero differences across opening state, forecast event funding, reserve
+account roll-forwards and monthly component cash flow. No private workbook data
+or filesystem paths are stored in this repository.
+
+## V2.1 UI/UX decision-workflow review
+
+Implemented after reviewing the external design critique against the actual
+lessor maintenance-reserve scope:
+
+- navigation follows the business sequence: Scenario inputs (01–02), Current
+  scenario analysis (03–06), Cross-scenario decision (07), and Model assurance
+  (08), without creating a separate scenario-manager page;
+- pages 03–06 share a visible analysis trail so event funding, reserve accounts
+  and detailed cash flow read as consecutive views of the same scenario;
+- run actions expose a loading/disabled state, calculation errors remain visible,
+  and changed inputs produce a stale-result warning until recalculated;
+- leases are identified as Historical, Active at analysis, or Proposed, with a
+  calculated duration and an action to copy commercial/utilization terms from
+  the preceding lease;
+- Forecast overview leads with funding risk, includes a reserve/event timeline,
+  and provides a contractual account-flow summary by lease;
+- Maintenance funding provides component and top-up filters, an abbreviated
+  decision table, visible risk counts, and expandable event settlement detail;
+- Reserve accounts leads with one row per lease-component account and keeps the
+  full monthly ledger behind progressive disclosure for audit use;
+- Reserve cash flow now reconciles the All view with separate 6Y, 12Y, LDG, E1
+  and E2 views, including a component funding comparison, component-specific
+  balance timeline and dated lease-account ledger;
+- lease inputs expose optional component-level reserve base-rate overrides, so
+  an identified component shortfall can be tested without changing every rate;
+- Maintenance funding summary metrics follow the selected component rather than
+  continuing to display misleading all-component totals after filtering;
+- Scenario comparison supports an optional user-selected baseline, incremental
+  deltas, and neutral driver descriptions while retaining absolute values and
+  avoiding automatic ranking;
+- keyboard focus states, table header semantics, live run status, and accessible
+  chart descriptions are included.
+
+Not adopted because they would change the business model or add unjustified
+product complexity:
+
+- automatic “best scenario” recommendations;
+- a mandatory two-scenario workflow;
+- rent, discount-rate or NPV analysis in this maintenance-reserve workspace;
+- mobile-first redesign, a separate scenario-management application, or a
+  multi-state document editing workflow;
+- decorative utilization charts and progress bars that could imply a false
+  reserve-funding threshold.
 
 | Stage | Status | Evidence |
 |---|---|---|
@@ -252,12 +307,14 @@ business-facing scenario-builder redesign is complete locally as version
 
 Final audit evidence:
 
-- 133 automated tests pass, with one socket-only test skipped by the execution sandbox;
+- 146 automated tests pass, with one socket-only test skipped by the execution sandbox;
+- private single-lease reference reconciliation passes 746 cent-level checks with zero differences across views 03–06;
 - Python modules and scripts compile and V2 JavaScript passes syntax validation;
 - runtime and GitHub Pages V2 assets are byte-identical;
 - rebuilding the static V2 payload produces no repository difference;
-- all V2 commits use the configured project author;
+- existing V2 commits use the configured project author;
 - no prohibited author-assistance or co-author markers occur in repository content;
-- the `v2-lifecycle` worktree is clean.
+- the current UI/UX and scenario-builder changes are ready for a local commit;
+- private workbook values and paths are excluded from repository content.
 
 Automated browser rendering was unavailable because the execution environment prohibits both local socket binding and local file navigation. The local visual acceptance URL remains `http://127.0.0.1:8765/v2/`.

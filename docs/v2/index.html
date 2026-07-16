@@ -10,13 +10,17 @@
   <aside class="sidebar">
     <a class="brand" href="../"><span>AL</span><strong>Aircraft Lifecycle<small>Lessor forecast</small></strong></a>
     <nav>
+      <span class="nav-group">Scenario inputs</span>
       <button class="active" data-view="setup">01 <span>Aircraft position</span></button>
       <button data-view="timeline">02 <span>Lease timeline</span></button>
+      <span class="nav-group">Current scenario</span>
       <button data-view="overview">03 <span>Forecast overview</span></button>
       <button data-view="funding">04 <span>Maintenance funding</span></button>
       <button data-view="reserves">05 <span>Reserve accounts</span></button>
       <button data-view="cashflow">06 <span>Reserve cash flow</span></button>
+      <span class="nav-group">Cross-scenario decision</span>
       <button data-view="comparison">07 <span>Scenario comparison</span></button>
+      <span class="nav-group">Model assurance</span>
       <button data-view="audit">08 <span>Model audit</span></button>
     </nav>
     <div class="version"><i></i><div><strong>Deterministic engine</strong><small>V2.1 · Lessor</small></div></div>
@@ -24,7 +28,7 @@
   <main>
     <header>
       <div><p class="eyebrow">Aircraft owner decision support</p><h1>Lifecycle forecast workspace</h1></div>
-      <div class="header-actions"><a class="button secondary" href="../">Open V1 case model</a><button class="button secondary" id="duplicate-scenario">Duplicate scenario</button><button class="button primary" id="run">Run forecast</button></div>
+      <div class="header-actions"><a class="button secondary" href="../">Open V1 case model</a><button class="button primary" id="run">Run current</button></div>
     </header>
     <section class="context">
       <div><span>Active scenario</span><select id="scenario-picker"></select></div>
@@ -32,7 +36,18 @@
       <div><span>Forecast end</span><strong id="forecast-end">—</strong></div>
       <div><span>Perspective</span><strong>Lessor / aircraft owner</strong></div>
     </section>
-    <div id="root"></div>
+    <section class="scenario-manager" aria-label="Scenario manager">
+      <div><span>Scenario manager</span><strong id="workspace-status">1 scenario · saved locally</strong></div>
+      <div class="scenario-actions">
+        <button class="button small secondary" id="new-scenario">New</button>
+        <button class="button small secondary" id="duplicate-scenario">Duplicate</button>
+        <button class="button small secondary" id="rename-scenario">Rename</button>
+        <button class="button small danger" id="delete-scenario">Delete</button>
+        <button class="button small secondary" id="run-all">Run all pending</button>
+        <button class="button small secondary" id="save-workspace">Save workspace</button>
+      </div>
+    </section>
+    <div id="root" aria-live="polite" aria-busy="false"></div>
   </main>
   <div id="toast" role="status"></div>
   <script src="dashboard-data.js"></script><script src="app.js" defer></script>
