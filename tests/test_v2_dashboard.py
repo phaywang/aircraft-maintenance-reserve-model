@@ -102,6 +102,11 @@ class ScenarioBuilderTests(unittest.TestCase):
         self.assertIn('"perspective": "lessor"', encoded)
         self.assertIsInstance(self.payload["summary"]["total_reserve_collections"], str)
 
+    def test_opening_reserve_inputs_are_limited_to_cents(self) -> None:
+        balances = default_scenario_input()["known_state"]["reserve_balances"]
+        self.assertTrue(balances)
+        self.assertTrue(all(Decimal(value).as_tuple().exponent == -2 for value in balances.values()))
+
 
 class V2DashboardFrontendTests(unittest.TestCase):
     @classmethod
@@ -120,6 +125,7 @@ class V2DashboardFrontendTests(unittest.TestCase):
         self.assertIn("Duplicate scenario", html)
         self.assertIn("Lessee unfunded", script)
         self.assertIn("reserve_cashflows", script)
+        self.assertIn("inputDecimal", script)
         self.assertNotIn("Rent collected", script)
         self.assertNotIn("Monthly rent", script)
         self.assertNotIn("annual_discount_rate", script)

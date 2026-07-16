@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import asdict
 from datetime import date, datetime, timezone
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from enum import Enum
 from typing import Any
 
@@ -56,6 +56,15 @@ def _records(frame: pd.DataFrame) -> list[dict[str, object]]:
     return [_serialize(row) for row in frame.to_dict("records")]
 
 
+def _input_amount(value: object) -> str:
+    """Format editable currency assumptions to business-level cent precision."""
+
+    return format(
+        Decimal(str(value)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP),
+        ".2f",
+    )
+
+
 def default_scenario_input() -> dict[str, object]:
     """Return one editable, complete lifecycle path for the local dashboard."""
 
@@ -83,10 +92,10 @@ def default_scenario_input() -> dict[str, object]:
                 state.component_last_event_dates
             ),
             "reserve_balances": {
-                code: str(state.reserve_account_balances[f"lease-1:{code}"])
+                code: _input_amount(state.reserve_account_balances[f"lease-1:{code}"])
                 for code in case.components_by_code
             } if hasattr(case, "components_by_code") else {
-                component.code: str(
+                component.code: _input_amount(
                     state.reserve_account_balances[f"lease-1:{component.code}"]
                 )
                 for component in case.components
