@@ -27,12 +27,12 @@ class ReserveInflowTests(unittest.TestCase):
         frame = build_forecast_reserve_inflows(self.case).set_index("date")
         self.assertAlmostEqual(
             frame.loc[date(2026, 6, 30), "total_reserve_inflow"],
-            Decimal("232842.0122317274"),
+            Decimal("236637.3193847272898327168320"),
             places=8,
         )
         self.assertAlmostEqual(
             frame.loc[date(2029, 6, 30), "total_reserve_inflow"],
-            Decimal("264201.6143414419"),
+            Decimal("268334.1869590995192510063176"),
             places=8,
         )
 

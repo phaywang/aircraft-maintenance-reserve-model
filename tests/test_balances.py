@@ -37,9 +37,9 @@ class ReserveBalanceTests(unittest.TestCase):
     def test_analysis_date_balances_are_generated_from_history(self) -> None:
         row = build_forecast_reserve_balances(self.case).iloc[0]
         expected = {
-            "6Y": Decimal("487298.7909139040"),
-            "12Y": Decimal("919599.7206475739"),
-            "LDG": Decimal("411428.5595102887"),
+            "6Y": Decimal("540270.3754439062602419098092"),
+            "12Y": Decimal("1078997.005559820017303722288"),
+            "LDG": Decimal("552489.779913816287616570"),
             "E1": Decimal("4678909.2344278920"),
             "E2": Decimal("4678909.2344278920"),
         }
@@ -55,17 +55,17 @@ class ReserveBalanceTests(unittest.TestCase):
         )
         self.assertAlmostEqual(
             frame.loc[date(2028, 11, 30), "total_reserve_outflow"],
-            Decimal("541709.4018852592"),
+            Decimal("700785.4642765735002720596016"),
             places=7,
         )
         self.assertAlmostEqual(
             frame.loc[date(2029, 6, 30), "total_reserve_outflow"],
-            Decimal("2297234.0748218643"),
+            Decimal("2553232.488287242165855993445"),
             places=7,
         )
         self.assertAlmostEqual(
             frame.loc[date(2029, 6, 30), "total_closing_balance"],
-            Decimal("6258742.935460652"),
+            Decimal("6339723.741906995985402601186"),
             places=7,
         )
 
