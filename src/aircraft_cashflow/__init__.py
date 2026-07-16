@@ -94,6 +94,7 @@ from .sensitivity import (
     SensitivityResult,
     SensitivitySpec,
     SensitivityVariable,
+    UNCERTAINTY_RANGE_COLUMNS,
     default_sensitivity_specs,
     run_sensitivity_analysis,
 )
@@ -160,6 +161,7 @@ __all__ = [
     "SensitivityResult",
     "SensitivitySpec",
     "SensitivityVariable",
+    "UNCERTAINTY_RANGE_COLUMNS",
     "default_sensitivity_specs",
     "run_sensitivity_analysis",
     "build_default_case",

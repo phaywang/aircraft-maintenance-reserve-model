@@ -56,6 +56,11 @@ SENSITIVITY_DRIVER_COLUMNS = (
     "sensitivity_id", "label", "variable", "minimum_npv_gap", "maximum_npv_gap",
     "recommendation_switch_count",
 )
+UNCERTAINTY_RANGE_COLUMNS = (
+    "alternative_id", "base_npv", "minimum_npv", "maximum_npv",
+    "downside_from_base", "upside_from_base", "recommendation_count",
+    "recommendation_frequency",
+)
 
 
 @dataclass(frozen=True)
@@ -63,6 +68,7 @@ class SensitivityResult:
     cases: pd.DataFrame
     alternative_values: pd.DataFrame
     drivers: pd.DataFrame
+    uncertainty_ranges: pd.DataFrame
     base_recommendation_id: str
 
 
@@ -198,9 +204,30 @@ def run_sensitivity_analysis(
             "maximum_npv_gap": max(subset["npv_gap"]),
             "recommendation_switch_count": int(subset["recommendation_changed"].sum()),
         })
+    values = pd.DataFrame(value_rows, columns=SENSITIVITY_VALUE_COLUMNS)
+    uncertainty_rows = []
+    for alternative_id in sorted(values["alternative_id"].unique()):
+        subset = values.loc[values["alternative_id"] == alternative_id]
+        base_npv = Decimal(str(subset.loc[subset["case_id"] == "base"].iloc[0]["npv"]))
+        minimum = min(subset["npv"])
+        maximum = max(subset["npv"])
+        recommendation_count = int(
+            (cases["recommended_alternative_id"] == alternative_id).sum()
+        )
+        uncertainty_rows.append({
+            "alternative_id": alternative_id,
+            "base_npv": base_npv,
+            "minimum_npv": minimum,
+            "maximum_npv": maximum,
+            "downside_from_base": Decimal(str(minimum)) - base_npv,
+            "upside_from_base": Decimal(str(maximum)) - base_npv,
+            "recommendation_count": recommendation_count,
+            "recommendation_frequency": Decimal(recommendation_count) / Decimal(len(cases)),
+        })
     return SensitivityResult(
         cases,
-        pd.DataFrame(value_rows, columns=SENSITIVITY_VALUE_COLUMNS),
+        values,
         pd.DataFrame(driver_rows, columns=SENSITIVITY_DRIVER_COLUMNS),
+        pd.DataFrame(uncertainty_rows, columns=UNCERTAINTY_RANGE_COLUMNS),
         base_winner,
     )

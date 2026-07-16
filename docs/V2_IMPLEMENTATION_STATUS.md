@@ -205,12 +205,14 @@ Implemented:
 - immutable scenario transformations and full lifecycle recalculation for every case;
 - case-level alternative NPV, NPV gap, recommendation and switch flag;
 - driver-level gap ranges and recommendation-switch counts;
+- alternative-level observed NPV ranges, downside/upside and recommendation frequency;
 - a dedicated Dashboard sensitivity view.
 
 Verification:
 
 - the default grid contains one base and 18 low/high cases with two alternative values each;
 - driver summaries reconcile to case-level switch counts;
+- uncertainty ranges reconcile to all case-level alternative NPVs;
 - sensitivity execution does not mutate base scenarios;
 - invalid ranges fail validation;
 - utilization and maintenance-cost cases demonstrate real recommendation switches;

@@ -45,6 +45,18 @@ class SensitivityTests(unittest.TestCase):
             )
             self.assertLessEqual(driver.minimum_npv_gap, driver.maximum_npv_gap)
 
+    def test_uncertainty_ranges_reconcile_to_case_values(self) -> None:
+        self.assertEqual(len(self.result.uncertainty_ranges), 2)
+        for row in self.result.uncertainty_ranges.itertuples(index=False):
+            values = self.result.alternative_values.loc[
+                self.result.alternative_values["alternative_id"] == row.alternative_id,
+                "npv",
+            ]
+            self.assertEqual(row.minimum_npv, min(values))
+            self.assertEqual(row.maximum_npv, max(values))
+            self.assertGreaterEqual(row.recommendation_frequency, Decimal("0"))
+            self.assertLessEqual(row.recommendation_frequency, Decimal("1"))
+
     def test_sensitivity_does_not_mutate_base_scenarios(self) -> None:
         before = self.alternatives.alternatives[0].scenario.to_dict()
         run_sensitivity_analysis(

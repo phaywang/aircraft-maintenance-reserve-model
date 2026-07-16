@@ -41448,7 +41448,7 @@
     ]
   },
   "run": {
-    "calculated_at": "2026-07-16T00:45:19.281795+00:00",
+    "calculated_at": "2026-07-15T00:00:00+00:00",
     "calculation_engine": "deterministic",
     "model_version": "2.0.0a0"
   },
@@ -42022,6 +42022,28 @@
       "case_id": "terminal:high",
       "incremental_npv": "-9563331.20333649265073664582",
       "npv": "28228419.16281305696028921632"
+    }
+  ],
+  "uncertainty_ranges": [
+    {
+      "alternative_id": "30-month",
+      "base_npv": "34807623.81435273456891235691",
+      "downside_from_base": "-11353629.58060026263030332290",
+      "maximum_npv": "40850617.39912424240441590449",
+      "minimum_npv": "23453994.23375247193860903401",
+      "recommendation_count": 17,
+      "recommendation_frequency": "0.8947368421052631578947368421",
+      "upside_from_base": "6042993.58477150783550354758"
+    },
+    {
+      "alternative_id": "42-month",
+      "base_npv": "25244292.61101624191817571109",
+      "downside_from_base": "-11155430.53831593899969597786",
+      "maximum_npv": "36399723.14933218091787168893",
+      "minimum_npv": "14088862.07270030291847973323",
+      "recommendation_count": 2,
+      "recommendation_frequency": "0.1052631578947368421052631579",
+      "upside_from_base": "11155430.53831593899969597784"
     }
   ],
   "valuation_summary": [

@@ -40,6 +40,7 @@ def build_v2_dashboard_payload(
     annual_discount_rate: Decimal | int | float | str = Decimal("0.09"),
     baseline_id: str = "30-month",
     alternative_inputs: dict[str, dict[str, object]] | None = None,
+    calculated_at: datetime | None = None,
 ) -> dict[str, object]:
     alternatives = build_v2_demo_alternatives(alternative_inputs)
     valuation = compare_alternatives(
@@ -72,7 +73,7 @@ def build_v2_dashboard_payload(
         }
     return _serialize({
         "run": {
-            "calculated_at": datetime.now(timezone.utc),
+            "calculated_at": calculated_at or datetime.now(timezone.utc),
             "model_version": "2.0.0a0",
             "calculation_engine": "deterministic",
         },
@@ -90,5 +91,6 @@ def build_v2_dashboard_payload(
         "sensitivity_cases": _records(sensitivity.cases),
         "sensitivity_values": _records(sensitivity.alternative_values),
         "sensitivity_drivers": _records(sensitivity.drivers),
+        "uncertainty_ranges": _records(sensitivity.uncertainty_ranges),
         "alternatives": detail,
     })

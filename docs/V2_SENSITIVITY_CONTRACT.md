@@ -21,4 +21,6 @@ Utilization and maintenance assumptions may move an event across a lease boundar
 
 The case table reports the shock, target, winning alternative, winner and runner-up NPVs, NPV gap and recommendation-change flag. The driver summary reports minimum and maximum observed gap and the number of recommendation switches.
 
+The uncertainty summary reports each alternative's observed minimum and maximum NPV, downside and upside from base, and recommendation frequency across the deterministic cases. These are scenario ranges, not probability-weighted forecasts.
+
 The base-case recommendation remains authoritative for the stated base assumptions; sensitivity describes robustness and break risk.
