@@ -12,6 +12,7 @@
 - Added common-horizon discounted cash flow, terminal value, NPV and incremental NPV comparison.
 - Added an independent V2 scenario-comparison dashboard with editable follow-on lease inputs and full lifecycle audit tables.
 - Added deterministic recommendations, alternative diagnostics and a guarded LLM-ready explanation payload.
+- Added one-way sensitivity grids, nonlinear maintenance-timing recalculation and recommendation-switch reporting.
 
 ## 1.0.1 — in development
 

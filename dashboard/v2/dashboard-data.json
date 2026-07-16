@@ -41448,10 +41448,582 @@
     ]
   },
   "run": {
-    "calculated_at": "2026-07-16T00:40:25.064614+00:00",
+    "calculated_at": "2026-07-16T00:45:19.281795+00:00",
     "calculation_engine": "deterministic",
     "model_version": "2.0.0a0"
   },
+  "sensitivity_cases": [
+    {
+      "case_id": "base",
+      "label": "Base case",
+      "level": "base",
+      "npv_gap": "9563331.20333649265073664582",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25244292.61101624191817571109",
+      "sensitivity_id": "base",
+      "shock_value": "0.09",
+      "target_alternative_id": null,
+      "variable": "base",
+      "winner_npv": "34807623.81435273456891235691"
+    },
+    {
+      "case_id": "discount-rate:low",
+      "label": "Discount rate",
+      "level": "low",
+      "npv_gap": "11158188.18286927107630342647",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "29692429.21625497132811247802",
+      "sensitivity_id": "discount-rate",
+      "shock_value": "0.06",
+      "target_alternative_id": null,
+      "variable": "discount_rate",
+      "winner_npv": "40850617.39912424240441590449"
+    },
+    {
+      "case_id": "discount-rate:high",
+      "label": "Discount rate",
+      "level": "high",
+      "npv_gap": "8231807.24167610262388426010",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "21612258.33682328502400075739",
+      "sensitivity_id": "discount-rate",
+      "shock_value": "0.12",
+      "target_alternative_id": null,
+      "variable": "discount_rate",
+      "winner_npv": "29844065.57849938764788501749"
+    },
+    {
+      "case_id": "rent-30:low",
+      "label": "30-month rent",
+      "level": "low",
+      "npv_gap": "6286582.81247637194467787407",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25244292.61101624191817571109",
+      "sensitivity_id": "rent-30",
+      "shock_value": "0.80",
+      "target_alternative_id": "30-month",
+      "variable": "rent",
+      "winner_npv": "31530875.42349261386285358516"
+    },
+    {
+      "case_id": "rent-30:high",
+      "label": "30-month rent",
+      "level": "high",
+      "npv_gap": "12840079.59419661335679541760",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25244292.61101624191817571109",
+      "sensitivity_id": "rent-30",
+      "shock_value": "1.20",
+      "target_alternative_id": "30-month",
+      "variable": "rent",
+      "winner_npv": "38084372.20521285527497112869"
+    },
+    {
+      "case_id": "rent-42:low",
+      "label": "42-month rent",
+      "level": "low",
+      "npv_gap": "13203450.13455413127260290875",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "21604173.67979860329630944816",
+      "sensitivity_id": "rent-42",
+      "shock_value": "0.80",
+      "target_alternative_id": "42-month",
+      "variable": "rent",
+      "winner_npv": "34807623.81435273456891235691"
+    },
+    {
+      "case_id": "rent-42:high",
+      "label": "42-month rent",
+      "level": "high",
+      "npv_gap": "5923212.27211885402887038293",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "28884411.54223388054004197398",
+      "sensitivity_id": "rent-42",
+      "shock_value": "1.20",
+      "target_alternative_id": "42-month",
+      "variable": "rent",
+      "winner_npv": "34807623.81435273456891235691"
+    },
+    {
+      "case_id": "utilization-30:low",
+      "label": "30-month utilization",
+      "level": "low",
+      "npv_gap": "5434479.97409840947241624266",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25244292.61101624191817571109",
+      "sensitivity_id": "utilization-30",
+      "shock_value": "0.80",
+      "target_alternative_id": "30-month",
+      "variable": "utilization",
+      "winner_npv": "30678772.58511465139059195375"
+    },
+    {
+      "case_id": "utilization-30:high",
+      "label": "30-month utilization",
+      "level": "high",
+      "npv_gap": "1790298.37726376997956667708",
+      "recommendation_changed": true,
+      "recommended_alternative_id": "42-month",
+      "runner_up_npv": "23453994.23375247193860903401",
+      "sensitivity_id": "utilization-30",
+      "shock_value": "1.20",
+      "target_alternative_id": "30-month",
+      "variable": "utilization",
+      "winner_npv": "25244292.61101624191817571109"
+    },
+    {
+      "case_id": "utilization-42:low",
+      "label": "42-month utilization",
+      "level": "low",
+      "npv_gap": "140951.47579331021977996496",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "34666672.33855942434913239195",
+      "sensitivity_id": "utilization-42",
+      "shock_value": "0.80",
+      "target_alternative_id": "42-month",
+      "variable": "utilization",
+      "winner_npv": "34807623.81435273456891235691"
+    },
+    {
+      "case_id": "utilization-42:high",
+      "label": "42-month utilization",
+      "level": "high",
+      "npv_gap": "7442672.06921811886815136817",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "27364951.74513461570076098874",
+      "sensitivity_id": "utilization-42",
+      "shock_value": "1.20",
+      "target_alternative_id": "42-month",
+      "variable": "utilization",
+      "winner_npv": "34807623.81435273456891235691"
+    },
+    {
+      "case_id": "maintenance-30:low",
+      "label": "30-month maintenance cost",
+      "level": "low",
+      "npv_gap": "14209661.96190728134571525346",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25244292.61101624191817571109",
+      "sensitivity_id": "maintenance-30",
+      "shock_value": "0.50",
+      "target_alternative_id": "30-month",
+      "variable": "maintenance_cost",
+      "winner_npv": "39453954.57292352326389096455"
+    },
+    {
+      "case_id": "maintenance-30:high",
+      "label": "30-month maintenance cost",
+      "level": "high",
+      "npv_gap": "4917000.44476570395575803820",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25244292.61101624191817571109",
+      "sensitivity_id": "maintenance-30",
+      "shock_value": "1.50",
+      "target_alternative_id": "30-month",
+      "variable": "maintenance_cost",
+      "winner_npv": "30161293.05578194587393374929"
+    },
+    {
+      "case_id": "maintenance-42:low",
+      "label": "42-month maintenance cost",
+      "level": "low",
+      "npv_gap": "1592099.33497944634895933202",
+      "recommendation_changed": true,
+      "recommended_alternative_id": "42-month",
+      "runner_up_npv": "34807623.81435273456891235691",
+      "sensitivity_id": "maintenance-42",
+      "shock_value": "0.50",
+      "target_alternative_id": "42-month",
+      "variable": "maintenance_cost",
+      "winner_npv": "36399723.14933218091787168893"
+    },
+    {
+      "case_id": "maintenance-42:high",
+      "label": "42-month maintenance cost",
+      "level": "high",
+      "npv_gap": "20718761.74165243165043262368",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "14088862.07270030291847973323",
+      "sensitivity_id": "maintenance-42",
+      "shock_value": "1.50",
+      "target_alternative_id": "42-month",
+      "variable": "maintenance_cost",
+      "winner_npv": "34807623.81435273456891235691"
+    },
+    {
+      "case_id": "transition:low",
+      "label": "Transition cost",
+      "level": "low",
+      "npv_gap": "9722546.14719539794390100236",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "25553872.28860728387348451156",
+      "sensitivity_id": "transition",
+      "shock_value": "0.50",
+      "target_alternative_id": null,
+      "variable": "transition_cost",
+      "winner_npv": "35276418.43580268181738551392"
+    },
+    {
+      "case_id": "transition:high",
+      "label": "Transition cost",
+      "level": "high",
+      "npv_gap": "9404116.25947758735757228936",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "24934712.93342519996286691064",
+      "sensitivity_id": "transition",
+      "shock_value": "1.50",
+      "target_alternative_id": null,
+      "variable": "transition_cost",
+      "winner_npv": "34338829.19290278732043920000"
+    },
+    {
+      "case_id": "terminal:low",
+      "label": "Terminal value",
+      "level": "low",
+      "npv_gap": "9563331.20333649265073664582",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "22260166.05921942687606220587",
+      "sensitivity_id": "terminal",
+      "shock_value": "0.80",
+      "target_alternative_id": null,
+      "variable": "terminal_value",
+      "winner_npv": "31823497.26255591952679885169"
+    },
+    {
+      "case_id": "terminal:high",
+      "label": "Terminal value",
+      "level": "high",
+      "npv_gap": "9563331.20333649265073664582",
+      "recommendation_changed": false,
+      "recommended_alternative_id": "30-month",
+      "runner_up_npv": "28228419.16281305696028921632",
+      "sensitivity_id": "terminal",
+      "shock_value": "1.20",
+      "target_alternative_id": null,
+      "variable": "terminal_value",
+      "winner_npv": "37791750.36614954961102586214"
+    }
+  ],
+  "sensitivity_drivers": [
+    {
+      "label": "Discount rate",
+      "maximum_npv_gap": "11158188.18286927107630342647",
+      "minimum_npv_gap": "8231807.24167610262388426010",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "discount-rate",
+      "variable": "discount_rate"
+    },
+    {
+      "label": "30-month rent",
+      "maximum_npv_gap": "12840079.59419661335679541760",
+      "minimum_npv_gap": "6286582.81247637194467787407",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "rent-30",
+      "variable": "rent"
+    },
+    {
+      "label": "42-month rent",
+      "maximum_npv_gap": "13203450.13455413127260290875",
+      "minimum_npv_gap": "5923212.27211885402887038293",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "rent-42",
+      "variable": "rent"
+    },
+    {
+      "label": "30-month utilization",
+      "maximum_npv_gap": "5434479.97409840947241624266",
+      "minimum_npv_gap": "1790298.37726376997956667708",
+      "recommendation_switch_count": 1,
+      "sensitivity_id": "utilization-30",
+      "variable": "utilization"
+    },
+    {
+      "label": "42-month utilization",
+      "maximum_npv_gap": "7442672.06921811886815136817",
+      "minimum_npv_gap": "140951.47579331021977996496",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "utilization-42",
+      "variable": "utilization"
+    },
+    {
+      "label": "30-month maintenance cost",
+      "maximum_npv_gap": "14209661.96190728134571525346",
+      "minimum_npv_gap": "4917000.44476570395575803820",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "maintenance-30",
+      "variable": "maintenance_cost"
+    },
+    {
+      "label": "42-month maintenance cost",
+      "maximum_npv_gap": "20718761.74165243165043262368",
+      "minimum_npv_gap": "1592099.33497944634895933202",
+      "recommendation_switch_count": 1,
+      "sensitivity_id": "maintenance-42",
+      "variable": "maintenance_cost"
+    },
+    {
+      "label": "Transition cost",
+      "maximum_npv_gap": "9722546.14719539794390100236",
+      "minimum_npv_gap": "9404116.25947758735757228936",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "transition",
+      "variable": "transition_cost"
+    },
+    {
+      "label": "Terminal value",
+      "maximum_npv_gap": "9563331.20333649265073664582",
+      "minimum_npv_gap": "9563331.20333649265073664582",
+      "recommendation_switch_count": 0,
+      "sensitivity_id": "terminal",
+      "variable": "terminal_value"
+    }
+  ],
+  "sensitivity_values": [
+    {
+      "alternative_id": "30-month",
+      "case_id": "base",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "base",
+      "incremental_npv": "-9563331.20333649265073664582",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "discount-rate:low",
+      "incremental_npv": "0E-20",
+      "npv": "40850617.39912424240441590449"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "discount-rate:low",
+      "incremental_npv": "-11158188.18286927107630342647",
+      "npv": "29692429.21625497132811247802"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "discount-rate:high",
+      "incremental_npv": "0E-20",
+      "npv": "29844065.57849938764788501749"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "discount-rate:high",
+      "incremental_npv": "-8231807.24167610262388426010",
+      "npv": "21612258.33682328502400075739"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "rent-30:low",
+      "incremental_npv": "0E-20",
+      "npv": "31530875.42349261386285358516"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "rent-30:low",
+      "incremental_npv": "-6286582.81247637194467787407",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "rent-30:high",
+      "incremental_npv": "0E-20",
+      "npv": "38084372.20521285527497112869"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "rent-30:high",
+      "incremental_npv": "-12840079.59419661335679541760",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "rent-42:low",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "rent-42:low",
+      "incremental_npv": "-13203450.13455413127260290875",
+      "npv": "21604173.67979860329630944816"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "rent-42:high",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "rent-42:high",
+      "incremental_npv": "-5923212.27211885402887038293",
+      "npv": "28884411.54223388054004197398"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "utilization-30:low",
+      "incremental_npv": "0E-20",
+      "npv": "30678772.58511465139059195375"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "utilization-30:low",
+      "incremental_npv": "-5434479.97409840947241624266",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "utilization-30:high",
+      "incremental_npv": "1790298.37726376997956667708",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "utilization-30:high",
+      "incremental_npv": "0E-20",
+      "npv": "23453994.23375247193860903401"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "utilization-42:low",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "utilization-42:low",
+      "incremental_npv": "-140951.47579331021977996496",
+      "npv": "34666672.33855942434913239195"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "utilization-42:high",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "utilization-42:high",
+      "incremental_npv": "-7442672.06921811886815136817",
+      "npv": "27364951.74513461570076098874"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "maintenance-30:low",
+      "incremental_npv": "0E-20",
+      "npv": "39453954.57292352326389096455"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "maintenance-30:low",
+      "incremental_npv": "-14209661.96190728134571525346",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "maintenance-30:high",
+      "incremental_npv": "0E-20",
+      "npv": "30161293.05578194587393374929"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "maintenance-30:high",
+      "incremental_npv": "-4917000.44476570395575803820",
+      "npv": "25244292.61101624191817571109"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "maintenance-42:low",
+      "incremental_npv": "1592099.33497944634895933202",
+      "npv": "36399723.14933218091787168893"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "maintenance-42:low",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "maintenance-42:high",
+      "incremental_npv": "0E-20",
+      "npv": "34807623.81435273456891235691"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "maintenance-42:high",
+      "incremental_npv": "-20718761.74165243165043262368",
+      "npv": "14088862.07270030291847973323"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "transition:low",
+      "incremental_npv": "0E-20",
+      "npv": "35276418.43580268181738551392"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "transition:low",
+      "incremental_npv": "-9722546.14719539794390100236",
+      "npv": "25553872.28860728387348451156"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "transition:high",
+      "incremental_npv": "0E-20",
+      "npv": "34338829.19290278732043920000"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "transition:high",
+      "incremental_npv": "-9404116.25947758735757228936",
+      "npv": "24934712.93342519996286691064"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "terminal:low",
+      "incremental_npv": "0E-20",
+      "npv": "31823497.26255591952679885169"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "terminal:low",
+      "incremental_npv": "-9563331.20333649265073664582",
+      "npv": "22260166.05921942687606220587"
+    },
+    {
+      "alternative_id": "30-month",
+      "case_id": "terminal:high",
+      "incremental_npv": "0E-20",
+      "npv": "37791750.36614954961102586214"
+    },
+    {
+      "alternative_id": "42-month",
+      "case_id": "terminal:high",
+      "incremental_npv": "-9563331.20333649265073664582",
+      "npv": "28228419.16281305696028921632"
+    }
+  ],
   "valuation_summary": [
     {
       "alternative_id": "30-month",

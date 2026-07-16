@@ -11,6 +11,7 @@ import pandas as pd
 
 from .contracts import build_contract_cashflows
 from .analysis import build_decision_analysis, build_llm_explanation_payload
+from .sensitivity import run_sensitivity_analysis
 from .lifecycle_utilization import build_lifecycle_utilization
 from .transitions import build_lifecycle_economics
 from .v2_demo import V2_COMMON_HORIZON, V2_DEMO_INPUTS, build_v2_demo_alternatives
@@ -48,6 +49,9 @@ def build_v2_dashboard_payload(
     explanation = build_llm_explanation_payload(
         alternatives, valuation, analysis
     )
+    sensitivity = run_sensitivity_analysis(
+        alternatives, annual_discount_rate, baseline_id, V2_COMMON_HORIZON
+    )
     detail: dict[str, object] = {}
     for alternative in alternatives.alternatives:
         scenario = alternative.scenario
@@ -83,5 +87,8 @@ def build_v2_dashboard_payload(
         "discounted_cashflows": _records(valuation.discounted_cashflows),
         "decision_analysis": analysis.to_dict(),
         "llm_explanation_payload": explanation,
+        "sensitivity_cases": _records(sensitivity.cases),
+        "sensitivity_values": _records(sensitivity.alternative_values),
+        "sensitivity_drivers": _records(sensitivity.drivers),
         "alternatives": detail,
     })

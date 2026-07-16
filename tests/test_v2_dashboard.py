@@ -32,6 +32,10 @@ class V2DashboardServiceTests(unittest.TestCase):
         summary = {row["alternative_id"]: row for row in self.payload["valuation_summary"]}
         self.assertEqual(Decimal(summary["30-month"]["incremental_npv"]), Decimal("0"))
         self.assertNotEqual(Decimal(summary["42-month"]["incremental_npv"]), Decimal("0"))
+        self.assertEqual(len(self.payload["sensitivity_cases"]), 19)
+        self.assertTrue(
+            any(case["recommendation_changed"] for case in self.payload["sensitivity_cases"])
+        )
 
     def test_editable_follow_on_input_recalculates_full_comparison(self) -> None:
         changed = build_v2_dashboard_payload(
@@ -62,12 +66,13 @@ class V2DashboardFrontendTests(unittest.TestCase):
     def test_frontend_has_six_decision_views_and_local_run(self) -> None:
         html = (self.root / "index.html").read_text(encoding="utf-8")
         script = (self.root / "app.js").read_text(encoding="utf-8")
-        for view in ("overview", "alternatives", "utilization", "settlement", "valuation", "audit"):
+        for view in ("overview", "alternatives", "utilization", "settlement", "valuation", "sensitivity", "audit"):
             self.assertIn(f'data-view="{view}"', html)
         self.assertIn('fetch("/api/v2/runs"', script)
         self.assertIn("data-field=", script)
         self.assertIn("follow_end", script)
         self.assertIn("annual_discount_rate", script)
+        self.assertIn("recommendation switches", script.lower())
 
     def test_static_and_pages_assets_are_complete(self) -> None:
         pages = Path(__file__).resolve().parents[1] / "docs" / "v2"
@@ -76,6 +81,12 @@ class V2DashboardFrontendTests(unittest.TestCase):
                 self.assertTrue((root / filename).is_file(), str(root / filename))
             payload = json.loads((root / "dashboard-data.json").read_text(encoding="utf-8"))
             self.assertEqual(len(payload["valuation_summary"]), 2)
+        for filename in ("index.html", "styles.css", "app.js", "dashboard-data.js", "dashboard-data.json"):
+            self.assertEqual(
+                (self.root / filename).read_bytes(),
+                (pages / filename).read_bytes(),
+                filename,
+            )
 
 
 if __name__ == "__main__":

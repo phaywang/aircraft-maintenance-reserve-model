@@ -90,6 +90,13 @@ from .analysis import (
     build_decision_analysis,
     build_llm_explanation_payload,
 )
+from .sensitivity import (
+    SensitivityResult,
+    SensitivitySpec,
+    SensitivityVariable,
+    default_sensitivity_specs,
+    run_sensitivity_analysis,
+)
 
 __all__ = [
     "CaseInputs",
@@ -150,6 +157,11 @@ __all__ = [
     "DecisionAnalysis",
     "build_decision_analysis",
     "build_llm_explanation_payload",
+    "SensitivityResult",
+    "SensitivitySpec",
+    "SensitivityVariable",
+    "default_sensitivity_specs",
+    "run_sensitivity_analysis",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",

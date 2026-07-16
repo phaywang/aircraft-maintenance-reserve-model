@@ -13,7 +13,7 @@ Version: `2.0.0a0`
 | V2.5 Common-horizon valuation | Implemented | `valuation.py`, valuation contract and NPV tests |
 | V2.6 Scenario dashboard | Implemented | `/v2/` workspace, V2 payload/API and frontend tests |
 | V2.7 Conclusions and explanation | Implemented | `analysis.py`, guarded explanation payload and conclusion tests |
-| V2.8 Sensitivity | Not started | — |
+| V2.8 Sensitivity | Implemented | `sensitivity.py`, sensitivity dashboard and switch tests |
 
 ## V2.0 implementation record
 
@@ -196,6 +196,28 @@ Verification:
 
 Detailed rules are recorded in `V2_ANALYSIS_CONTRACT.md`.
 
-## Next approval gate
+## V2.8 implementation record
 
-V2.8 will run systematic sensitivities, identify recommendation switches and report value-driver ranges without replacing deterministic base-case results.
+Implemented:
+
+- low/high one-way shocks around the deterministic base case;
+- discount-rate, scenario rent, utilization, maintenance-cost, transition-cost and terminal-value sensitivities;
+- immutable scenario transformations and full lifecycle recalculation for every case;
+- case-level alternative NPV, NPV gap, recommendation and switch flag;
+- driver-level gap ranges and recommendation-switch counts;
+- a dedicated Dashboard sensitivity view.
+
+Verification:
+
+- the default grid contains one base and 18 low/high cases with two alternative values each;
+- driver summaries reconcile to case-level switch counts;
+- sensitivity execution does not mutate base scenarios;
+- invalid ranges fail validation;
+- utilization and maintenance-cost cases demonstrate real recommendation switches;
+- JavaScript and Python sensitivity views pass regression tests.
+
+Detailed rules are recorded in `V2_SENSITIVITY_CONTRACT.md`.
+
+## Completion gate
+
+V2.0 through V2.8 are implemented. Final release readiness requires a clean full regression, generated-asset consistency, author and prohibited-trace scan, repository status review and local visual acceptance when socket access is available.
