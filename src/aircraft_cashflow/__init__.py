@@ -77,6 +77,12 @@ from .transitions import (
     build_lifecycle_economics,
     build_transition_cashflows,
 )
+from .valuation import (
+    VALUATION_CASHFLOW_COLUMNS,
+    VALUATION_SUMMARY_COLUMNS,
+    ValuationResult,
+    compare_alternatives,
+)
 
 __all__ = [
     "CaseInputs",
@@ -128,6 +134,10 @@ __all__ = [
     "ScenarioAlternative",
     "build_lifecycle_economics",
     "build_transition_cashflows",
+    "VALUATION_CASHFLOW_COLUMNS",
+    "VALUATION_SUMMARY_COLUMNS",
+    "ValuationResult",
+    "compare_alternatives",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",

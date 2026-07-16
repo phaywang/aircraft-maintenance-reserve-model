@@ -9,6 +9,7 @@
 - Added lease-specific rent and maintenance-reserve accounts with arbitrary-date periods, contract-specific escalation and expiry-period collection.
 - Added physical maintenance-event settlement, component reserve ledgers, redelivery condition compensation and contractual account close-out.
 - Added transition storage, fixed and dated costs plus complete arbitrary-duration follow-on lifecycle alternatives.
+- Added common-horizon discounted cash flow, terminal value, NPV and incremental NPV comparison.
 
 ## 1.0.1 — in development
 

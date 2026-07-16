@@ -10,7 +10,7 @@ Version: `2.0.0a0`
 | V2.2 Multi-lease contract engine | Implemented | `contracts.py`, contract cash-flow contract and multi-lease tests |
 | V2.3 Redelivery settlement | Implemented | `settlement.py`, settlement contract and expiry-order tests |
 | V2.4 Transition economics | Implemented | `transitions.py`, transition contract and alternative tests |
-| V2.5 Common-horizon valuation | Not started | — |
+| V2.5 Common-horizon valuation | Implemented | `valuation.py`, valuation contract and NPV tests |
 | V2.6 Scenario dashboard | Not started | — |
 | V2.7 Conclusions and explanation | Not started | — |
 | V2.8 Sensitivity | Not started | — |
@@ -130,6 +130,27 @@ Verification:
 
 Detailed rules are recorded in `V2_TRANSITION_CONTRACT.md`.
 
+## V2.5 implementation record
+
+Implemented:
+
+- dated discounting from one shared valuation date;
+- strict common-horizon validation;
+- net terminal value after selling cost;
+- operating and terminal present-value detail;
+- total NPV and incremental NPV versus a selected baseline;
+- supporting rent, reserve, maintenance and transition totals.
+
+Verification:
+
+- zero-rate NPV reconciles exactly to nominal cash flow plus net terminal value;
+- incremental NPV reconciles to alternative NPV less baseline NPV;
+- positive discount rates reduce future present value;
+- alternatives not fully modeled through the common horizon fail;
+- missing terminal values fail rather than silently treating the aircraft as worthless.
+
+Detailed rules are recorded in `V2_VALUATION_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.5 will normalize alternative cash flows to a common comparison horizon, add terminal value and calculate NPV and incremental NPV from one shared valuation date.
+V2.6 will expose lifecycle inputs, alternative assumptions, event settlement and common-horizon valuation through a scenario comparison dashboard.
