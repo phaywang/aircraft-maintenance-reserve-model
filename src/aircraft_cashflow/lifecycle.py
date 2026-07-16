@@ -52,6 +52,14 @@ class TerminalValueBasis(str, Enum):
     CONTINUATION = "continuation"
 
 
+class ReserveCloseoutRule(str, Enum):
+    """Treatment of an unused reserve balance when a lease closes."""
+
+    RETAIN_BY_LESSOR = "retain_by_lessor"
+    REFUND_TO_LESSEE = "refund_to_lessee"
+    OFFSET_REDELIVERY = "offset_redelivery"
+
+
 def _serialize(value: Any) -> Any:
     if isinstance(value, Decimal):
         return str(value)
@@ -109,6 +117,7 @@ class ReserveAccountRule:
     base_rate: Decimal | int | float | str = Decimal("0")
     rate_base_date: date | None = None
     annual_escalation: Decimal | int | float | str = Decimal("0")
+    closeout_rule: ReserveCloseoutRule = ReserveCloseoutRule.RETAIN_BY_LESSOR
 
     def __post_init__(self) -> None:
         _require_identifier("account_id", self.account_id)
@@ -125,8 +134,27 @@ class ReserveAccountRule:
         _require_nonnegative("reserve account annual_escalation", annual_escalation)
         if base_rate and self.reserve_basis is None:
             raise ValueError("a positive reserve rate requires a reserve_basis")
+        if not isinstance(self.closeout_rule, ReserveCloseoutRule):
+            raise ValueError("closeout_rule must be a ReserveCloseoutRule")
         object.__setattr__(self, "base_rate", base_rate)
         object.__setattr__(self, "annual_escalation", annual_escalation)
+
+
+@dataclass(frozen=True)
+class RedeliveryConditionRule:
+    """Minimum remaining-life condition for one physical component."""
+
+    component_code: str
+    minimum_remaining_ratio: Decimal | int | float | str
+
+    def __post_init__(self) -> None:
+        _require_identifier("redelivery component_code", self.component_code)
+        ratio = to_decimal(
+            self.minimum_remaining_ratio, "minimum_remaining_ratio"
+        )
+        if ratio < 0 or ratio > 1:
+            raise ValueError("minimum_remaining_ratio must be between zero and one")
+        object.__setattr__(self, "minimum_remaining_ratio", ratio)
 
 
 @dataclass(frozen=True)
@@ -143,6 +171,9 @@ class LeaseContract:
     monthly_rent: Decimal | int | float | str = Decimal("0")
     rent_base_date: date | None = None
     annual_rent_escalation: Decimal | int | float | str = Decimal("0")
+    redelivery_conditions: tuple[RedeliveryConditionRule, ...] = field(
+        default_factory=tuple
+    )
 
     def __post_init__(self) -> None:
         _require_identifier("contract_id", self.contract_id)
@@ -169,6 +200,11 @@ class LeaseContract:
             raise ValueError("reserve account identifiers must be unique within a lease")
         if len(component_codes) != len(set(component_codes)):
             raise ValueError("a physical component cannot map to multiple reserve accounts in one lease")
+        condition_codes = [
+            condition.component_code for condition in self.redelivery_conditions
+        ]
+        if len(condition_codes) != len(set(condition_codes)):
+            raise ValueError("redelivery component conditions must be unique within a lease")
 
 
 @dataclass(frozen=True)
@@ -284,6 +320,7 @@ class KnownState:
     reserve_account_balances: dict[str, Decimal | int | float | str] = field(
         default_factory=dict
     )
+    component_last_event_dates: dict[str, date] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         ttsn = to_decimal(self.ttsn, "known state ttsn")
@@ -302,6 +339,11 @@ class KnownState:
             _require_nonnegative(f"component usage {code}", value)
         for account_id, value in balances.items():
             _require_nonnegative(f"reserve balance {account_id}", value)
+        for code, event_date in self.component_last_event_dates.items():
+            if event_date > self.as_of_date:
+                raise ValueError(
+                    f"last event date for {code} cannot be after known-state date"
+                )
         object.__setattr__(self, "ttsn", ttsn)
         object.__setattr__(self, "tcsn", tcsn)
         object.__setattr__(self, "component_usage_since_event", component_usage)
@@ -379,6 +421,15 @@ class Scenario:
                 if rule.account_id in valid_account_ids:
                     raise ValueError("reserve account identifiers must be unique across leases")
                 valid_account_ids.add(rule.account_id)
+            unknown_conditions = {
+                condition.component_code
+                for condition in lease.redelivery_conditions
+            } - component_codes
+            if unknown_conditions:
+                raise ValueError(
+                    f"redelivery conditions reference unknown components: "
+                    f"{sorted(unknown_conditions)}"
+                )
 
         segments = sorted(
             [
@@ -439,6 +490,14 @@ class Scenario:
         if self.known_state is not None:
             if self.known_state.as_of_date > self.analysis_date:
                 raise ValueError("known state cannot be dated after the analysis date")
+            if (
+                self.cutoff_position is CutoffPosition.BEFORE_EXPIRY_SETTLEMENT
+                and self.known_state.as_of_date >= self.analysis_date
+            ):
+                raise ValueError(
+                    "before-expiry-settlement known state must be settled through "
+                    "the day before expiry"
+                )
             unknown_components = set(self.known_state.component_usage_since_event) - component_codes
             if unknown_components:
                 raise ValueError(
@@ -448,6 +507,14 @@ class Scenario:
             if unknown_accounts:
                 raise ValueError(
                     f"known state references unknown reserve accounts: {sorted(unknown_accounts)}"
+                )
+            unknown_event_dates = (
+                set(self.known_state.component_last_event_dates) - component_codes
+            )
+            if unknown_event_dates:
+                raise ValueError(
+                    f"known state references unknown component event dates: "
+                    f"{sorted(unknown_event_dates)}"
                 )
 
         if self.terminal_value is not None:

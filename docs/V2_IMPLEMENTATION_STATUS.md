@@ -8,7 +8,7 @@ Version: `2.0.0a0`
 | V2.0 Lifecycle schema and migration | Implemented | `lifecycle.py`, lifecycle tests and full V1 regression |
 | V2.1 Variable utilization | Implemented | `lifecycle_utilization.py`, utilization contract and full V1 regression |
 | V2.2 Multi-lease contract engine | Implemented | `contracts.py`, contract cash-flow contract and multi-lease tests |
-| V2.3 Redelivery settlement | Not started | — |
+| V2.3 Redelivery settlement | Implemented | `settlement.py`, settlement contract and expiry-order tests |
 | V2.4 Transition economics | Not started | — |
 | V2.5 Common-horizon valuation | Not started | — |
 | V2.6 Scenario dashboard | Not started | — |
@@ -85,6 +85,30 @@ Verification:
 
 Detailed rules are recorded in `V2_CONTRACT_CASHFLOW_CONTRACT.md`.
 
+## V2.3 implementation record
+
+Implemented:
+
+- physical calendar-, FH- and FC-driven maintenance events independent of lease accounts;
+- exact dated event assignment to the active lease or transition segment;
+- component-account reserve rollforwards with opening, inflow, reimbursement, shortfall and closing balance;
+- component technical-state snapshots at each lease expiry;
+- minimum remaining-life redelivery compensation;
+- reserve retention, refund and redelivery-offset close-out rules;
+- owner cash-flow output separating rent, reserve inflow, maintenance cost, redelivery cash and refunds;
+- explicit before-expiry cut-offs settled through the prior day.
+
+Verification:
+
+- expiry-period reserve is collected before an expiry-date maintenance event;
+- event reimbursement follows the lower-of available reserve and event cost;
+- unused reserves produce distinct retention, refund and offset outcomes;
+- maintenance during a transition has no lease account and remains unfunded;
+- an expiry-date calendar event resets component remaining life before redelivery testing;
+- an expiry cut-off still applies final-day usage, reserve collection, event settlement and account close-out.
+
+Detailed rules are recorded in `V2_SETTLEMENT_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.3 will calculate physical maintenance events and costs, reimburse each event from its mapped lease reserve account, apply redelivery-condition and account close-out rules, and preserve the mandatory expiry-period sequence.
+V2.4 will add transition-specific costs, downtime, ferry and preparation assumptions, then package alternative follow-on lease paths as comparable complete lifecycle scenarios.
