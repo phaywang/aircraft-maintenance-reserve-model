@@ -6,6 +6,7 @@
 - Added explicit expiry cut-off semantics and arbitrary-date stub periods.
 - Added V1 migration adapters with exact Phase 1 calculation regression.
 - Added a continuous variable-utilization timeline with fixed, seasonal and explicit-month inputs, actual-day stub proration and explicit zero-flight transitions.
+- Added lease-specific rent and maintenance-reserve accounts with arbitrary-date periods, contract-specific escalation and expiry-period collection.
 
 ## 1.0.1 — in development
 

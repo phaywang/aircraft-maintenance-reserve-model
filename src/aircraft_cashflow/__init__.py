@@ -49,6 +49,12 @@ from .lifecycle_utilization import (
     build_forecast_lifecycle_utilization,
     build_lifecycle_utilization,
 )
+from .contracts import (
+    LEASE_CASHFLOW_COLUMNS,
+    RESERVE_ACCOUNT_INFLOW_COLUMNS,
+    ContractCashflowResult,
+    build_contract_cashflows,
+)
 
 __all__ = [
     "CaseInputs",
@@ -78,6 +84,10 @@ __all__ = [
     "LIFECYCLE_UTILIZATION_COLUMNS",
     "build_forecast_lifecycle_utilization",
     "build_lifecycle_utilization",
+    "LEASE_CASHFLOW_COLUMNS",
+    "RESERVE_ACCOUNT_INFLOW_COLUMNS",
+    "ContractCashflowResult",
+    "build_contract_cashflows",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",

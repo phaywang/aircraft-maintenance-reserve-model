@@ -12,6 +12,7 @@ from typing import Any, Iterable
 from .models import (
     CaseInputs,
     ComponentConfig,
+    ReserveBasis,
     UtilizationOverride,
     to_decimal,
 )
@@ -104,10 +105,28 @@ class ReserveAccountRule:
 
     account_id: str
     component_code: str
+    reserve_basis: ReserveBasis | None = None
+    base_rate: Decimal | int | float | str = Decimal("0")
+    rate_base_date: date | None = None
+    annual_escalation: Decimal | int | float | str = Decimal("0")
 
     def __post_init__(self) -> None:
         _require_identifier("account_id", self.account_id)
         _require_identifier("component_code", self.component_code)
+        if self.reserve_basis is not None and not isinstance(
+            self.reserve_basis, ReserveBasis
+        ):
+            raise ValueError("reserve_basis must be a ReserveBasis")
+        base_rate = to_decimal(self.base_rate, "reserve account base_rate")
+        annual_escalation = to_decimal(
+            self.annual_escalation, "reserve account annual_escalation"
+        )
+        _require_nonnegative("reserve account base_rate", base_rate)
+        _require_nonnegative("reserve account annual_escalation", annual_escalation)
+        if base_rate and self.reserve_basis is None:
+            raise ValueError("a positive reserve rate requires a reserve_basis")
+        object.__setattr__(self, "base_rate", base_rate)
+        object.__setattr__(self, "annual_escalation", annual_escalation)
 
 
 @dataclass(frozen=True)
@@ -121,6 +140,9 @@ class LeaseContract:
     reserve_accounts: tuple[ReserveAccountRule, ...]
     fixed_cash_proration: ProrationConvention = ProrationConvention.ACTUAL_DAYS
     due_day: int | None = None
+    monthly_rent: Decimal | int | float | str = Decimal("0")
+    rent_base_date: date | None = None
+    annual_rent_escalation: Decimal | int | float | str = Decimal("0")
 
     def __post_init__(self) -> None:
         _require_identifier("contract_id", self.contract_id)
@@ -131,6 +153,16 @@ class LeaseContract:
             raise ValueError("fixed_cash_proration must be a ProrationConvention")
         if self.due_day is not None and not 1 <= self.due_day <= 31:
             raise ValueError("due_day must be between 1 and 31")
+        monthly_rent = to_decimal(self.monthly_rent, "monthly_rent")
+        annual_rent_escalation = to_decimal(
+            self.annual_rent_escalation, "annual_rent_escalation"
+        )
+        _require_nonnegative("monthly_rent", monthly_rent)
+        _require_nonnegative("annual_rent_escalation", annual_rent_escalation)
+        rent_base_date = self.rent_base_date or self.start_date
+        object.__setattr__(self, "monthly_rent", monthly_rent)
+        object.__setattr__(self, "annual_rent_escalation", annual_rent_escalation)
+        object.__setattr__(self, "rent_base_date", rent_base_date)
         account_ids = [rule.account_id for rule in self.reserve_accounts]
         component_codes = [rule.component_code for rule in self.reserve_accounts]
         if len(account_ids) != len(set(account_ids)):
@@ -547,6 +579,10 @@ def migrate_v1_case(case: CaseInputs, scenario_id: str = "v1-migrated") -> Scena
             ReserveAccountRule(
                 account_id=f"{contract_id}:{component.code}",
                 component_code=component.code,
+                reserve_basis=component.reserve_basis,
+                base_rate=component.base_reserve_rate,
+                rate_base_date=component.reserve_rate_base_date,
+                annual_escalation=component.annual_reserve_escalation,
             )
             for component in case.components
         ),

@@ -7,7 +7,7 @@ Version: `2.0.0a0`
 |---|---|---|
 | V2.0 Lifecycle schema and migration | Implemented | `lifecycle.py`, lifecycle tests and full V1 regression |
 | V2.1 Variable utilization | Implemented | `lifecycle_utilization.py`, utilization contract and full V1 regression |
-| V2.2 Multi-lease contract engine | Not started | — |
+| V2.2 Multi-lease contract engine | Implemented | `contracts.py`, contract cash-flow contract and multi-lease tests |
 | V2.3 Redelivery settlement | Not started | — |
 | V2.4 Transition economics | Not started | — |
 | V2.5 Common-horizon valuation | Not started | — |
@@ -62,6 +62,29 @@ Verification:
 
 Detailed input, output and validation rules are recorded in `V2_UTILIZATION_CONTRACT.md`.
 
+## V2.2 implementation record
+
+Implemented:
+
+- lease-specific monthly rent, rent base date and annual escalation;
+- lease-specific reserve rate, reserve basis, base date and annual escalation for each component account;
+- arbitrary-date monthly contract periods with actual-day or full-month fixed-charge treatment;
+- separate period-summary and component-account detail tables;
+- independent terms for consecutive leases on the same physical component;
+- known-state cut-offs that calculate only the remaining modeled days and usage;
+- an explicit expiry-period row that collects rent and reserves before V2.3 settlement.
+
+Verification:
+
+- first and last stub rent, per-month reserves and FH reserves reconcile to hand calculations;
+- an analysis-date split does not duplicate a full-month fixed charge;
+- a mid-month known-state cut-off uses only remaining FH and days;
+- two leases apply different rent and reserve terms to the same aircraft;
+- calendar-year escalations are contract-specific;
+- missing reserve rate terms fail with an account-specific error.
+
+Detailed rules are recorded in `V2_CONTRACT_CASHFLOW_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.2 will add lease-specific rent and maintenance-reserve terms, map physical components to contract-specific accounts, and calculate arbitrary multi-lease cash flows using the verified V2.1 utilization timeline. Expiry-period reserve collection must remain before maintenance and close-out settlement.
+V2.3 will calculate physical maintenance events and costs, reimburse each event from its mapped lease reserve account, apply redelivery-condition and account close-out rules, and preserve the mandatory expiry-period sequence.
