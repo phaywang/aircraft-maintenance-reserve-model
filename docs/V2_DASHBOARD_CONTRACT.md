@@ -6,7 +6,7 @@ reserve model at `/`; V2 is the lessor lifecycle scenario builder at `/v2/`.
 ## Views
 
 1. Aircraft position — scenario identity, analysis date and authoritative known state.
-2. Lease timeline — arbitrary lease and transition segments.
+2. Lease timeline — any number of consecutive lease contracts.
 3. Forecast overview — reserve collections, event funding and exposure.
 4. Maintenance funding — event cost, reserve reimbursement, lessee unfunded and off-lease cost.
 5. Reserve accounts — lease-component roll-forward and close-out.
@@ -23,6 +23,9 @@ scenario payloads and returns reserve-funding summary metrics without mutating t
 
 Rent is deliberately outside the V2 dashboard scope. No rent input is required,
 and no rent collection or whole-aircraft investment return is presented.
+The active dashboard also assumes no remarketing, delivery-preparation, storage
+or holding period between leases; those periods require assumptions that are not
+part of the current model.
 
 ## Deployment
 

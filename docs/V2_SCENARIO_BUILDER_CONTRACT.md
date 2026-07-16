@@ -10,9 +10,10 @@ changes V1 inputs, calculations, routes or static assets.
 
 One scenario is a complete planned path for one physical aircraft from an
 arbitrary analysis date through a user-selected forecast end date. A scenario
-may contain one current lease, any number of future leases and explicit
-transition or storage periods. A scenario runs independently. Comparison is
-optional and accepts two or more independently calculated scenarios.
+may contain one current lease and any number of consecutive future leases. The
+active dashboard does not assume a remarketing, delivery-preparation, storage
+or holding period between contracts. A scenario runs independently. Comparison
+is optional and accepts two or more independently calculated scenarios.
 
 The physical aircraft state is continuous across all segments. TTSN, TCSN and
 component usage do not reset at a lease boundary. Contract reserve accounts are
@@ -85,9 +86,9 @@ event timing and reserve-account close-out.
 
 ## Validation rules
 
-- Lease and transition identifiers are unique.
-- Lifecycle segments cannot overlap or contain implicit gaps.
-- Every segment has a complete utilization regime, including zero-use downtime.
+- Lease identifiers are unique.
+- Lease segments cannot overlap or contain implicit gaps.
+- Every lease has a complete utilization regime.
 - Lease reserve accounts map one-to-one to physical maintenance components.
 - Opening reserve balances may reference only the lease active at the cut-off.
 - The forecast end must be covered by the final lifecycle segment.

@@ -65,7 +65,7 @@ def default_scenario_input() -> dict[str, object]:
         "scenario_id": "base-plan",
         "name": "Current lease and follow-on plan",
         "analysis_date": case.analysis_date.isoformat(),
-        "forecast_end_date": "2033-12-31",
+        "forecast_end_date": "2032-01-31",
         "cutoff_position": CutoffPosition.AFTER_EXPIRY_SETTLEMENT.value,
         "currency": "USD",
         "aircraft": {
@@ -103,27 +103,13 @@ def default_scenario_input() -> dict[str, object]:
                 "closeout_rule": ReserveCloseoutRule.RETAIN_BY_LESSOR.value,
             },
             {
-                "type": "transition", "id": "preparation",
-                "description": "Remarketing and delivery preparation",
-                "start_date": "2029-07-01", "end_date": "2029-07-31",
-                "monthly_fh": "0", "monthly_fc": "0",
-                "monthly_cost": "0", "fixed_cost": "0",
-            },
-            {
                 "type": "lease", "id": "follow-on-1",
-                "lessee": "Follow-on Airline", "start_date": "2029-08-01",
+                "lessee": "Follow-on Airline", "start_date": "2029-07-01",
                 "end_date": "2032-01-31",
                 "monthly_fh": "250", "monthly_fc": "95",
                 "reserve_rate_multiplier": "1.05",
                 "redelivery_minimum_ratio": "0.50",
                 "closeout_rule": ReserveCloseoutRule.RETAIN_BY_LESSOR.value,
-            },
-            {
-                "type": "transition", "id": "terminal-holding",
-                "description": "Post-lease holding",
-                "start_date": "2032-02-01", "end_date": "2033-12-31",
-                "monthly_fh": "0", "monthly_fc": "0",
-                "monthly_cost": "0", "fixed_cost": "0",
             },
         ],
     }

@@ -10,7 +10,8 @@ Implemented after business-scope review:
 - V1 remains unchanged at the root route and V2 remains independent at `/v2/`;
 - fixed two-alternative `30-month` / `42-month` workflow removed from the active V2 dashboard;
 - one scenario now contains an arbitrary analysis date, known technical state,
-  any number of leases and explicit transition/storage periods;
+  any number of consecutive leases; the active dashboard assumes no transition,
+  storage or holding period until those assumptions are defined;
 - physical TTSN/TCSN and component state continue across leases while each
   lease creates and closes separate component reserve accounts;
 - lease-event cost is split into reserve reimbursement paid by the lessor and

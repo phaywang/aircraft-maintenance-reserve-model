@@ -27,7 +27,7 @@ class ScenarioBuilderTests(unittest.TestCase):
             self.payload["run"]["valuation_basis"], "maintenance_reserve_cashflow"
         )
         self.assertEqual(self.payload["summary"]["lease_count"], 2)
-        self.assertEqual(self.payload["summary"]["transition_count"], 2)
+        self.assertEqual(self.payload["summary"]["transition_count"], 0)
         self.assertNotIn("valuation_summary", self.payload)
         self.assertNotIn("baseline_id", self.payload)
 
@@ -60,21 +60,16 @@ class ScenarioBuilderTests(unittest.TestCase):
     def test_arbitrary_future_lease_can_be_added(self) -> None:
         inputs = default_scenario_input()
         inputs["segments"][-1]["end_date"] = "2032-02-29"
-        inputs["segments"].extend([
+        inputs["forecast_end_date"] = "2033-06-30"
+        inputs["segments"].append(
             {
                 "type": "lease", "id": "follow-on-2", "lessee": "Airline B",
                 "start_date": "2032-03-01", "end_date": "2033-06-30",
                 "monthly_fh": "230", "monthly_fc": "85",
                 "reserve_rate_multiplier": "1.1", "redelivery_minimum_ratio": "0.4",
                 "closeout_rule": "retain_by_lessor",
-            },
-            {
-                "type": "transition", "id": "final-holding",
-                "description": "Final holding", "start_date": "2033-07-01",
-                "end_date": "2033-12-31", "monthly_fh": "0", "monthly_fc": "0",
-                "monthly_cost": "30000", "fixed_cost": "0",
-            },
-        ])
+            }
+        )
         result = build_scenario_payload(inputs)
         self.assertEqual(result["summary"]["lease_count"], 3)
         self.assertEqual(len(result["scenario"]["leases"]), 3)
@@ -120,6 +115,8 @@ class V2DashboardFrontendTests(unittest.TestCase):
             self.assertIn(f'data-view="{view}"', html)
         self.assertIn('fetch("/api/v2/runs"', script)
         self.assertIn("Add lease", script)
+        self.assertNotIn("Add transition", script)
+        self.assertNotIn("Transition / downtime", script)
         self.assertIn("Duplicate scenario", html)
         self.assertIn("Lessee unfunded", script)
         self.assertIn("reserve_cashflows", script)
