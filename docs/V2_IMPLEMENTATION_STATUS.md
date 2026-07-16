@@ -231,7 +231,7 @@ Final audit evidence:
 - runtime and GitHub Pages V2 assets are byte-identical;
 - rebuilding the static V2 payload produces no repository difference;
 - all V2 commits use the configured project author;
-- no ChatGPT, Codex, OpenAI or co-author markers occur in repository content;
+- no prohibited author-assistance or co-author markers occur in repository content;
 - the `v2-lifecycle` worktree is clean.
 
 Automated browser rendering was unavailable because the execution environment prohibits both local socket binding and local file navigation. The local visual acceptance URL remains `http://127.0.0.1:8765/v2/`.
