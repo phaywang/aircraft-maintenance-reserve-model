@@ -44,6 +44,11 @@ from .lifecycle import (
     scenario_to_v1_case,
 )
 from .utilization import build_forecast_utilization, build_full_utilization
+from .lifecycle_utilization import (
+    LIFECYCLE_UTILIZATION_COLUMNS,
+    build_forecast_lifecycle_utilization,
+    build_lifecycle_utilization,
+)
 
 __all__ = [
     "CaseInputs",
@@ -70,6 +75,9 @@ __all__ = [
     "lifecycle_segments",
     "migrate_v1_case",
     "scenario_to_v1_case",
+    "LIFECYCLE_UTILIZATION_COLUMNS",
+    "build_forecast_lifecycle_utilization",
+    "build_lifecycle_utilization",
     "build_default_case",
     "build_forecast_reserve_balances",
     "build_forecast_maintenance_calendar",

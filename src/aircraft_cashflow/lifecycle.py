@@ -36,7 +36,7 @@ class ProrationConvention(str, Enum):
 
 
 class UtilizationPattern(str, Enum):
-    """V2 utilization input pattern; detailed behavior is implemented in V2.1."""
+    """How a dated utilization regime resolves monthly FH and FC."""
 
     FIXED_MONTHLY = "fixed_monthly"
     SEASONAL_PROFILE = "seasonal_profile"
@@ -152,6 +152,12 @@ class UtilizationRegime:
     pattern: UtilizationPattern = UtilizationPattern.FIXED_MONTHLY
     actual: bool = False
     month_overrides: tuple[UtilizationOverride, ...] = field(default_factory=tuple)
+    seasonal_fh_factors: tuple[Decimal | int | float | str, ...] = field(
+        default_factory=tuple
+    )
+    seasonal_fc_factors: tuple[Decimal | int | float | str, ...] = field(
+        default_factory=tuple
+    )
 
     def __post_init__(self) -> None:
         _require_identifier("regime_id", self.regime_id)
@@ -164,14 +170,37 @@ class UtilizationRegime:
         monthly_fc = to_decimal(self.monthly_fc, "monthly_fc")
         _require_nonnegative("monthly_fh", monthly_fh)
         _require_nonnegative("monthly_fc", monthly_fc)
+        fh_factors = tuple(
+            to_decimal(value, "seasonal_fh_factors")
+            for value in self.seasonal_fh_factors
+        )
+        fc_factors = tuple(
+            to_decimal(value, "seasonal_fc_factors")
+            for value in self.seasonal_fc_factors
+        )
+        for factor in (*fh_factors, *fc_factors):
+            _require_nonnegative("seasonal utilization factor", factor)
+        if self.pattern is UtilizationPattern.SEASONAL_PROFILE:
+            if len(fh_factors) != 12 or len(fc_factors) != 12:
+                raise ValueError(
+                    "seasonal utilization requires 12 FH factors and 12 FC factors"
+                )
+        elif fh_factors or fc_factors:
+            raise ValueError("seasonal factors are valid only for a seasonal profile")
+
         override_dates = [override.month_end for override in self.month_overrides]
         if len(override_dates) != len(set(override_dates)):
             raise ValueError("utilization regime override dates must be unique")
         for override in self.month_overrides:
-            if not self.start_date <= override.month_end <= self.end_date:
-                raise ValueError("utilization regime override must fall within its regime")
+            override_month = (override.month_end.year, override.month_end.month)
+            start_month = (self.start_date.year, self.start_date.month)
+            end_month = (self.end_date.year, self.end_date.month)
+            if not start_month <= override_month <= end_month:
+                raise ValueError("utilization regime override month must overlap its regime")
         object.__setattr__(self, "monthly_fh", monthly_fh)
         object.__setattr__(self, "monthly_fc", monthly_fc)
+        object.__setattr__(self, "seasonal_fh_factors", fh_factors)
+        object.__setattr__(self, "seasonal_fc_factors", fc_factors)
 
 
 @dataclass(frozen=True)

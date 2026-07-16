@@ -6,7 +6,7 @@ Version: `2.0.0a0`
 | Stage | Status | Evidence |
 |---|---|---|
 | V2.0 Lifecycle schema and migration | Implemented | `lifecycle.py`, lifecycle tests and full V1 regression |
-| V2.1 Variable utilization | Not started | Awaiting V2.0 approval gate |
+| V2.1 Variable utilization | Implemented | `lifecycle_utilization.py`, utilization contract and full V1 regression |
 | V2.2 Multi-lease contract engine | Not started | — |
 | V2.3 Redelivery settlement | Not started | — |
 | V2.4 Transition economics | Not started | — |
@@ -38,6 +38,30 @@ Verification:
 - invalid lifecycle overlaps, unexplained gaps and unknown component/account mappings fail with explicit errors;
 - serialized scenarios contain no raw `date`, `Decimal` or enum objects.
 
+## V2.1 implementation record
+
+Implemented:
+
+- multiple non-overlapping utilization regimes within each lease or transition;
+- fixed monthly FH/FC, twelve-month seasonal factors and explicit monthly overrides;
+- actual-day proration for arbitrary first, last and intra-month regime stubs;
+- automatic row boundaries at calendar month-end, regime changes, lifecycle changes and the analysis date;
+- explicit zero-flight regimes for storage and other downtime rather than hidden zero assumptions;
+- continuous TTSN/TCSN across leases, transitions and utilization changes;
+- an optional known-state row that anchors forecast TTSN/TCSN at the selected cut-off;
+- a stable, component-independent utilization output table for downstream maintenance calculations.
+
+Verification:
+
+- fixed, seasonal and explicit-month calculations reconcile to hand-calculated examples;
+- two regimes within one month produce separate auditable rows without losing usage;
+- a zero-flight transition preserves cumulative TTSN/TCSN into the follow-on lease;
+- missing transition coverage and missing explicit monthly values fail clearly;
+- arbitrary analysis dates become explicit timeline boundaries;
+- all V1 calculation and dashboard regression tests continue to pass.
+
+Detailed input, output and validation rules are recorded in `V2_UTILIZATION_CONTRACT.md`.
+
 ## Next approval gate
 
-V2.1 will replace the compatibility-only fixed utilization regime with a lifecycle calculation timeline supporting multiple dated regimes, zero-flight transitions, seasonal profiles and explicit period overrides while preserving continuous TTSN/TCSN.
+V2.2 will add lease-specific rent and maintenance-reserve terms, map physical components to contract-specific accounts, and calculate arbitrary multi-lease cash flows using the verified V2.1 utilization timeline. Expiry-period reserve collection must remain before maintenance and close-out settlement.

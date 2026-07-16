@@ -5,6 +5,7 @@
 - Added the V2 lifecycle schema for aircraft, leases, transitions, utilization regimes, known state and terminal value.
 - Added explicit expiry cut-off semantics and arbitrary-date stub periods.
 - Added V1 migration adapters with exact Phase 1 calculation regression.
+- Added a continuous variable-utilization timeline with fixed, seasonal and explicit-month inputs, actual-day stub proration and explicit zero-flight transitions.
 
 ## 1.0.1 — in development
 
