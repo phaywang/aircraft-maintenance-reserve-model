@@ -41450,7 +41450,7 @@ window.V2_DASHBOARD_DATA = {
   "run": {
     "calculated_at": "2026-07-15T00:00:00+00:00",
     "calculation_engine": "deterministic",
-    "model_version": "2.0.0a0"
+    "model_version": "2.0.0"
   },
   "sensitivity_cases": [
     {

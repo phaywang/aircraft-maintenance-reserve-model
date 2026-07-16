@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0a0 — in development
+## 2.0.0 — 2026-07-15
 
 - Added the V2 lifecycle schema for aircraft, leases, transitions, utilization regimes, known state and terminal value.
 - Added explicit expiry cut-off semantics and arbitrary-date stub periods.
@@ -14,7 +14,7 @@
 - Added deterministic recommendations, alternative diagnostics and a guarded LLM-ready explanation payload.
 - Added one-way sensitivity grids, nonlinear maintenance-timing recalculation and recommendation-switch reporting.
 
-## 1.0.1 — in development
+## 1.0.1 — 2026-07-15
 
 - Recalibrated synthetic reserve rates to produce funded, near-threshold and underfunded forecast events.
 - Refreshed the deterministic regression baseline and embedded dashboard payloads.

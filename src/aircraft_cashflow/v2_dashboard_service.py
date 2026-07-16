@@ -74,7 +74,7 @@ def build_v2_dashboard_payload(
     return _serialize({
         "run": {
             "calculated_at": calculated_at or datetime.now(timezone.utc),
-            "model_version": "2.0.0a0",
+            "model_version": "2.0.0",
             "calculation_engine": "deterministic",
         },
         "comparison": {

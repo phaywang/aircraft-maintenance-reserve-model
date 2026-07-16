@@ -20,7 +20,7 @@ The model calculates a complete monthly history from manufacture through lease e
 
 Reserve accounts remain segregated throughout the model. The expiry month is processed as an active contractual period: final utilization and reserve collections occur before maintenance settlement and account close-out.
 
-## Dashboard
+## Dashboards
 
 The local dashboard provides editable inputs and eight analysis views:
 
@@ -32,6 +32,16 @@ The local dashboard provides editable inputs and eight analysis views:
 - Event Settlement
 - Reserve Adequacy
 - Model Validation
+
+The V2 lifecycle workspace adds seven views for complete follow-on lease decisions:
+
+- Decision Summary
+- Alternatives
+- Utilization
+- Events & Settlement
+- Cash Flow & Valuation
+- Sensitivity
+- Model Audit
 
 ![Model validation](docs/images/model-validation.png)
 
@@ -61,6 +71,8 @@ python3 scripts/run_dashboard_api.py --port 8765
 ```
 
 Open [http://127.0.0.1:8765](http://127.0.0.1:8765).
+
+Open [http://127.0.0.1:8765/v2/](http://127.0.0.1:8765/v2/) for the multi-lease lifecycle comparison.
 
 On macOS, `Run Aircraft Reserve Dashboard.command` starts the same local service.
 
@@ -92,14 +104,16 @@ The tests cover threshold crossing, calendar-versus-usage event behavior, rate e
 ```text
 src/aircraft_cashflow/   Calculation engine and local API
 dashboard/static/        Dashboard application
+dashboard/v2/            V2 lifecycle comparison application
 tests/                   Unit, regression and interface tests
 scripts/                 CLI and payload utilities
+docs/v2/                 GitHub Pages V2 application
 docs/images/             Dashboard screenshots
 ```
 
-## Roadmap
+## V2 lifecycle model
 
-The next model layer will support arbitrary analysis dates, variable utilization regimes, multiple leases, transition periods, redelivery settlement and common-horizon scenario valuation.
+Version 2.0 supports arbitrary analysis dates, variable utilization, multiple leases, transition economics, physical maintenance events, contract-specific reserve accounts, redelivery settlement, common-horizon NPV, deterministic conclusions, guarded LLM explanation payloads and sensitivity ranges.
 
 ## License
 

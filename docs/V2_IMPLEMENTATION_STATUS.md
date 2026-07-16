@@ -1,7 +1,7 @@
 # V2 Implementation Status
 
 Branch: `v2-lifecycle`  
-Version: `2.0.0a0`
+Version: `2.0.0`
 
 | Stage | Status | Evidence |
 |---|---|---|
@@ -222,4 +222,16 @@ Detailed rules are recorded in `V2_SENSITIVITY_CONTRACT.md`.
 
 ## Completion gate
 
-V2.0 through V2.8 are implemented. Final release readiness requires a clean full regression, generated-asset consistency, author and prohibited-trace scan, repository status review and local visual acceptance when socket access is available.
+V2.0 through V2.8 are implemented and released as version `2.0.0`.
+
+Final audit evidence:
+
+- 129 automated tests pass, with one socket-only test skipped by the execution sandbox;
+- Python modules and scripts compile and V2 JavaScript passes syntax validation;
+- runtime and GitHub Pages V2 assets are byte-identical;
+- rebuilding the static V2 payload produces no repository difference;
+- all V2 commits use the configured project author;
+- no ChatGPT, Codex, OpenAI or co-author markers occur in repository content;
+- the `v2-lifecycle` worktree is clean.
+
+Automated browser rendering was unavailable because the execution environment prohibits both local socket binding and local file navigation. The local visual acceptance URL remains `http://127.0.0.1:8765/v2/`.
