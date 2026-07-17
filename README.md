@@ -44,10 +44,61 @@ reconciled to the V1 opening position, event funding, reserve-account
 roll-forward and monthly component cash flow. Both hosted workspaces are
 read-only demonstrations; clone the repository to recalculate edited inputs.
 
+## Product walkthrough
+
+### 1. Establish the single-lease reference position
+
+V1 starts with the aircraft, analysis date, remaining lease term and headline
+maintenance-reserve position. The opening reserve is reconstructed from the
+modeled history rather than entered as an unexplained balancing figure.
+
 ![V1 dashboard overview](docs/assets/demo/v1-overview.png)
 
-For a complete presentation sequence, scenario setup and screenshot index, see
-the [product demo workflow](docs/DEMO_WORKFLOW.md).
+### 2. Trace every event to its component account
+
+The event-settlement view compares the escalated event cost with the reserve
+available in the matching 6Y, 12Y, landing-gear or engine account. Aggregate
+cash flow remains available for reconciliation, while component-level balances
+show which contractual rate may require review.
+
+![V1 component event settlement](docs/assets/demo/v1-event-settlement.png)
+
+### 3. Interpret validated results
+
+The optional analysis workspace can generate a structured report or answer a
+free-form question. Financial statements are bound to deterministic evidence;
+the language model cannot create a second set of cash-flow calculations.
+
+![V1 evidence-grounded analysis](docs/assets/demo/v1-question-result.png)
+
+### 4. Extend the same aircraft across consecutive leases
+
+V2 carries the physical aircraft state, TTSN, TCSN and component usage across
+lease boundaries. Each lease can have different utilization and reserve terms,
+while its contractual component accounts open and close separately.
+
+![V2 consecutive lease timeline](docs/assets/demo/v2-lease-timeline.png)
+
+### 5. Compare independently calculated lifecycle paths
+
+Users may duplicate a lifecycle path, change lease duration, utilization or
+reserve terms, run each scenario independently and select any number for
+comparison. The dashboard reports absolute outcomes and timing trade-offs; it
+does not declare a universal winner from an incomplete economic scope.
+
+![V2 multi-scenario comparison](docs/assets/demo/v2-scenario-comparison.png)
+
+### 6. Generate cross-scenario analysis
+
+The V2 analysis workspace can explain the active scenario or a selected
+comparison set, including the relationship between top-up exposure, event
+timing, retained reserves and remaining component life.
+
+![V2 cross-scenario analysis](docs/assets/demo/v2-cross-scenario-question.png)
+
+For the complete 01–09 presentation sequence, demonstration inputs, suggested
+questions and full-page screenshot index, open the
+[product demo workflow](docs/DEMO_WORKFLOW.md).
 
 ## What the model does
 
@@ -96,8 +147,6 @@ The physical aircraft state continues across lease boundaries. Each lease has
 separate component reserve accounts, and the expiry period is processed in the
 required order: final utilization, final reserve collection, maintenance-event
 settlement and then account close-out.
-
-![V2 scenario comparison](docs/assets/demo/v2-scenario-comparison.png)
 
 ## Demonstration assumptions
 
