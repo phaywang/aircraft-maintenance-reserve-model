@@ -6,6 +6,32 @@ funding exposure. The project deliberately retains two workspaces: V1 is the
 verified single-lease reference model, while V2 extends the same reserve
 methodology to flexible multi-lease lifecycle scenarios.
 
+## Start here
+
+This model is designed for a lessor, aircraft owner or technical-finance adviser
+reviewing one practical question:
+
+> Will the component-specific maintenance reserves available at each forecast
+> maintenance event be sufficient to reimburse the modeled event cost, and how
+> does that exposure change under a different lease path?
+
+The calculation workflow is:
+
+1. Enter the aircraft position, maintenance program and contractual reserve terms.
+2. Enter one lease in V1, or any number of consecutive leases in V2.
+3. Select **Run model**. The Python engine reconstructs history, calculates the
+   analysis-date opening position and forecasts every subsequent month.
+4. Review event funding first, then trace each result through component reserve
+   accounts and the monthly cash ledger.
+5. Optionally use **Analysis & Q&A** to turn the validated results into an English
+   report or ask a focused lessor-side question.
+
+For a two-minute review, open the hosted V1 dashboard and follow views 01–09.
+Then open V2 to see how the same calculation extends across consecutive leases
+and multiple independently calculated scenarios. The hosted dashboards contain
+precalculated demonstration data; run the project locally to edit assumptions
+and recalculate.
+
 ## Choose a workspace
 
 | Workspace | Purpose | Best for | Hosted dashboard |
@@ -18,7 +44,7 @@ reconciled to the V1 opening position, event funding, reserve-account
 roll-forward and monthly component cash flow. Both hosted workspaces are
 read-only demonstrations; clone the repository to recalculate edited inputs.
 
-![Dashboard overview](docs/images/dashboard-overview.png)
+![V1 dashboard overview](docs/assets/demo/v1-overview.png)
 
 For a complete presentation sequence, scenario setup and screenshot index, see
 the [product demo workflow](docs/DEMO_WORKFLOW.md).
@@ -34,6 +60,20 @@ The model calculates a complete monthly history from manufacture through lease e
 5. **Adequacy** — component-level balances and shortfalls identify funding exposure.
 
 Reserve accounts remain segregated throughout the model. The expiry month is processed as an active contractual period: final utilization and reserve collections occur before maintenance settlement and account close-out.
+
+### How to read the principal outputs
+
+| Output | Meaning in this model |
+|---|---|
+| **MR collected** | Contractual maintenance reserve inflow credited to the matching component account |
+| **Event cost** | Escalated modeled maintenance cost at the event date |
+| **Reserve reimbursement** | Lower of event cost and the matching reserve available at settlement |
+| **Lessee top-up** | Modeled unfunded contractual obligation; it is not assumed to be collected cash |
+| **Retained reserve** | Balance remaining after modeled settlement and lease close-out, subject to the stated close-out assumption |
+
+The model does not net one component account against another. Base rent, aircraft
+market value, NPV, downtime and lessee credit or collectability remain outside
+the active scope.
 
 ## Workspace design
 
@@ -57,7 +97,7 @@ separate component reserve accounts, and the expiry period is processed in the
 required order: final utilization, final reserve collection, maintenance-event
 settlement and then account close-out.
 
-![V2 lifecycle event funding](docs/images/lifecycle-event-funding.png)
+![V2 scenario comparison](docs/assets/demo/v2-scenario-comparison.png)
 
 ## Demonstration assumptions
 
@@ -74,13 +114,10 @@ All dates, utilization, costs, reserve rates and escalation assumptions can be e
 
 The synthetic reserve rates are calibrated to demonstrate different funding outcomes: fully funded events, a near-threshold event and material component shortfalls. They are illustrative inputs, not market quotations.
 
-The public timeline is shifted forward by 32 months from the private reference
-timeline: manufacture, lease commencement, analysis and expiry move together, so
-aircraft age, cumulative utilization and event timing relative to the lease are
-preserved. Cost and reserve-rate escalation still resets each January. Because a
-32-month shift changes where January falls within the relative lease timeline,
-the monthly reserve collections and funding outcomes are recalculated and are
-not expected to equal the private reference results.
+The public demonstration uses a synthetic timeline, fictional counterparties
+and illustrative commercial assumptions. Calendar-year escalation resets each
+January, so all displayed balances and funding outcomes are recalculated from
+the published inputs rather than presented as fixed examples.
 
 The V2 public demo starts from the same aircraft and analysis-date position. It
 then continues the existing lease through 30 June 2029 and adds a consecutive
@@ -118,7 +155,7 @@ and interprets verified results from a lessor perspective. It does not
 recalculate cash flows or introduce rent, NPV, aircraft value, downtime or
 credit-risk assumptions.
 
-For V1 Question 3, the Python engine freezes historical events and the
+For the V1 engine-interval sensitivity analysis, the Python engine freezes historical events and the
 analysis-date opening reserve, then recalculates only the next E1 event using
 95%, 100% and 105% of the base flight-hour interval. The resulting “advantage”
 is explicitly limited to the lessor's modeled maintenance-reserve reimbursement
@@ -186,7 +223,7 @@ docs/assets/             Dashboard screenshots and demo assets
 
 ## V2 lifecycle model
 
-Version 2.1 keeps V1 as the frozen reference baseline and provides an independent
+Version 2.2 keeps V1 as the verified reference baseline and provides an independent
 lessor lifecycle scenario builder. V1 changes are limited to verified bug fixes;
 V2 is the active product-development workspace. One V2 scenario can start at an
 arbitrary analysis date and contain a current lease plus any number of
