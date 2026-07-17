@@ -170,7 +170,7 @@ def run_sensitivity_analysis(
         case_rows.append({
             "case_id": case_id,
             "sensitivity_id": spec.sensitivity_id if spec else "base",
-            "label": spec.label if spec else "Base case",
+            "label": spec.label if spec else "Baseline",
             "variable": spec.variable.value if spec else "base",
             "level": level,
             "shock_value": value,

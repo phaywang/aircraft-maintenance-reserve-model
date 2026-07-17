@@ -1,13 +1,20 @@
 const COMPONENTS = ["All", "6Y", "12Y", "LDG", "E1", "E2"];
-const VIEWS = ["overview", "assumptions", "utilization", "events", "inflows", "cashflow", "risk", "audit"];
+const VIEWS = ["overview", "assumptions", "utilization", "events", "inflows", "cashflow", "risk", "analysis", "audit"];
 const STORAGE_KEY = "aircraft-reserve-model-draft-v2";
 
 const demoData = structuredClone(window.DASHBOARD_DATA);
 let currentData = structuredClone(demoData);
 let draftCase = applyV1DerivedBaseDates(loadDraft() || structuredClone(demoData.case));
 let currentView = location.hash.slice(1) || "overview";
+if (currentView === "case-questions") currentView = "analysis";
 let selectedComponent = "All";
 let isDirty = JSON.stringify(draftCase) !== JSON.stringify(currentData.case);
+let caseReport = null;
+let caseReportRunning = false;
+let caseReportError = "";
+let analysisMode = "report";
+let analysisReportType = "full_analysis";
+let analysisQuestion = "";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -155,7 +162,7 @@ function renderOverview() {
   const data = currentData;
   return `${heading("Portfolio overview", "Maintenance reserve position", "Forecast values include opening balances accumulated from the full historical simulation.")}
     <section class="metric-grid">${metric("Forecast reserve inflow", money(data.summary.forecast_reserve_inflow, true), `${data.summary.forecast_months}-month collection`)}${metric("Forecast reimbursement", money(data.summary.forecast_reimbursement, true), `Across ${data.summary.component_event_count} component events`)}${metric("Total forecast shortfall", money(data.summary.forecast_shortfall, true), `${data.summary.underfunded_event_count} underfunded events`, "risk-metric")}${metric("Lease-end reserve balance", money(data.summary.lease_end_reserve_balance, true), `Closing position · ${month(draftCase.lease_expiry_date)}`)}</section>
-    <section class="panel assumption-snapshot"><div class="panel-header"><div><p class="eyebrow">Reference inputs</p><h3>Case assumptions</h3></div><button class="button secondary compact" data-open-view="assumptions">Edit assumptions</button></div><div class="snapshot-grid"><div><span>Aircraft / lessee</span><strong>${escapeHtml(draftCase.aircraft_type)}</strong><small>${escapeHtml(draftCase.lessee)}</small></div><div><span>Lease period</span><strong>${longDate(draftCase.lease_start_date)}</strong><small>to ${longDate(draftCase.lease_expiry_date)}</small></div><div><span>Analysis date</span><strong>${longDate(draftCase.analysis_date)}</strong><small>${data.summary.forecast_months} forecast months</small></div><div><span>Default utilization</span><strong>${number(draftCase.default_monthly_fh)} FH / month</strong><small>${number(draftCase.default_monthly_fc)} FC / month</small></div></div><div class="table-scroll"><table><thead><tr><th>Component</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base event cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th></tr></thead><tbody>${draftCase.components.map((component) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong><span class="component-name">${escapeHtml(component.name)}</span></td><td>${escapeHtml(component.event_driver.replaceAll("_", " "))}</td><td class="number">${number(component.interval)}</td><td class="number">${money(component.base_cost)}</td><td class="number">${percent(component.annual_cost_escalation)}</td><td>${escapeHtml(component.reserve_basis.replaceAll("_", " "))}</td><td class="number">${money(component.base_reserve_rate)}</td><td class="number">${percent(component.annual_reserve_escalation)}</td></tr>`).join("")}</tbody></table></div><div class="assumption-footnote"><strong>Public demonstration basis.</strong> The private reference timeline is shifted forward by 32 months. Aircraft age and relative event timing are preserved, while January-based escalation is recalculated from the displayed dates.</div></section>
+    <section class="panel assumption-snapshot"><div class="panel-header"><div><p class="eyebrow">Reference inputs</p><h3>Model assumptions</h3></div><button class="button secondary compact" data-open-view="assumptions">Edit assumptions</button></div><div class="snapshot-grid"><div><span>Aircraft / lessee</span><strong>${escapeHtml(draftCase.aircraft_type)}</strong><small>${escapeHtml(draftCase.lessee)}</small></div><div><span>Lease period</span><strong>${longDate(draftCase.lease_start_date)}</strong><small>to ${longDate(draftCase.lease_expiry_date)}</small></div><div><span>Analysis date</span><strong>${longDate(draftCase.analysis_date)}</strong><small>${data.summary.forecast_months} forecast months</small></div><div><span>Default utilization</span><strong>${number(draftCase.default_monthly_fh)} FH / month</strong><small>${number(draftCase.default_monthly_fc)} FC / month</small></div></div><div class="table-scroll"><table><thead><tr><th>Component</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base event cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th></tr></thead><tbody>${draftCase.components.map((component) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong><span class="component-name">${escapeHtml(component.name)}</span></td><td>${escapeHtml(component.event_driver.replaceAll("_", " "))}</td><td class="number">${number(component.interval)}</td><td class="number">${money(component.base_cost)}</td><td class="number">${percent(component.annual_cost_escalation)}</td><td>${escapeHtml(component.reserve_basis.replaceAll("_", " "))}</td><td class="number">${money(component.base_reserve_rate)}</td><td class="number">${percent(component.annual_reserve_escalation)}</td></tr>`).join("")}</tbody></table></div><div class="assumption-footnote"><strong>Public demonstration basis.</strong> The private reference timeline is shifted forward by 32 months. Aircraft age and relative event timing are preserved, while January-based escalation is recalculated from the displayed dates.</div></section>
     <section class="panel cashflow-panel"><div class="panel-header"><div><p class="eyebrow">Monthly cash flow</p><h3>Collections, reimbursements and closing balance</h3></div><div class="chart-legend"><span><i class="legend-inflow"></i> Inflow</span><span><i class="legend-outflow"></i> Reimbursement</span><span><i class="legend-balance"></i> Closing balance</span></div></div>${cashflowChart(data.cashflows)}</section>
     <section class="panel funding-panel"><div class="panel-header funding-header"><div><p class="eyebrow">Event funding</p><h3>Forecast maintenance exposure</h3></div>${componentFilters()}</div>${fundingTable(filteredEvents())}</section>
     ${auditStrip()}`;
@@ -171,9 +178,9 @@ function componentInput(index, field, value, type = "number", step = "any", tran
 
 function renderAssumptions() {
   const caseInputs = draftCase;
-  return `${heading("Case setup", "Inputs and assumptions", "Every value below is part of the deterministic Stage 1–4 request. Changes are saved locally until the model is run.", `<span class="draft-badge ${isDirty ? "visible" : ""}">Unsaved calculation changes</span>`)}
+  return `${heading("Model inputs", "Inputs and assumptions", "Every value below is part of the deterministic Stage 1–4 request. Changes are saved locally until the model is run.", `<span class="draft-badge ${isDirty ? "visible" : ""}">Unsaved calculation changes</span>`)}
     <form id="assumptions-form" autocomplete="off">
-      <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Aircraft and lease</p><h3>Case identity and timeline</h3></div></div><div class="form-grid">${inputField("Aircraft type", "aircraft_type", caseInputs.aircraft_type)}${inputField("Lessee", "lessee", caseInputs.lessee)}${inputField("Date of manufacture", "date_of_manufacture", caseInputs.date_of_manufacture, "date")}${inputField("Lease start", "lease_start_date", caseInputs.lease_start_date, "date")}${inputField("Analysis date", "analysis_date", caseInputs.analysis_date, "date")}${inputField("Lease expiry", "lease_expiry_date", caseInputs.lease_expiry_date, "date")}${inputField("Default monthly flight hours", "default_monthly_fh", caseInputs.default_monthly_fh, "number", 'min="0" step="any"')}${inputField("Default monthly flight cycles", "default_monthly_fc", caseInputs.default_monthly_fc, "number", 'min="0" step="any"')}</div></section>
+      <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Aircraft and lease</p><h3>Aircraft and lease timeline</h3></div></div><div class="form-grid">${inputField("Aircraft type", "aircraft_type", caseInputs.aircraft_type)}${inputField("Lessee", "lessee", caseInputs.lessee)}${inputField("Date of manufacture", "date_of_manufacture", caseInputs.date_of_manufacture, "date")}${inputField("Lease start", "lease_start_date", caseInputs.lease_start_date, "date")}${inputField("Analysis date", "analysis_date", caseInputs.analysis_date, "date")}${inputField("Lease expiry", "lease_expiry_date", caseInputs.lease_expiry_date, "date")}${inputField("Default monthly flight hours", "default_monthly_fh", caseInputs.default_monthly_fh, "number", 'min="0" step="any"')}${inputField("Default monthly flight cycles", "default_monthly_fc", caseInputs.default_monthly_fc, "number", 'min="0" step="any"')}</div></section>
       <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Maintenance assumptions</p><h3>Intervals, event costs and reserve rates</h3></div><span class="panel-note">Escalation inputs shown as annual percentages</span></div><div class="table-scroll assumption-table"><table><thead><tr><th>Component</th><th>Driver</th><th class="number">Interval</th><th class="number">Base cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th><th class="number">Usage at lease start</th></tr></thead><tbody>${caseInputs.components.map((component, index) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong>${componentInput(index, "name", component.name, "text")}</td><td><select data-component-index="${index}" data-component-field="event_driver"><option value="calendar_months" ${component.event_driver === "calendar_months" ? "selected" : ""}>Calendar months</option><option value="flight_hours" ${component.event_driver === "flight_hours" ? "selected" : ""}>Flight hours</option><option value="flight_cycles" ${component.event_driver === "flight_cycles" ? "selected" : ""}>Flight cycles</option></select></td><td>${componentInput(index, "interval", component.interval)}</td><td>${componentInput(index, "base_cost", component.base_cost)}</td><td>${componentInput(index, "annual_cost_escalation", percentInput(component.annual_cost_escalation), "number", "0.01", "percent")}</td><td><select data-component-index="${index}" data-component-field="reserve_basis"><option value="per_month" ${component.reserve_basis === "per_month" ? "selected" : ""}>Per month</option><option value="per_flight_hour" ${component.reserve_basis === "per_flight_hour" ? "selected" : ""}>Per flight hour</option><option value="per_flight_cycle" ${component.reserve_basis === "per_flight_cycle" ? "selected" : ""}>Per flight cycle</option></select></td><td>${componentInput(index, "base_reserve_rate", component.base_reserve_rate)}</td><td>${componentInput(index, "annual_reserve_escalation", percentInput(component.annual_reserve_escalation), "number", "0.01", "percent")}</td><td>${component.event_driver === "calendar_months" ? '<span class="not-applicable">N/A</span>' : componentInput(index, "usage_since_event_at_lease_start", component.usage_since_event_at_lease_start ?? "")}</td></tr>`).join("")}</tbody></table></div></section>
       <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Monthly exceptions</p><h3>Utilization overrides</h3></div><button type="button" class="button secondary compact" id="add-override">Add month</button></div><div id="override-list" class="override-list">${caseInputs.utilization_overrides.length ? caseInputs.utilization_overrides.map((override, index) => `<div class="override-row"><label class="field"><span>Month end</span><input type="date" data-override-index="${index}" data-override-field="month_end" value="${escapeHtml(override.month_end)}"></label><label class="field"><span>Flight hours</span><input type="number" min="0" step="any" data-override-index="${index}" data-override-field="flight_hours" value="${escapeHtml(override.flight_hours)}"></label><label class="field"><span>Flight cycles</span><input type="number" min="0" step="any" data-override-index="${index}" data-override-field="flight_cycles" value="${escapeHtml(override.flight_cycles)}"></label><button type="button" class="remove-button" data-remove-override="${index}" aria-label="Remove utilization override">Remove</button></div>`).join("") : '<div class="empty-state compact-empty">No month-specific overrides. Defaults apply throughout the lease.</div>'}</div></section>
       <div class="form-actions"><p>Running the model recalculates the full historical lease, then returns the forecast period.</p><button type="button" class="button primary large" data-run-from-form>Run Stage 1–4 model</button></div>
@@ -323,6 +330,68 @@ function renderRisk() {
     <section class="panel risk-detail"><div class="panel-header"><div><p class="eyebrow">Complete forecast schedule</p><h3>All event funding outcomes</h3></div><span class="panel-note">Includes funded events and remaining post-event reserve</span></div>${fundingTable(events)}<div class="schedule-note"><strong>Adequacy test</strong><span>Coverage compares event cost with the matching component reserve available on the payment date. Component accounts remain segregated and cannot offset one another.</span></div></section>`;
 }
 
+function caseReportInline(value) {
+  return escapeHtml(value)
+    .replace(/\[verified: ([A-Za-z0-9_:\-.]+)\]/g, '<span class="verified-ref" title="$1">Verified source</span>')
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>");
+}
+
+function caseReportHtml(markdown) {
+  const lines = String(markdown || "").split("\n");
+  const output = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    const next = lines[index + 1] || "";
+    if (line.trim().startsWith("|") && /^\s*\|?[\s:|-]+\|\s*$/.test(next)) {
+      const cells = (value) => value.trim().replace(/^\||\|$/g, "").split("|").map((cell) => caseReportInline(cell.trim()));
+      const headers = cells(line);
+      const rows = [];
+      index += 2;
+      while (index < lines.length && lines[index].trim().startsWith("|")) {
+        rows.push(cells(lines[index]));
+        index += 1;
+      }
+      index -= 1;
+      output.push(`<div class="report-table"><table><thead><tr>${headers.map((header) => `<th>${header}</th>`).join("")}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+      continue;
+    }
+    const safe = caseReportInline(line);
+    if (safe.startsWith("# ")) output.push(`<h2>${safe.slice(2)}</h2>`);
+    else if (safe.startsWith("## ")) output.push(`<h3>${safe.slice(3)}</h3>`);
+    else if (safe.startsWith("### ")) output.push(`<h4>${safe.slice(4)}</h4>`);
+    else if (/^---+$/.test(line.trim())) output.push("<hr>");
+    else if (safe.startsWith("- ")) output.push(`<div class="report-bullet">${safe.slice(2)}</div>`);
+    else output.push(safe ? `<p>${safe}</p>` : '<div class="report-space"></div>');
+  }
+  return output.join("");
+}
+
+function renderAnalysis() {
+  const suggestedQuestions = [
+    "Which maintenance events create the greatest funding exposure for the lessor?",
+    "Which component reserve rates appear misaligned with forecast maintenance costs?",
+    "How does the next engine interval affect the lessor’s reimbursement exposure?",
+    "What should the lessor review before lease expiry?",
+  ];
+  const reportLabels = {
+    full_analysis: "Full Maintenance Reserve Analysis",
+    funding_adequacy: "Funding Adequacy Review",
+    component_rate_review: "Component Reserve-Rate Review",
+    engine_interval_sensitivity: "Engine Interval Sensitivity Note",
+  };
+  const canGenerate = !isDirty && !caseReportRunning && (analysisMode === "report" || analysisQuestion.trim().length > 0);
+  const resultTitle = caseReport?.mode === "question" ? "Evidence-based answer" : reportLabels[caseReport?.report_type] || "Generated analysis";
+  return `${heading("Lessor analysis workspace", "Analysis & Q&A", "Generate a report or ask a question about the current validated model run.")}
+    <section class="panel analysis-usage-guide"><div class="analysis-guide-heading"><div><p class="eyebrow">How to use this workspace</p><h3>Calculated first. Interpreted second.</h3></div><span class="status funded">Current run validated</span></div><div class="analysis-steps"><article><span>01</span><div><strong>Run the model</strong><p>Complete or update Inputs & Assumptions, then run Stage 1–4. Analysis always uses the latest validated results.</p></div></article><article><span>02</span><div><strong>Choose an analysis path</strong><p>Generate a structured report or ask a specific question about funding, reserve rates, events or engine timing.</p></div></article><article><span>03</span><div><strong>Review verified evidence</strong><p>Financial values are bound to deterministic claims. Unsupported calculations are blocked before publication.</p></div></article></div><div class="analysis-boundary"><strong>When a new calculation is required</strong><span>If your question changes utilization, rates, dates, intervals or another assumption, edit the inputs and rerun the model first. The language model does not create new cash-flow results.</span></div></section>
+    <section class="analysis-mode-tabs" role="group" aria-label="Choose analysis mode"><button type="button" data-analysis-mode="report" class="${analysisMode === "report" ? "selected" : ""}"><strong>Generate report</strong><small>Structured review of the current run</small></button><button type="button" data-analysis-mode="question" class="${analysisMode === "question" ? "selected" : ""}"><strong>Ask a question</strong><small>Focused answer from verified evidence</small></button></section>
+    ${analysisMode === "report" ? `<section class="panel analysis-controls"><div class="analysis-control-copy"><p class="eyebrow">Report builder</p><h3>Select an analysis format</h3><p>Each report uses the same current-run evidence but organizes the interpretation for a different review purpose.</p></div><label class="field analysis-report-select"><span>Report type</span><select data-analysis-report-type>${Object.entries(reportLabels).map(([value, label]) => `<option value="${value}" ${analysisReportType === value ? "selected" : ""}>${escapeHtml(label)}</option>`).join("")}</select></label><button class="button primary" data-generate-analysis ${canGenerate ? "" : "disabled"}>${caseReportRunning ? "Generating…" : "Generate report"}</button></section>` : `<section class="panel analysis-question-panel"><div class="analysis-control-copy"><p class="eyebrow">Evidence-grounded Q&A</p><h3>Ask about the current model results</h3><p>Questions can address funding exposure, component adequacy, event timing and lessor considerations within the calculated scope.</p></div><label class="analysis-question-field"><span>Your question</span><textarea data-analysis-question maxlength="1200" placeholder="e.g. Which component accounts should the lessor review first?">${escapeHtml(analysisQuestion)}</textarea><small>${analysisQuestion.length} / 1,200 characters</small></label><div class="suggested-question-block"><span>Suggested questions</span><div>${suggestedQuestions.map((question) => `<button type="button" data-suggested-question="${escapeHtml(question)}">${escapeHtml(question)}</button>`).join("")}</div></div><div class="analysis-question-actions"><span>Answers are limited to the current validated run.</span><button class="button primary" data-generate-analysis ${canGenerate ? "" : "disabled"}>${caseReportRunning ? "Analyzing…" : "Analyze question"}</button></div></section>`}
+    ${caseReportError ? `<section class="status-banner error" role="alert"><div><strong>Analysis could not be generated</strong><p>${escapeHtml(caseReportError)}</p></div></section>` : ""}
+    ${isDirty ? '<div class="note"><strong>Calculation required.</strong> Inputs have changed. Run the updated Stage 1–4 model before generating analysis so the evidence matches the displayed assumptions.</div>' : ""}
+    ${caseReport ? `<section class="panel case-report-output"><div class="panel-header"><div><p class="eyebrow">Generated analysis</p><h3>${escapeHtml(resultTitle)}</h3>${caseReport.question ? `<p class="analysis-result-question">${escapeHtml(caseReport.question)}</p>` : ""}</div><span class="status funded">Verified evidence</span></div><article class="case-report-prose">${caseReportHtml(caseReport.report_markdown)}</article><div class="case-report-audit"><span>${escapeHtml(caseReport.model_id)}</span><span>English</span><span>Lessor perspective</span><span>${number(caseReport.verified_claim_count)} verified claims</span><span>${number(caseReport.financial_numbers_checked)} financial references checked</span><span>${escapeHtml(caseReport.guardrail_status)}</span>${caseReport.removed_line_count ? `<span>${number(caseReport.removed_line_count)} unsupported lines removed</span>` : ""}</div></section>` : '<section class="panel case-report-empty"><div class="empty-state">No report or answer has been generated in this session.</div></section>'}
+    <div class="note"><strong>Analysis boundary.</strong> The workspace covers maintenance reserve funding. Base rent, NPV, aircraft market value, downtime, lessee credit quality and collectability are outside the current V1 model.</div>`;
+}
+
 function renderAudit() {
   const checks = currentData.audit.runtime_checks;
   const reconciliation = currentData.audit.demo_reconciliation;
@@ -358,7 +427,7 @@ function simpleTable(headers, rows, numericColumns = [], className = "") {
 function renderCurrentView() {
   if (!VIEWS.includes(currentView)) currentView = "overview";
   document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.view === currentView));
-  const renderers = { overview: renderOverview, assumptions: renderAssumptionsV2, utilization: renderUtilization, events: renderEvents, inflows: renderInflows, cashflow: renderCashflow, risk: renderRisk, audit: renderAudit };
+  const renderers = { overview: renderOverview, assumptions: renderAssumptionsV2, utilization: renderUtilization, events: renderEvents, inflows: renderInflows, cashflow: renderCashflow, risk: renderRisk, analysis: renderAnalysis, audit: renderAudit };
   document.querySelector("#view-root").innerHTML = renderers[currentView]();
   bindViewActions();
   updateCaseHeader();
@@ -404,6 +473,13 @@ function bindViewActions() {
   document.querySelectorAll("[data-component]").forEach((button) => button.addEventListener("click", () => { selectedComponent = button.dataset.component; renderCurrentView(); }));
   document.querySelectorAll("[data-export]").forEach((button) => button.addEventListener("click", () => exportCsv(button.dataset.export)));
   document.querySelectorAll("[data-export-validation]").forEach((button) => button.addEventListener("click", exportValidation));
+  document.querySelectorAll("[data-analysis-mode]").forEach((button) => button.addEventListener("click", () => { analysisMode = button.dataset.analysisMode; caseReport = null; caseReportError = ""; renderCurrentView(); }));
+  document.querySelectorAll("[data-generate-analysis]").forEach((button) => button.addEventListener("click", generateV1Analysis));
+  document.querySelectorAll("[data-suggested-question]").forEach((button) => button.addEventListener("click", () => { analysisQuestion = button.dataset.suggestedQuestion; caseReport = null; renderCurrentView(); }));
+  const reportType = document.querySelector("[data-analysis-report-type]");
+  if (reportType) reportType.addEventListener("change", (event) => { analysisReportType = event.target.value; caseReport = null; });
+  const questionInput = document.querySelector("[data-analysis-question]");
+  if (questionInput) questionInput.addEventListener("input", (event) => { analysisQuestion = event.target.value; caseReport = null; const count = event.target.parentElement.querySelector("small"); if (count) count.textContent = `${analysisQuestion.length} / 1,200 characters`; const button = document.querySelector("[data-generate-analysis]"); if (button) button.disabled = isDirty || caseReportRunning || !analysisQuestion.trim(); });
   if (currentView !== "assumptions") return;
   const form = document.querySelector("#assumptions-form");
   form.addEventListener("input", syncDraftFromForm);
@@ -426,6 +502,39 @@ function bindViewActions() {
   document.querySelector("[data-run-from-form]").addEventListener("click", runModel);
 }
 
+async function generateV1Analysis() {
+  if (caseReportRunning || isDirty) return;
+  caseReportRunning = true;
+  caseReportError = "";
+  caseReport = null;
+  renderCurrentView();
+  try {
+    const payload = { case: currentData.case, mode: analysisMode };
+    if (analysisMode === "report") payload.report_type = analysisReportType;
+    else payload.question = analysisQuestion.trim();
+    const response = await fetch("/api/v1/analysis", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      let message = "Bedrock analysis request failed.";
+      try {
+        const error = await response.json();
+        message = error.message || message;
+      } catch {}
+      throw new Error(message);
+    }
+    caseReport = await response.json();
+    showToast(analysisMode === "report" ? "Verified report generated." : "Evidence-based answer generated.");
+  } catch (error) {
+    caseReportError = location.protocol.startsWith("http") ? error.message : "Start the local Python service to use Bedrock analysis.";
+  } finally {
+    caseReportRunning = false;
+    renderCurrentView();
+  }
+}
+
 async function runModel() {
   if (currentView === "assumptions") syncDraftFromForm();
   const buttons = document.querySelectorAll("#run-model, [data-run-from-form]");
@@ -439,6 +548,8 @@ async function runModel() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(draftCase));
     isDirty = false;
     selectedComponent = "All";
+    caseReport = null;
+    caseReportError = "";
     showToast("Stage 1–4 recalculated successfully.");
     navigate("overview");
   } catch (error) {
@@ -484,6 +595,8 @@ function resetDemo() {
   localStorage.removeItem(STORAGE_KEY);
   isDirty = false;
   selectedComponent = "All";
+  caseReport = null;
+  caseReportError = "";
   showToast("Demo scenario restored.");
   navigate("assumptions");
 }

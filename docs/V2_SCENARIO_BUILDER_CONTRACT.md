@@ -2,7 +2,7 @@
 
 ## Product boundary
 
-V1 remains the verified single-lease recruitment-case dashboard at `/`. V2 is
+V1 remains the verified single-lease reference dashboard at `/`. V2 is
 an independent lessor / aircraft-owner lifecycle forecast at `/v2/`. V2 never
 changes V1 inputs, calculations, routes or static assets.
 

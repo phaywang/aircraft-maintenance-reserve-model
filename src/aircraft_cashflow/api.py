@@ -12,7 +12,18 @@ from urllib.parse import urlparse
 
 from .config import build_default_case
 from .dashboard_service import case_from_payload, run_dashboard_case
+from .llm.report_service import (
+    ReportValidationError,
+    generate_analysis_answer,
+    generate_analysis_report,
+    generate_v1_analysis,
+    generate_v1_case_questions_report,
+)
 from .scenario_builder import build_scenario_payload, compare_scenario_payloads
+
+
+class AnalysisServiceUnavailable(RuntimeError):
+    pass
 
 
 class DashboardRunStore:
@@ -138,7 +149,10 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         request_path = urlparse(self.path).path
-        if request_path not in ("/api/runs", "/api/v2/runs", "/api/v2/compare"):
+        if request_path not in (
+            "/api/runs", "/api/v1/analysis", "/api/v1/case-report", "/api/v2/runs",
+            "/api/v2/compare", "/api/v2/analysis",
+        ):
             self._not_found()
             return
         try:
@@ -149,7 +163,66 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
             request_payload = json.loads(raw)
             if not isinstance(request_payload, dict):
                 raise ValueError("request body must be a JSON object")
-            if request_path == "/api/v2/runs":
+            if request_path == "/api/v1/analysis":
+                case_payload = request_payload.get("case")
+                mode = request_payload.get("mode")
+                if not isinstance(case_payload, dict):
+                    raise ValueError("case must be an object")
+                if not isinstance(mode, str):
+                    raise ValueError("mode must be report or question")
+                try:
+                    result = generate_v1_analysis(
+                        case_payload,
+                        mode=mode,
+                        report_type=request_payload.get("report_type"),
+                        question=request_payload.get("question"),
+                    )
+                except (ValueError, ReportValidationError):
+                    raise
+                except Exception as exc:
+                    raise AnalysisServiceUnavailable(str(exc)) from exc
+            elif request_path == "/api/v1/case-report":
+                case_payload = request_payload.get("case", request_payload)
+                if not isinstance(case_payload, dict):
+                    raise ValueError("case must be an object")
+                try:
+                    result = generate_v1_case_questions_report(case_payload)
+                except (ValueError, ReportValidationError):
+                    raise
+                except Exception as exc:
+                    raise AnalysisServiceUnavailable(str(exc)) from exc
+            elif request_path == "/api/v2/analysis":
+                mode = request_payload.get("mode", "report")
+                report_type = request_payload.get("report_type")
+                analysis_scope = request_payload.get(
+                    "analysis_scope", report_type
+                )
+                scenarios = request_payload.get("scenarios")
+                if not isinstance(scenarios, list) or not all(
+                    isinstance(item, dict) for item in scenarios
+                ):
+                    raise ValueError("scenarios must be an array of objects")
+                try:
+                    if mode == "question":
+                        question = request_payload.get("question")
+                        if not isinstance(analysis_scope, str):
+                            raise ValueError("analysis_scope must be a string")
+                        if not isinstance(question, str):
+                            raise ValueError("question must be a string")
+                        result = generate_analysis_answer(
+                            analysis_scope, scenarios, question
+                        )
+                    elif mode == "report":
+                        if not isinstance(report_type, str):
+                            raise ValueError("report_type must be a string")
+                        result = generate_analysis_report(report_type, scenarios)
+                    else:
+                        raise ValueError("mode must be report or question")
+                except (ValueError, ReportValidationError):
+                    raise
+                except Exception as exc:
+                    raise AnalysisServiceUnavailable(str(exc)) from exc
+            elif request_path == "/api/v2/runs":
                 scenario = request_payload.get("scenario", request_payload)
                 if not isinstance(scenario, dict):
                     raise ValueError("scenario must be an object")
@@ -170,6 +243,18 @@ class DashboardAPIHandler(BaseHTTPRequestHandler):
             self._send_json(
                 HTTPStatus.BAD_REQUEST,
                 {"error": "invalid_case_inputs", "message": str(exc)},
+            )
+            return
+        except ReportValidationError as exc:
+            self._send_json(
+                HTTPStatus.BAD_GATEWAY,
+                {"error": "analysis_validation_failed", "message": str(exc)},
+            )
+            return
+        except (RuntimeError, AnalysisServiceUnavailable) as exc:
+            self._send_json(
+                HTTPStatus.SERVICE_UNAVAILABLE,
+                {"error": "analysis_service_unavailable", "message": str(exc)},
             )
             return
         self._send_json(HTTPStatus.CREATED, result)

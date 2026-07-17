@@ -20,6 +20,9 @@ read-only demonstrations; clone the repository to recalculate edited inputs.
 
 ![Dashboard overview](docs/images/dashboard-overview.png)
 
+For a complete presentation sequence, scenario setup and screenshot index, see
+the [product demo workflow](docs/DEMO_WORKFLOW.md).
+
 ## What the model does
 
 The model calculates a complete monthly history from manufacture through lease expiry and exposes the forecast from the selected analysis date.
@@ -34,9 +37,11 @@ Reserve accounts remain segregated throughout the model. The expiry month is pro
 
 ## Workspace design
 
-V1 follows the original calculation sequence through eight views: overview,
+V1 follows the original calculation sequence through nine views: overview,
 inputs and assumptions, utilization, maintenance events, reserve inflow, event
-settlement, reserve adequacy and model validation.
+settlement, reserve adequacy, Analysis & Q&A and model validation. The optional
+analysis workspace can generate a structured English report or answer a
+user-defined question from the current validated model results.
 
 V2 uses the same reserve logic in a lifecycle workflow:
 
@@ -44,7 +49,8 @@ V2 uses the same reserve logic in a lifecycle workflow:
 2. Any number of consecutive lease contracts and their utilization and reserve terms.
 3. Current-scenario forecast overview, event funding, reserve accounts and detailed cash flow.
 4. Optional comparison of any number of independently calculated scenarios.
-5. Model audit and calculation provenance.
+5. Optional Bedrock-assisted English reports and evidence-grounded Q&A.
+6. Model audit and calculation provenance.
 
 The physical aircraft state continues across lease boundaries. Each lease has
 separate component reserve accounts, and the expiry period is processed in the
@@ -69,12 +75,12 @@ All dates, utilization, costs, reserve rates and escalation assumptions can be e
 The synthetic reserve rates are calibrated to demonstrate different funding outcomes: fully funded events, a near-threshold event and material component shortfalls. They are illustrative inputs, not market quotations.
 
 The public timeline is shifted forward by 32 months from the private reference
-case: manufacture, lease commencement, analysis and expiry move together, so
+timeline: manufacture, lease commencement, analysis and expiry move together, so
 aircraft age, cumulative utilization and event timing relative to the lease are
 preserved. Cost and reserve-rate escalation still resets each January. Because a
 32-month shift changes where January falls within the relative lease timeline,
 the monthly reserve collections and funding outcomes are recalculated and are
-not expected to equal the private reference case.
+not expected to equal the private reference results.
 
 The V2 public demo starts from the same aircraft and analysis-date position. It
 then continues the existing lease through 30 June 2029 and adds a consecutive
@@ -99,6 +105,48 @@ Open [V1 at http://127.0.0.1:8765](http://127.0.0.1:8765) or
 also provide the same workspace switcher at the top of the page.
 
 On macOS, `Run Aircraft Reserve Dashboard.command` starts the same local service.
+
+## Bedrock-assisted analysis
+
+V1 can generate a full maintenance-reserve report, a focused funding or
+component-rate review, an engine sensitivity note, or an answer to a custom
+analysis question. V2 can generate a `Current Scenario Analysis`, a
+`Cross-Scenario Decision Report`, or answer a custom question about either the
+active scenario or selected comparison set. Both workspaces use AWS Bedrock, while the deterministic
+Python engine remains authoritative: Bedrock receives a compact evidence packet
+and interprets verified results from a lessor perspective. It does not
+recalculate cash flows or introduce rent, NPV, aircraft value, downtime or
+credit-risk assumptions.
+
+For V1 Question 3, the Python engine freezes historical events and the
+analysis-date opening reserve, then recalculates only the next E1 event using
+95%, 100% and 105% of the base flight-hour interval. The resulting “advantage”
+is explicitly limited to the lessor's modeled maintenance-reserve reimbursement
+cash outflow; broader technical and asset-value effects remain outside V1.
+
+Install the optional dependencies and create a local `.env` file:
+
+```bash
+pip install -e '.[llm]'
+cp .env.example .env
+```
+
+```text
+AWS_PROFILE=your-local-profile
+AWS_REGION=us-east-1
+BEDROCK_MODEL_ID=us.anthropic.claude-sonnet-4-6
+```
+
+Start the local service and open V1 `08 Analysis & Q&A`, or run the required V2
+scenario(s) and open V2 `08 Analysis & Q&A`. All prompts and generated reports are English. Every
+currency amount and percentage in published prose must match a deterministic
+claim and carry a verified source binding. One model repair is attempted; any
+remaining unsupported financial lines are removed before publication.
+
+The GitHub Pages dashboard is static and cannot call a private AWS account. The
+Bedrock report feature is therefore available only through the local service or
+another explicitly configured backend deployment. AWS credentials and `.env`
+are excluded from Git.
 
 ## Command-line outputs
 
@@ -127,6 +175,7 @@ The tests cover threshold crossing, calendar-versus-usage event behavior, rate e
 
 ```text
 src/aircraft_cashflow/   Calculation engine and local API
+src/aircraft_cashflow/llm/  Bedrock client, prompts and report guardrails
 dashboard/static/        Dashboard application
 dashboard/v2/            V2 lessor lifecycle scenario builder
 tests/                   Unit, regression and interface tests
@@ -149,6 +198,14 @@ reimbursement, lessee top-up exposure and lease-end reserve close-out. Rent,
 transition-period assumptions and whole-aircraft investment returns are outside
 the active dashboard; multi-scenario comparison is optional and does not impose
 an automatic ranking.
+
+The optional advisory layer adds English narrative interpretation without
+changing any deterministic result. V1 supports structured reports and
+current-run Q&A with suggested questions for common reserve-review tasks. If a
+question requires changed assumptions, the user must edit the inputs and rerun
+the deterministic model. V2 current-scenario reports and questions explain one
+lifecycle path, while cross-scenario reports and questions explain absolute
+outcomes and trade-offs across any selected set of calculated scenarios.
 
 ## License
 

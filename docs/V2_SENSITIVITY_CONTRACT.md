@@ -1,6 +1,6 @@
 # V2.8 Sensitivity Contract
 
-V2.8 measures how assumption changes affect alternative NPV and recommendation robustness without replacing the deterministic base case.
+V2.8 measures how assumption changes affect alternative NPV and recommendation robustness without replacing the deterministic baseline.
 
 ## Default drivers
 
@@ -23,4 +23,4 @@ The case table reports the shock, target, winning alternative, winner and runner
 
 The uncertainty summary reports each alternative's observed minimum and maximum NPV, downside and upside from base, and recommendation frequency across the deterministic cases. These are scenario ranges, not probability-weighted forecasts.
 
-The base-case recommendation remains authoritative for the stated base assumptions; sensitivity describes robustness and break risk.
+The baseline recommendation remains authoritative for the stated assumptions; sensitivity describes robustness and break risk.

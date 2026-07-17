@@ -7,10 +7,12 @@ from decimal import Decimal
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+from unittest.mock import patch
 
 from aircraft_cashflow.api import DashboardRunStore, create_server
 from aircraft_cashflow.config import build_default_case
 from aircraft_cashflow.dashboard_service import case_from_payload, run_dashboard_case
+from aircraft_cashflow.scenario_builder import default_scenario_input
 
 
 class DashboardServiceTests(unittest.TestCase):
@@ -233,7 +235,7 @@ class DashboardFrontendTests(unittest.TestCase):
         self.assertIn("Reference model (V1)", html)
         self.assertIn('href="v2/"', html)
         self.assertIn("Lifecycle scenarios", html)
-        self.assertIn("Reference case", html)
+        self.assertIn("Reference model", html)
         self.assertIn("Calculation workflow", html)
         self.assertIn("Risk &amp; assurance", html)
         self.assertIn("V2-aligned reference workspace shell", styles)
@@ -398,6 +400,100 @@ class DashboardAPITests(unittest.TestCase):
         )
         self.assertEqual(status, 400)
         self.assertEqual(error["error"], "invalid_case_inputs")
+
+    def test_bedrock_analysis_endpoint_returns_report_envelope(self) -> None:
+        generated = {
+            "report_type": "current_scenario",
+            "report_markdown": "# Current Scenario Analysis",
+            "model_id": "test-model",
+            "guardrail_status": "pass",
+            "language": "en",
+        }
+        with patch("aircraft_cashflow.api.generate_analysis_report", return_value=generated):
+            status, report = self.request_json(
+                "/api/v2/analysis",
+                method="POST",
+                payload={
+                    "report_type": "current_scenario",
+                    "scenarios": [default_scenario_input()],
+                },
+            )
+        self.assertEqual(status, 201)
+        self.assertEqual(report, generated)
+
+    def test_v2_analysis_endpoint_supports_cross_scenario_questions(self) -> None:
+        generated = {
+            "mode": "question",
+            "analysis_scope": "cross_scenario",
+            "question": "What drives the differences?",
+            "report_markdown": "# Analysis Answer",
+            "model_id": "test-model",
+        }
+        scenario_a = default_scenario_input()
+        scenario_b = default_scenario_input()
+        scenario_b["scenario_id"] = "scenario-b"
+        with patch(
+            "aircraft_cashflow.api.generate_analysis_answer",
+            return_value=generated,
+        ) as service:
+            status, report = self.request_json(
+                "/api/v2/analysis",
+                method="POST",
+                payload={
+                    "mode": "question",
+                    "analysis_scope": "cross_scenario",
+                    "question": "What drives the differences?",
+                    "scenarios": [scenario_a, scenario_b],
+                },
+            )
+        self.assertEqual(status, 201)
+        self.assertEqual(report, generated)
+        self.assertEqual(service.call_args.args[0], "cross_scenario")
+
+    def test_v1_case_questions_endpoint_returns_report_envelope(self) -> None:
+        generated = {
+            "report_type": "v1_case_questions",
+            "report_markdown": "# Maintenance Reserve Analysis",
+            "model_id": "test-model",
+            "guardrail_status": "pass",
+            "language": "en",
+        }
+        with patch(
+            "aircraft_cashflow.api.generate_v1_case_questions_report",
+            return_value=generated,
+        ):
+            status, report = self.request_json(
+                "/api/v1/case-report",
+                method="POST",
+                payload={"case": build_default_case().to_dict()},
+            )
+        self.assertEqual(status, 201)
+        self.assertEqual(report, generated)
+
+    def test_v1_general_analysis_endpoint_supports_custom_questions(self) -> None:
+        generated = {
+            "mode": "question",
+            "question": "Which account has the largest shortfall?",
+            "report_markdown": "# Analysis Answer",
+            "model_id": "test-model",
+            "guardrail_status": "pass",
+            "language": "en",
+        }
+        with patch(
+            "aircraft_cashflow.api.generate_v1_analysis", return_value=generated,
+        ) as service:
+            status, report = self.request_json(
+                "/api/v1/analysis",
+                method="POST",
+                payload={
+                    "case": build_default_case().to_dict(),
+                    "mode": "question",
+                    "question": "Which account has the largest shortfall?",
+                },
+            )
+        self.assertEqual(status, 201)
+        self.assertEqual(report, generated)
+        self.assertEqual(service.call_args.kwargs["mode"], "question")
 
 
 if __name__ == "__main__":

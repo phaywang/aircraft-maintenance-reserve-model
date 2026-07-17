@@ -1,6 +1,6 @@
 # V2.1 Lessor Scenario Builder Dashboard Contract
 
-The V2 workspace is independent of V1. V1 remains the detailed recruitment-case
+The V2 workspace is independent of V1. V1 remains the detailed single-lease
 reserve model at `/`; V2 is the lessor lifecycle scenario builder at `/v2/`.
 
 ## Views

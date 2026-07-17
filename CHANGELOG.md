@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.0 — 2026-07-16
+
+- Added optional AWS Bedrock Converse integration using the existing local AWS profile, region and model configuration pattern.
+- Added English Current Scenario Analysis and Cross-Scenario Decision Report workflows for the lessor perspective.
+- Added compact verified evidence packets covering scenario, event and component reserve-funding outcomes.
+- Added exact-value numeric guardrails, one automatic model repair attempt and deterministic removal of remaining unsupported financial lines.
+- Expanded V2 `08 Analysis & Q&A` with active-scenario and selected-comparison questions, suggested prompts and prominent usage guidance, while retaining the deterministic model audit as view 09.
+- Added V1 `08 Analysis & Q&A` with structured report formats, custom evidence-grounded questions and common reserve-review suggestions.
+- Added top-of-page usage guidance that separates deterministic recalculation from Bedrock interpretation.
+- Added deterministic 95% / 100% / 105% next-engine interval evidence that freezes the historical opening position and varies only the next E1 cycle.
+- Added an English LLM analysis contract, optional dependencies, API coverage and live Bedrock smoke-test validation.
+
 ## 2.0.0 — 2026-07-15
 
 - Added the V2 lifecycle schema for aircraft, leases, transitions, utilization regimes, known state and terminal value.

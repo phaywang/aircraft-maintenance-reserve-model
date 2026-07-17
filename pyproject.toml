@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aircraft-maintenance-cashflow"
-version = "2.1.0"
+version = "2.2.0"
 description = "Deterministic aircraft maintenance reserve cash-flow engine and dashboard"
 readme = "README.md"
 authors = [{ name = "Fei Wang" }]
@@ -16,6 +16,10 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
+]
+llm = [
+    "boto3>=1.34.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.scripts]

@@ -3,9 +3,12 @@ __pycache__/
 .DS_Store
 .pytest_cache/
 .venv/
+.env
 dist/
 build/
 *.egg-info/
 *.xlsx
 outputs/*
 !outputs/.gitkeep
+docs/*_IMPLEMENTATION_PLAN.md
+docs/*_IMPLEMENTATION_STATUS.md
