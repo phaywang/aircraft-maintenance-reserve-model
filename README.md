@@ -181,7 +181,7 @@ dashboard/v2/            V2 lessor lifecycle scenario builder
 tests/                   Unit, regression and interface tests
 scripts/                 CLI and payload utilities
 docs/v2/                 GitHub Pages V2 application
-docs/images/             Dashboard screenshots
+docs/assets/             Dashboard screenshots and demo assets
 ```
 
 ## V2 lifecycle model
