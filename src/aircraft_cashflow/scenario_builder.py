@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict
+from copy import deepcopy
+from dataclasses import asdict, replace
 from datetime import date, datetime, timezone
 from decimal import Decimal, ROUND_HALF_UP
 from enum import Enum
@@ -89,13 +90,22 @@ def _maintenance_program_input(components: tuple[ComponentConfig, ...]) -> list[
 
 
 def _components_from_input(
-    payload: dict[str, object], defaults: tuple[ComponentConfig, ...]
+    payload: dict[str, object],
+    defaults: tuple[ComponentConfig, ...],
+    manufacture_date: date,
 ) -> tuple[ComponentConfig, ...]:
     """Build the aircraft maintenance program, preserving legacy saved inputs."""
 
     raw_program = payload.get("maintenance_program")
     if raw_program is None:
-        return defaults
+        return tuple(
+            replace(
+                component,
+                cost_base_date=manufacture_date,
+                reserve_rate_base_date=manufacture_date,
+            )
+            for component in defaults
+        )
     if not isinstance(raw_program, list) or not raw_program:
         raise ValueError("maintenance_program must be a non-empty array")
     components: list[ComponentConfig] = []
@@ -112,14 +122,14 @@ def _components_from_input(
                 event_driver=driver,
                 interval=raw.get("interval", "0"),
                 base_cost=raw.get("base_cost", "0"),
-                cost_base_date=_date(raw.get("cost_base_date"), f"{prefix}.cost_base_date"),
+                # V2 carries one continuous aircraft-level technical cost curve.
+                # Base costs are manufacture-year values and do not reset by lease.
+                cost_base_date=manufacture_date,
                 annual_cost_escalation=raw.get("annual_cost_escalation", "0"),
                 reserve_basis=ReserveBasis(str(raw.get("reserve_basis", ""))),
                 base_reserve_rate=raw.get("base_reserve_rate", "0"),
-                reserve_rate_base_date=_date(
-                    raw.get("reserve_rate_base_date"),
-                    f"{prefix}.reserve_rate_base_date",
-                ),
+                # Contract-specific rate dates are derived from each lease start.
+                reserve_rate_base_date=manufacture_date,
                 annual_reserve_escalation=raw.get(
                     "annual_reserve_escalation", "0"
                 ),
@@ -301,7 +311,7 @@ def default_scenario_input() -> dict[str, object]:
             },
             {
                 "type": "lease", "id": "follow-on-1",
-                "lessee": "Follow-on Airline", "start_date": "2029-07-01",
+                "lessee": "Northstar Air", "start_date": "2029-07-01",
                 "end_date": "2032-01-31",
                 "monthly_fh": "250", "monthly_fc": "95",
                 "reserve_rate_multiplier": "1.05",
@@ -316,17 +326,21 @@ def scenario_from_input(payload: dict[str, object]) -> Scenario:
     """Validate and convert a business-facing scenario payload."""
 
     case = build_default_case()
-    components = _components_from_input(payload, case.components)
-    component_codes = {component.code for component in components}
     analysis_date = _date(payload.get("analysis_date"), "analysis_date")
     forecast_end = _date(payload.get("forecast_end_date"), "forecast_end_date")
     asset_input = payload.get("aircraft", {})
     if not isinstance(asset_input, dict):
         raise ValueError("aircraft must be an object")
+    manufacture_date = _date(
+        asset_input.get("date_of_manufacture", case.date_of_manufacture),
+        "date_of_manufacture",
+    )
+    components = _components_from_input(payload, case.components, manufacture_date)
+    component_codes = {component.code for component in components}
     asset = AircraftAsset(
         str(asset_input.get("asset_id", "aircraft-1")),
         str(asset_input.get("aircraft_type", case.aircraft_type)),
-        _date(asset_input.get("date_of_manufacture", case.date_of_manufacture), "date_of_manufacture"),
+        manufacture_date,
         components,
     )
 
@@ -361,7 +375,6 @@ def scenario_from_input(payload: dict[str, object]) -> Scenario:
                 raise ValueError(
                     f"unknown reserve escalation components: {sorted(unknown_escalations)}"
                 )
-            rate_base_date_input = raw.get("reserve_rate_base_date")
             closeout = ReserveCloseoutRule(
                 str(raw.get("closeout_rule", ReserveCloseoutRule.RETAIN_BY_LESSOR.value))
             )
@@ -370,12 +383,7 @@ def scenario_from_input(payload: dict[str, object]) -> Scenario:
                     f"{segment_id}:{component.code}", component.code,
                     component.reserve_basis,
                     explicit_rates.get(component.code, component.base_reserve_rate * multiplier),
-                    _date(
-                        rate_base_date_input
-                        if rate_base_date_input is not None
-                        else component.reserve_rate_base_date,
-                        f"{segment_id}.{component.code}.reserve_rate_base_date",
-                    ),
+                    start,
                     explicit_escalations.get(
                         component.code,
                         raw.get("reserve_escalation", component.annual_reserve_escalation),
@@ -608,6 +616,17 @@ def build_scenario_payload(
             if state_basis == "reconstructed" else "actual_statement_or_manual_input"
         ),
     }
+    normalized_input = deepcopy(input_payload)
+    raw_program = normalized_input.get("maintenance_program", [])
+    if isinstance(raw_program, list):
+        for item in raw_program:
+            if isinstance(item, dict):
+                item["cost_base_date"] = scenario.asset.date_of_manufacture.isoformat()
+    raw_segments = normalized_input.get("segments", [])
+    if isinstance(raw_segments, list):
+        for segment in raw_segments:
+            if isinstance(segment, dict) and segment.get("type") == "lease":
+                segment["reserve_rate_base_date"] = str(segment.get("start_date", ""))
     return _serialize({
         "run": {
             "calculated_at": calculated_at or datetime.now(timezone.utc),
@@ -616,7 +635,7 @@ def build_scenario_payload(
             "perspective": "lessor",
             "valuation_basis": "maintenance_reserve_cashflow",
         },
-        "scenario_input": input_payload,
+        "scenario_input": normalized_input,
         "scenario": scenario_output,
         "resolved_known_state": resolved_known_state,
         "summary": summary,

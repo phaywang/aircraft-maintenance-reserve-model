@@ -1,5 +1,5 @@
 {
-  "scenario_name": "Illustrative Narrowbody Demo",
+  "scenario_name": "A320-200 Public Demo",
   "numeric_tolerance": "0.000001",
   "stages": {
     "stage_1": {

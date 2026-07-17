@@ -19,6 +19,18 @@ class DashboardServiceTests(unittest.TestCase):
         parsed = case_from_payload(original.to_dict())
         self.assertEqual(parsed.to_dict(), original.to_dict())
 
+    def test_v1_derives_cost_and_rate_dates_from_the_single_lease_timeline(self) -> None:
+        payload = build_default_case().to_dict()
+        for component in payload["components"]:
+            component["cost_base_date"] = "2000-01-01"
+            component["reserve_rate_base_date"] = "2001-01-01"
+
+        parsed = case_from_payload(payload)
+
+        for component in parsed.components:
+            self.assertEqual(component.cost_base_date, parsed.date_of_manufacture)
+            self.assertEqual(component.reserve_rate_base_date, parsed.lease_start_date)
+
     def test_dashboard_payload_contains_stage_1_through_4(self) -> None:
         payload = run_dashboard_case(build_default_case())
         self.assertEqual(len(payload["utilization"]), 37)
@@ -206,10 +218,25 @@ class DashboardFrontendTests(unittest.TestCase):
         self.assertNotIn("Automation controls", script)
         self.assertNotIn("Historical event and escalation anchors", script)
         self.assertIn("data-sync-engine", script)
+        self.assertIn("manufacture-year values", script)
+        self.assertIn("lease-commencement rates", script)
+        self.assertIn("applyV1DerivedBaseDates", script)
+        self.assertIn("percentInput", script)
+        self.assertNotIn("Number(component.annual_cost_escalation) * 100", script)
+        self.assertNotIn("Number(component.annual_reserve_escalation) * 100", script)
+        self.assertNotIn("Cost basis year", script)
+        self.assertNotIn("Rate effective date", script)
         self.assertIn("Readability scale", styles)
         html = (self.static_root / "index.html").read_text(encoding="utf-8")
         self.assertIn("Aircraft Maintenance Cash Flow Analysis", html)
         self.assertIn("Inputs &amp; Assumptions", html)
+        self.assertIn("Reference model (V1)", html)
+        self.assertIn('href="v2/"', html)
+        self.assertIn("Lifecycle scenarios", html)
+        self.assertIn("Reference case", html)
+        self.assertIn("Calculation workflow", html)
+        self.assertIn("Risk &amp; assurance", html)
+        self.assertIn("V2-aligned reference workspace shell", styles)
         self.assertNotIn("Case Setup", html)
 
     def test_utilization_prioritizes_exercise_schedule_over_redundant_chart(self) -> None:
@@ -355,7 +382,7 @@ class DashboardAPITests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(health["calculation_scope"], [1, 2, 3, 4])
         self.assertEqual(case_status, 200)
-        self.assertEqual(demo["case"]["aircraft_type"], "Illustrative Narrowbody")
+        self.assertEqual(demo["case"]["aircraft_type"], "A320-200")
 
     def test_run_and_section_endpoints(self) -> None:
         status, run = self.request_json("/api/runs", method="POST", payload={})

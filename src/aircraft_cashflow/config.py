@@ -75,9 +75,9 @@ def build_default_case() -> CaseInputs:
         )
 
     return CaseInputs(
-        aircraft_type="Illustrative Narrowbody",
+        aircraft_type="A320-200",
         date_of_manufacture=DEMO_BASE_DATE,
-        lessee="Demo Airline",
+        lessee="AeroVista Airlines",
         lease_start_date=DEMO_BASE_DATE,
         analysis_date=date(2026, 6, 30),
         lease_expiry_date=date(2029, 6, 30),

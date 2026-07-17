@@ -28,8 +28,19 @@
   <main>
     <header>
       <div><p class="eyebrow">Aircraft owner decision support</p><h1>Lifecycle forecast workspace</h1></div>
-      <div class="header-actions"><a class="button secondary" href="../">Open V1 case model</a><button class="button primary" id="run">Run current</button></div>
+      <div class="header-actions"><button class="button primary" id="run">Run current</button></div>
     </header>
+    <section class="workspace-switcher" aria-label="Model workspace">
+      <div class="workspace-copy">
+        <span>Current workspace</span>
+        <strong>Lifecycle scenarios (V2)</strong>
+        <p>Flexible multi-lease forecasting built on the reserve methodology reconciled to V1.</p>
+      </div>
+      <nav class="workspace-tabs" aria-label="Choose model workspace">
+        <a href="../"><span>Reference model</span><small>V1</small></a>
+        <a class="active" href="./" aria-current="page"><span>Lifecycle scenarios</span><small>V2</small></a>
+      </nav>
+    </section>
     <section class="context">
       <div><span>Active scenario</span><select id="scenario-picker"></select></div>
       <div><span>Analysis date</span><strong id="analysis-date">—</strong></div>

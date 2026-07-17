@@ -222,6 +222,22 @@ class ScenarioBuilderTests(unittest.TestCase):
         self.assertGreater(first_rate(changed, "6Y"), first_rate(base, "6Y"))
         self.assertEqual(first_rate(changed, "12Y"), first_rate(base, "12Y"))
 
+    def test_v2_derives_cost_basis_and_rate_dates_from_business_timeline(self) -> None:
+        inputs = default_scenario_input()
+        manufacture_date = date.fromisoformat(inputs["aircraft"]["date_of_manufacture"])
+        for item in inputs["maintenance_program"]:
+            item["cost_base_date"] = "2000-01-01"
+        for segment in inputs["segments"]:
+            segment["reserve_rate_base_date"] = "2001-01-01"
+
+        scenario = scenario_from_input(inputs)
+
+        for component in scenario.asset.components:
+            self.assertEqual(component.cost_base_date, manufacture_date)
+        for lease in scenario.leases:
+            for account in lease.reserve_accounts:
+                self.assertEqual(account.rate_base_date, lease.start_date)
+
     def test_reconstruction_uses_each_historical_lease_utilization(self) -> None:
         inputs = default_scenario_input()
         inputs["segments"][0]["end_date"] = "2024-06-30"
@@ -331,10 +347,22 @@ class V2DashboardFrontendTests(unittest.TestCase):
         self.assertNotIn("Monthly rent", script)
         self.assertNotIn("annual_discount_rate", script)
         self.assertNotIn("baseline_id", script)
+        self.assertNotIn("Cost base date", script)
+        self.assertNotIn("MR rate base date", script)
+        self.assertIn("manufacture-year values", script)
+        self.assertIn("Each lease starts its own rate escalation clock", script)
+        self.assertIn("normalizeV2Input", script)
+        self.assertIn("return d.toISOString().slice(0,10)", script)
+        self.assertIn('document.addEventListener("input"', script)
+        self.assertNotIn("window.prompt", script)
+        self.assertNotIn("window.confirm", script)
+        self.assertIn("Confirm delete", script)
 
     def test_v1_and_v2_routes_remain_distinct(self) -> None:
         html = (self.root / "index.html").read_text(encoding="utf-8")
-        self.assertIn('href="../">Open V1 case model', html)
+        self.assertIn('href="../"><span>Reference model</span><small>V1</small>', html)
+        self.assertIn("Lifecycle scenarios (V2)", html)
+        self.assertIn("methodology reconciled to V1", html)
         self.assertTrue((self.root.parent / "static" / "index.html").is_file())
 
     def test_decision_workflow_progressive_disclosure_and_accessibility(self) -> None:

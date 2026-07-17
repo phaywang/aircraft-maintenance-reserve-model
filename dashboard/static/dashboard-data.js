@@ -12,7 +12,7 @@ window.DASHBOARD_DATA = {
       "evidence": "Versioned deterministic regression snapshot",
       "numeric_tolerance": "0.000001",
       "reason": "Model outputs match the versioned demonstration snapshot",
-      "scenario_name": "Illustrative Narrowbody Demo",
+      "scenario_name": "A320-200 Public Demo",
       "stages": {
         "stage_1": {
           "checked_columns": 6,
@@ -129,7 +129,7 @@ window.DASHBOARD_DATA = {
     }
   },
   "case": {
-    "aircraft_type": "Illustrative Narrowbody",
+    "aircraft_type": "A320-200",
     "analysis_date": "2026-06-30",
     "components": [
       {
@@ -213,7 +213,7 @@ window.DASHBOARD_DATA = {
     "default_monthly_fh": "260",
     "lease_expiry_date": "2029-06-30",
     "lease_start_date": "2017-06-30",
-    "lessee": "Demo Airline",
+    "lessee": "AeroVista Airlines",
     "utilization_overrides": []
   },
   "cashflows": [
@@ -7446,11 +7446,11 @@ window.DASHBOARD_DATA = {
     }
   ],
   "run": {
-    "calculated_at": "2026-07-15T23:07:07.519603+00:00",
+    "calculated_at": "2026-07-17T02:29:38.676550+00:00",
     "demo_case": true,
-    "input_signature": "57a956d49cc358413c1a8be6a6fc1d3099e558a8696119add8ad706a48833e12",
+    "input_signature": "173dac8770ae8b58fa524006546bebcbf17b70d128c6fbb06952762f3beaba79",
     "model_version": "1.0.1-phase1",
-    "run_id": "2c5ab9eb-ae8e-4e86-ba0b-4e00e5340c0f",
+    "run_id": "5e489c0a-98f3-4aa6-9812-f5b70faea45a",
     "status": "validated"
   },
   "summary": {

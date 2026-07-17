@@ -1,11 +1,10 @@
 const COMPONENTS = ["All", "6Y", "12Y", "LDG", "E1", "E2"];
 const VIEWS = ["overview", "assumptions", "utilization", "events", "inflows", "cashflow", "risk", "audit"];
-const STORAGE_KEY = "aircraft-reserve-model-draft-v1";
-const IS_STATIC_DEMO = location.hostname.endsWith(".github.io");
+const STORAGE_KEY = "aircraft-reserve-model-draft-v2";
 
 const demoData = structuredClone(window.DASHBOARD_DATA);
 let currentData = structuredClone(demoData);
-let draftCase = IS_STATIC_DEMO ? structuredClone(demoData.case) : loadDraft() || structuredClone(demoData.case);
+let draftCase = applyV1DerivedBaseDates(loadDraft() || structuredClone(demoData.case));
 let currentView = location.hash.slice(1) || "overview";
 let selectedComponent = "All";
 let isDirty = JSON.stringify(draftCase) !== JSON.stringify(currentData.case);
@@ -56,6 +55,10 @@ function percent(value, digits = 1) {
   return `${(Number(value) * 100).toFixed(digits)}%`;
 }
 
+function percentInput(value) {
+  return String(Number((Number(value) * 100).toFixed(8)));
+}
+
 function loadDraft() {
   try {
     const value = localStorage.getItem(STORAGE_KEY);
@@ -82,14 +85,6 @@ function updateStateIndicators() {
   const state = document.querySelector("#calculation-state");
   const modelState = document.querySelector("#model-state");
   const runButton = document.querySelector("#run-model");
-  if (IS_STATIC_DEMO) {
-    state.className = "";
-    state.innerHTML = "<i></i> Validated";
-    modelState.textContent = "Model validated";
-    runButton.textContent = "Run locally";
-    runButton.title = "Clone the repository and start the Python service to recalculate scenarios.";
-    return;
-  }
   if (isDirty) {
     state.className = "pending-state";
     state.innerHTML = "<i></i> Inputs changed";
@@ -105,12 +100,12 @@ function updateStateIndicators() {
 
 function updateCaseHeader() {
   document.querySelector("#case-title").textContent = `${draftCase.aircraft_type} · ${draftCase.lessee}`;
-  document.querySelector("#case-context").textContent = currentData.run.demo_case ? "Illustrative demonstration" : "User-defined scenario";
+  document.querySelector("#case-context").textContent = currentData.run.demo_case ? "Single-lease calculation reference" : "User-defined single-lease scenario";
   document.querySelector("#lease-start").textContent = longDate(draftCase.lease_start_date);
   document.querySelector("#analysis-date").textContent = longDate(draftCase.analysis_date);
   document.querySelector("#lease-expiry").textContent = longDate(draftCase.lease_expiry_date);
   document.querySelector("#forecast-months").textContent = `${currentData.summary.forecast_months} months`;
-  document.querySelector("#model-version").textContent = `Stage 1–4 · ${currentData.run.model_version}`;
+  document.querySelector("#model-version").textContent = `V1.1 · Reference · ${currentData.run.model_version}`;
   updateStateIndicators();
 }
 
@@ -160,7 +155,7 @@ function renderOverview() {
   const data = currentData;
   return `${heading("Portfolio overview", "Maintenance reserve position", "Forecast values include opening balances accumulated from the full historical simulation.")}
     <section class="metric-grid">${metric("Forecast reserve inflow", money(data.summary.forecast_reserve_inflow, true), `${data.summary.forecast_months}-month collection`)}${metric("Forecast reimbursement", money(data.summary.forecast_reimbursement, true), `Across ${data.summary.component_event_count} component events`)}${metric("Total forecast shortfall", money(data.summary.forecast_shortfall, true), `${data.summary.underfunded_event_count} underfunded events`, "risk-metric")}${metric("Lease-end reserve balance", money(data.summary.lease_end_reserve_balance, true), `Closing position · ${month(draftCase.lease_expiry_date)}`)}</section>
-    <section class="panel assumption-snapshot"><div class="panel-header"><div><p class="eyebrow">Reference inputs</p><h3>Case assumptions</h3></div><button class="button secondary compact" data-open-view="assumptions">Edit assumptions</button></div><div class="snapshot-grid"><div><span>Aircraft / lessee</span><strong>${escapeHtml(draftCase.aircraft_type)}</strong><small>${escapeHtml(draftCase.lessee)}</small></div><div><span>Lease period</span><strong>${longDate(draftCase.lease_start_date)}</strong><small>to ${longDate(draftCase.lease_expiry_date)}</small></div><div><span>Analysis date</span><strong>${longDate(draftCase.analysis_date)}</strong><small>${data.summary.forecast_months} forecast months</small></div><div><span>Default utilization</span><strong>${number(draftCase.default_monthly_fh)} FH / month</strong><small>${number(draftCase.default_monthly_fc)} FC / month</small></div></div><div class="table-scroll"><table><thead><tr><th>Component</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base event cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th></tr></thead><tbody>${draftCase.components.map((component) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong><span class="component-name">${escapeHtml(component.name)}</span></td><td>${escapeHtml(component.event_driver.replaceAll("_", " "))}</td><td class="number">${number(component.interval)}</td><td class="number">${money(component.base_cost)}</td><td class="number">${percent(component.annual_cost_escalation)}</td><td>${escapeHtml(component.reserve_basis.replaceAll("_", " "))}</td><td class="number">${money(component.base_reserve_rate)}</td><td class="number">${percent(component.annual_reserve_escalation)}</td></tr>`).join("")}</tbody></table></div></section>
+    <section class="panel assumption-snapshot"><div class="panel-header"><div><p class="eyebrow">Reference inputs</p><h3>Case assumptions</h3></div><button class="button secondary compact" data-open-view="assumptions">Edit assumptions</button></div><div class="snapshot-grid"><div><span>Aircraft / lessee</span><strong>${escapeHtml(draftCase.aircraft_type)}</strong><small>${escapeHtml(draftCase.lessee)}</small></div><div><span>Lease period</span><strong>${longDate(draftCase.lease_start_date)}</strong><small>to ${longDate(draftCase.lease_expiry_date)}</small></div><div><span>Analysis date</span><strong>${longDate(draftCase.analysis_date)}</strong><small>${data.summary.forecast_months} forecast months</small></div><div><span>Default utilization</span><strong>${number(draftCase.default_monthly_fh)} FH / month</strong><small>${number(draftCase.default_monthly_fc)} FC / month</small></div></div><div class="table-scroll"><table><thead><tr><th>Component</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base event cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th></tr></thead><tbody>${draftCase.components.map((component) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong><span class="component-name">${escapeHtml(component.name)}</span></td><td>${escapeHtml(component.event_driver.replaceAll("_", " "))}</td><td class="number">${number(component.interval)}</td><td class="number">${money(component.base_cost)}</td><td class="number">${percent(component.annual_cost_escalation)}</td><td>${escapeHtml(component.reserve_basis.replaceAll("_", " "))}</td><td class="number">${money(component.base_reserve_rate)}</td><td class="number">${percent(component.annual_reserve_escalation)}</td></tr>`).join("")}</tbody></table></div><div class="assumption-footnote"><strong>Public demonstration basis.</strong> The private reference timeline is shifted forward by 32 months. Aircraft age and relative event timing are preserved, while January-based escalation is recalculated from the displayed dates.</div></section>
     <section class="panel cashflow-panel"><div class="panel-header"><div><p class="eyebrow">Monthly cash flow</p><h3>Collections, reimbursements and closing balance</h3></div><div class="chart-legend"><span><i class="legend-inflow"></i> Inflow</span><span><i class="legend-outflow"></i> Reimbursement</span><span><i class="legend-balance"></i> Closing balance</span></div></div>${cashflowChart(data.cashflows)}</section>
     <section class="panel funding-panel"><div class="panel-header funding-header"><div><p class="eyebrow">Event funding</p><h3>Forecast maintenance exposure</h3></div>${componentFilters()}</div>${fundingTable(filteredEvents())}</section>
     ${auditStrip()}`;
@@ -179,7 +174,7 @@ function renderAssumptions() {
   return `${heading("Case setup", "Inputs and assumptions", "Every value below is part of the deterministic Stage 1–4 request. Changes are saved locally until the model is run.", `<span class="draft-badge ${isDirty ? "visible" : ""}">Unsaved calculation changes</span>`)}
     <form id="assumptions-form" autocomplete="off">
       <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Aircraft and lease</p><h3>Case identity and timeline</h3></div></div><div class="form-grid">${inputField("Aircraft type", "aircraft_type", caseInputs.aircraft_type)}${inputField("Lessee", "lessee", caseInputs.lessee)}${inputField("Date of manufacture", "date_of_manufacture", caseInputs.date_of_manufacture, "date")}${inputField("Lease start", "lease_start_date", caseInputs.lease_start_date, "date")}${inputField("Analysis date", "analysis_date", caseInputs.analysis_date, "date")}${inputField("Lease expiry", "lease_expiry_date", caseInputs.lease_expiry_date, "date")}${inputField("Default monthly flight hours", "default_monthly_fh", caseInputs.default_monthly_fh, "number", 'min="0" step="any"')}${inputField("Default monthly flight cycles", "default_monthly_fc", caseInputs.default_monthly_fc, "number", 'min="0" step="any"')}</div></section>
-      <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Maintenance assumptions</p><h3>Intervals, event costs and reserve rates</h3></div><span class="panel-note">Escalation inputs shown as annual percentages</span></div><div class="table-scroll assumption-table"><table><thead><tr><th>Component</th><th>Driver</th><th class="number">Interval</th><th class="number">Base cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th><th class="number">Usage at lease start</th></tr></thead><tbody>${caseInputs.components.map((component, index) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong>${componentInput(index, "name", component.name, "text")}</td><td><select data-component-index="${index}" data-component-field="event_driver"><option value="calendar_months" ${component.event_driver === "calendar_months" ? "selected" : ""}>Calendar months</option><option value="flight_hours" ${component.event_driver === "flight_hours" ? "selected" : ""}>Flight hours</option><option value="flight_cycles" ${component.event_driver === "flight_cycles" ? "selected" : ""}>Flight cycles</option></select></td><td>${componentInput(index, "interval", component.interval)}</td><td>${componentInput(index, "base_cost", component.base_cost)}</td><td>${componentInput(index, "annual_cost_escalation", Number(component.annual_cost_escalation) * 100, "number", "0.01", "percent")}</td><td><select data-component-index="${index}" data-component-field="reserve_basis"><option value="per_month" ${component.reserve_basis === "per_month" ? "selected" : ""}>Per month</option><option value="per_flight_hour" ${component.reserve_basis === "per_flight_hour" ? "selected" : ""}>Per flight hour</option><option value="per_flight_cycle" ${component.reserve_basis === "per_flight_cycle" ? "selected" : ""}>Per flight cycle</option></select></td><td>${componentInput(index, "base_reserve_rate", component.base_reserve_rate)}</td><td>${componentInput(index, "annual_reserve_escalation", Number(component.annual_reserve_escalation) * 100, "number", "0.01", "percent")}</td><td>${component.event_driver === "calendar_months" ? '<span class="not-applicable">N/A</span>' : componentInput(index, "usage_since_event_at_lease_start", component.usage_since_event_at_lease_start ?? "")}</td></tr>`).join("")}</tbody></table></div></section>
+      <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Maintenance assumptions</p><h3>Intervals, event costs and reserve rates</h3></div><span class="panel-note">Escalation inputs shown as annual percentages</span></div><div class="table-scroll assumption-table"><table><thead><tr><th>Component</th><th>Driver</th><th class="number">Interval</th><th class="number">Base cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th><th class="number">Usage at lease start</th></tr></thead><tbody>${caseInputs.components.map((component, index) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong>${componentInput(index, "name", component.name, "text")}</td><td><select data-component-index="${index}" data-component-field="event_driver"><option value="calendar_months" ${component.event_driver === "calendar_months" ? "selected" : ""}>Calendar months</option><option value="flight_hours" ${component.event_driver === "flight_hours" ? "selected" : ""}>Flight hours</option><option value="flight_cycles" ${component.event_driver === "flight_cycles" ? "selected" : ""}>Flight cycles</option></select></td><td>${componentInput(index, "interval", component.interval)}</td><td>${componentInput(index, "base_cost", component.base_cost)}</td><td>${componentInput(index, "annual_cost_escalation", percentInput(component.annual_cost_escalation), "number", "0.01", "percent")}</td><td><select data-component-index="${index}" data-component-field="reserve_basis"><option value="per_month" ${component.reserve_basis === "per_month" ? "selected" : ""}>Per month</option><option value="per_flight_hour" ${component.reserve_basis === "per_flight_hour" ? "selected" : ""}>Per flight hour</option><option value="per_flight_cycle" ${component.reserve_basis === "per_flight_cycle" ? "selected" : ""}>Per flight cycle</option></select></td><td>${componentInput(index, "base_reserve_rate", component.base_reserve_rate)}</td><td>${componentInput(index, "annual_reserve_escalation", percentInput(component.annual_reserve_escalation), "number", "0.01", "percent")}</td><td>${component.event_driver === "calendar_months" ? '<span class="not-applicable">N/A</span>' : componentInput(index, "usage_since_event_at_lease_start", component.usage_since_event_at_lease_start ?? "")}</td></tr>`).join("")}</tbody></table></div></section>
       <section class="panel form-panel"><div class="panel-header"><div><p class="eyebrow">Monthly exceptions</p><h3>Utilization overrides</h3></div><button type="button" class="button secondary compact" id="add-override">Add month</button></div><div id="override-list" class="override-list">${caseInputs.utilization_overrides.length ? caseInputs.utilization_overrides.map((override, index) => `<div class="override-row"><label class="field"><span>Month end</span><input type="date" data-override-index="${index}" data-override-field="month_end" value="${escapeHtml(override.month_end)}"></label><label class="field"><span>Flight hours</span><input type="number" min="0" step="any" data-override-index="${index}" data-override-field="flight_hours" value="${escapeHtml(override.flight_hours)}"></label><label class="field"><span>Flight cycles</span><input type="number" min="0" step="any" data-override-index="${index}" data-override-field="flight_cycles" value="${escapeHtml(override.flight_cycles)}"></label><button type="button" class="remove-button" data-remove-override="${index}" aria-label="Remove utilization override">Remove</button></div>`).join("") : '<div class="empty-state compact-empty">No month-specific overrides. Defaults apply throughout the lease.</div>'}</div></section>
       <div class="form-actions"><p>Running the model recalculates the full historical lease, then returns the forecast period.</p><button type="button" class="button primary large" data-run-from-form>Run Stage 1–4 model</button></div>
     </form>`;
@@ -205,16 +200,16 @@ function renderAssumptionsV2() {
       </section>
 
       <section class="panel form-panel raw-data-section">
-        <div class="panel-header"><div><p class="eyebrow">Input group 2</p><h3>Aircraft Maintenance Program Information</h3></div><span class="panel-note">Costs in 2017 USD · annual escalation</span></div>
-        <div class="table-scroll assumption-table source-table"><table><thead><tr><th>Maintenance item</th><th>Event driver</th><th class="number">Interval</th><th class="number">Cost (2017 USD)</th><th class="number">Yearly cost escalation</th></tr></thead><tbody>${sourceComponents.map(({ component, index, engineShared }) => `<tr><td><strong class="component-code">${escapeHtml(sourceCode(component, engineShared))}</strong><span class="component-name">${escapeHtml(sourceName(component, engineShared))}</span></td><td>${driverSelect(component, index, engineShared)}</td><td>${componentInput(index, "interval", component.interval, "number", "any", "", engineSync(engineShared))}</td><td>${componentInput(index, "base_cost", component.base_cost, "number", "any", "", engineSync(engineShared))}</td><td>${componentInput(index, "annual_cost_escalation", Number(component.annual_cost_escalation) * 100, "number", "0.01", "percent", engineSync(engineShared))}</td></tr>`).join("")}</tbody></table></div>
-        <div class="assumption-footnote">A common Engine Performance Restoration assumption is applied to E1 and E2, which remain separate balance accounts throughout the calculation.</div>
+        <div class="panel-header"><div><p class="eyebrow">Input group 2</p><h3>Aircraft Maintenance Program Information</h3></div><span class="panel-note">Technical cost assumptions · annual escalation</span></div>
+        <div class="table-scroll assumption-table source-table"><table><thead><tr><th>Maintenance item</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base cost</th><th class="number">Yearly cost escalation</th></tr></thead><tbody>${sourceComponents.map(({ component, index, engineShared }) => `<tr><td><strong class="component-code">${escapeHtml(sourceCode(component, engineShared))}</strong><span class="component-name">${escapeHtml(sourceName(component, engineShared))}</span></td><td>${driverSelect(component, index, engineShared)}</td><td>${componentInput(index, "interval", component.interval, "number", "any", "", engineSync(engineShared))}</td><td>${componentInput(index, "base_cost", component.base_cost, "number", "any", "", engineSync(engineShared))}</td><td>${componentInput(index, "annual_cost_escalation", percentInput(component.annual_cost_escalation), "number", "0.01", "percent", engineSync(engineShared))}</td></tr>`).join("")}</tbody></table></div>
+        <div class="assumption-footnote">V1 treats base maintenance costs as manufacture-year values and escalates them from the aircraft manufacture year. A common Engine Performance Restoration assumption is applied to E1 and E2.</div>
       </section>
 
       <section class="panel form-panel raw-data-section">
         <div class="panel-header"><div><p class="eyebrow">Input group 3</p><h3>Aircraft Lease Terms</h3></div><span class="source-badge">Contractual inputs</span></div>
         <div class="contract-subsection"><div class="subsection-heading"><span>3.1</span><div><strong>Lease Period</strong><small>Contract dates and analysis cut-off</small></div></div><div class="form-grid three-inputs">${inputField("Lease Start Date", "lease_start_date", caseInputs.lease_start_date, "date")}${inputField("Lease Expiry Date", "lease_expiry_date", caseInputs.lease_expiry_date, "date")}${inputField("Analysis Date", "analysis_date", caseInputs.analysis_date, "date")}</div></div>
-        <div class="contract-subsection reserve-terms"><div class="subsection-heading"><span>3.2</span><div><strong>Maintenance Reserve Terms</strong><small>Contracted rates, charging bases and annual escalation</small></div></div><div class="table-scroll assumption-table source-table"><table><thead><tr><th>Maintenance item</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Yearly reserve escalation</th></tr></thead><tbody>${sourceComponents.map(({ component, index, engineShared }) => `<tr><td><strong class="component-code">${escapeHtml(sourceCode(component, engineShared))}</strong><span class="component-name">${escapeHtml(sourceName(component, engineShared))}</span></td><td>${basisSelect(component, index, engineShared)}</td><td>${componentInput(index, "base_reserve_rate", component.base_reserve_rate, "number", "any", "", engineSync(engineShared))}</td><td>${componentInput(index, "annual_reserve_escalation", Number(component.annual_reserve_escalation) * 100, "number", "0.01", "percent", engineSync(engineShared))}</td></tr>`).join("")}</tbody></table></div></div>
-        <div class="assumption-footnote">Lease dates and maintenance reserve terms are contractual inputs. The analysis date is the Step 1 reporting cut-off.</div>
+        <div class="contract-subsection reserve-terms"><div class="subsection-heading"><span>3.2</span><div><strong>Maintenance Reserve Terms</strong><small>Contracted rates, charging bases and annual escalation</small></div></div><div class="table-scroll assumption-table source-table"><table><thead><tr><th>Maintenance item</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Yearly reserve escalation</th></tr></thead><tbody>${sourceComponents.map(({ component, index, engineShared }) => `<tr><td><strong class="component-code">${escapeHtml(sourceCode(component, engineShared))}</strong><span class="component-name">${escapeHtml(sourceName(component, engineShared))}</span></td><td>${basisSelect(component, index, engineShared)}</td><td>${componentInput(index, "base_reserve_rate", component.base_reserve_rate, "number", "any", "", engineSync(engineShared))}</td><td>${componentInput(index, "annual_reserve_escalation", percentInput(component.annual_reserve_escalation), "number", "0.01", "percent", engineSync(engineShared))}</td></tr>`).join("")}</tbody></table></div></div>
+        <div class="assumption-footnote">V1 treats the displayed reserve rates as lease-commencement rates and escalates them from the Lease Start Date.</div>
       </section>
 
       <section class="panel form-panel">
@@ -381,7 +376,8 @@ function syncDraftFromForm() {
   document.querySelectorAll("[data-case-field]").forEach((input) => { draftCase[input.dataset.caseField] = input.value; });
   document.querySelectorAll("[data-component-field]").forEach((input) => {
     const component = draftCase.components[Number(input.dataset.componentIndex)];
-    const value = input.dataset.transform === "percent" ? String(Number(input.value) / 100) : input.value;
+    let value = input.value;
+    if (input.dataset.transform === "percent") value = String(Number(input.value) / 100);
     component[input.dataset.componentField] = value === "" && ["last_event_date", "usage_since_event_at_lease_start"].includes(input.dataset.componentField) ? null : value;
     if (input.dataset.syncEngine === "true") {
       const engineTwo = draftCase.components.find((item) => item.code === "E2");
@@ -389,8 +385,18 @@ function syncDraftFromForm() {
     }
   });
   document.querySelectorAll("[data-override-field]").forEach((input) => { draftCase.utilization_overrides[Number(input.dataset.overrideIndex)][input.dataset.overrideField] = input.value; });
+  applyV1DerivedBaseDates(draftCase);
   saveDraft();
   updateCaseHeader();
+}
+
+function applyV1DerivedBaseDates(caseInputs) {
+  if (!caseInputs?.components) return caseInputs;
+  caseInputs.components.forEach((component) => {
+    component.cost_base_date = caseInputs.date_of_manufacture;
+    component.reserve_rate_base_date = caseInputs.lease_start_date;
+  });
+  return caseInputs;
 }
 
 function bindViewActions() {
@@ -400,10 +406,6 @@ function bindViewActions() {
   document.querySelectorAll("[data-export-validation]").forEach((button) => button.addEventListener("click", exportValidation));
   if (currentView !== "assumptions") return;
   const form = document.querySelector("#assumptions-form");
-  if (IS_STATIC_DEMO) {
-    form.querySelectorAll("input, select, button").forEach((control) => { control.disabled = true; });
-    return;
-  }
   form.addEventListener("input", syncDraftFromForm);
   form.addEventListener("change", (event) => {
     syncDraftFromForm();
@@ -425,10 +427,6 @@ function bindViewActions() {
 }
 
 async function runModel() {
-  if (IS_STATIC_DEMO) {
-    showToast("This hosted site is a read-only demonstration. Run the project locally to recalculate scenarios.", "error");
-    return;
-  }
   if (currentView === "assumptions") syncDraftFromForm();
   const buttons = document.querySelectorAll("#run-model, [data-run-from-form]");
   buttons.forEach((button) => { button.disabled = true; button.textContent = "Calculating…"; });

@@ -90,6 +90,11 @@ def case_from_payload(payload: dict[str, object]) -> CaseInputs:
     if missing:
         raise ValueError("missing case fields: " + ", ".join(missing))
 
+    manufacture_date = _date(
+        payload["date_of_manufacture"], "date_of_manufacture"
+    )
+    lease_start_date = _date(payload["lease_start_date"], "lease_start_date")
+
     raw_components = payload["components"]
     if not isinstance(raw_components, list):
         raise ValueError("components must be an array")
@@ -105,17 +110,14 @@ def case_from_payload(payload: dict[str, object]) -> CaseInputs:
                     event_driver=EventDriver(str(raw["event_driver"])),
                     interval=raw["interval"],
                     base_cost=raw["base_cost"],
-                    cost_base_date=_date(
-                        raw["cost_base_date"],
-                        f"components[{index}].cost_base_date",
-                    ),
+                    # V1 is a single-lease reference model: technical costs are
+                    # manufacture-year values and contract rates commence with
+                    # the lease. These dates are derived, not separate inputs.
+                    cost_base_date=manufacture_date,
                     annual_cost_escalation=raw["annual_cost_escalation"],
                     reserve_basis=ReserveBasis(str(raw["reserve_basis"])),
                     base_reserve_rate=raw["base_reserve_rate"],
-                    reserve_rate_base_date=_date(
-                        raw["reserve_rate_base_date"],
-                        f"components[{index}].reserve_rate_base_date",
-                    ),
+                    reserve_rate_base_date=lease_start_date,
                     annual_reserve_escalation=raw["annual_reserve_escalation"],
                     last_event_date=(
                         _date(
@@ -160,11 +162,9 @@ def case_from_payload(payload: dict[str, object]) -> CaseInputs:
 
     return CaseInputs(
         aircraft_type=str(payload["aircraft_type"]),
-        date_of_manufacture=_date(
-            payload["date_of_manufacture"], "date_of_manufacture"
-        ),
+        date_of_manufacture=manufacture_date,
         lessee=str(payload["lessee"]),
-        lease_start_date=_date(payload["lease_start_date"], "lease_start_date"),
+        lease_start_date=lease_start_date,
         analysis_date=_date(payload["analysis_date"], "analysis_date"),
         lease_expiry_date=_date(payload["lease_expiry_date"], "lease_expiry_date"),
         default_monthly_fh=payload["default_monthly_fh"],

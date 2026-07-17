@@ -13,8 +13,8 @@ class DefaultConfigurationTests(unittest.TestCase):
         self.components = {component.code: component for component in self.case.components}
 
     def test_case_header_matches_public_demo(self) -> None:
-        self.assertEqual(self.case.aircraft_type, "Illustrative Narrowbody")
-        self.assertEqual(self.case.lessee, "Demo Airline")
+        self.assertEqual(self.case.aircraft_type, "A320-200")
+        self.assertEqual(self.case.lessee, "AeroVista Airlines")
         self.assertEqual(self.case.default_monthly_fh, Decimal("260"))
         self.assertEqual(self.case.default_monthly_fc, Decimal("95"))
         self.assertEqual(self.case.lease_start_date.isoformat(), "2017-06-30")

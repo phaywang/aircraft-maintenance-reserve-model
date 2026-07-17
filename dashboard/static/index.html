@@ -11,32 +11,46 @@
     <div class="application-shell">
       <aside class="side-navigation">
         <div class="product-mark" aria-label="Aircraft Maintenance Cash Flow Analysis">
-          <span class="mark-symbol">MC</span>
-          <span><strong>Maintenance Cash Flow</strong><small>Analysis workspace</small></span>
+          <span class="mark-symbol">AM</span>
+          <span><strong>Aircraft Maintenance</strong><small>Reference model</small></span>
         </div>
         <nav id="model-navigation" aria-label="Model sections">
-          <p class="nav-label">Workspace</p>
+          <p class="nav-label">Reference case</p>
           <button class="nav-item active" data-view="overview"><span class="nav-index">01</span>Overview</button>
           <button class="nav-item" data-view="assumptions"><span class="nav-index">02</span>Inputs &amp; Assumptions</button>
+          <p class="nav-label">Calculation workflow</p>
           <button class="nav-item" data-view="utilization"><span class="nav-index">03</span>Utilization</button>
           <button class="nav-item" data-view="events"><span class="nav-index">04</span>Maintenance Events</button>
           <button class="nav-item" data-view="inflows"><span class="nav-index">05</span>Reserve Inflow</button>
           <button class="nav-item" data-view="cashflow"><span class="nav-index">06</span>Event Settlement</button>
+          <p class="nav-label">Risk &amp; assurance</p>
           <button class="nav-item" data-view="risk"><span class="nav-index">07</span>Reserve Adequacy</button>
           <button class="nav-item" data-view="audit"><span class="nav-index">08</span>Model Validation</button>
         </nav>
-        <div class="model-version"><span class="status-dot"></span><div><strong id="model-state">Model validated</strong><span id="model-version">Stage 1–4 · v1.0.1-phase1</span></div></div>
+        <div class="model-version"><span class="status-dot"></span><div><strong id="model-state">Deterministic engine</strong><span id="model-version">V1.1 · Reference</span></div></div>
       </aside>
 
       <main class="workspace">
         <header class="top-bar">
-          <div><p class="eyebrow" id="case-context">Illustrative demonstration</p><h1 id="case-title">Illustrative Narrowbody · Demo Airline</h1></div>
+          <div><p class="eyebrow" id="case-context">Single-lease calculation reference</p><h1 id="case-title">A320-200 · AeroVista Airlines</h1></div>
           <div class="top-actions">
             <button class="button secondary" id="reset-case">Reset demo</button>
             <button class="button secondary" id="export-data">Export run</button>
             <button class="button primary" id="run-model">Run model</button>
           </div>
         </header>
+
+        <section class="workspace-switcher" aria-label="Model workspace">
+          <div class="workspace-copy">
+            <span>Current workspace</span>
+            <strong>Reference model (V1)</strong>
+            <p>Verified single-lease monthly reserve model and calculation audit trail.</p>
+          </div>
+          <nav class="workspace-tabs" aria-label="Choose model workspace">
+            <a class="active" href="./" aria-current="page"><span>Reference model</span><small>V1</small></a>
+            <a href="v2/"><span>Lifecycle scenarios</span><small>V2</small></a>
+          </nav>
+        </section>
 
         <section class="case-strip" aria-label="Case details">
           <div><span>Lease commencement</span><strong id="lease-start">—</strong></div>
