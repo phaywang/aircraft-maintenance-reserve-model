@@ -6,7 +6,25 @@ funding exposure. The project deliberately retains two workspaces: V1 is the
 verified single-lease reference model, while V2 extends the same reserve
 methodology to flexible multi-lease lifecycle scenarios.
 
-## Start here
+## Live demo — no installation required
+
+**[Open the aircraft maintenance reserve dashboard](https://phaywang.github.io/aircraft-maintenance-reserve-model/)**
+
+Start in **Reference model (V1)** to follow the verified single-lease
+calculation from assumptions through event settlement and model validation.
+Use the workspace switcher at the top of the dashboard to open **Lifecycle
+scenarios (V2)**, which extends the same methodology across consecutive leases
+and multiple scenario paths.
+
+- [Open V1 — Reference model](https://phaywang.github.io/aircraft-maintenance-reserve-model/)
+- [Open V2 — Lifecycle scenarios](https://phaywang.github.io/aircraft-maintenance-reserve-model/v2/)
+- [Open the guided demo workflow](docs/DEMO_WORKFLOW.md)
+
+> The hosted dashboard is a static demonstration with precalculated fictional
+> inputs. It can be explored without GitHub knowledge or local setup. Clone and
+> run the project locally when you want to edit assumptions and recalculate.
+
+## What this model answers
 
 This model is designed for a lessor, aircraft owner or technical-finance adviser
 reviewing one practical question:
