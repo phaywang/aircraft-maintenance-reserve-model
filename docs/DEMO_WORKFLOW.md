@@ -4,12 +4,18 @@ This walkthrough presents the model from a lessor or aircraft-owner perspective.
 
 All aircraft, airline and commercial assumptions shown here are fictional demonstration data. The model covers maintenance reserve funding only; it does not model base rent, aircraft market value, NPV, downtime or lessee credit quality.
 
+The GitHub Pages dashboard is a read-only review environment. V1 contains one
+precalculated reference run, and V2 contains three precalculated lifecycle
+scenarios that can be selected and compared immediately. Steps that edit inputs,
+rerun the engine or call Bedrock require the local Python service; the screenshots
+below show the resulting complete workflow.
+
 ## Recommended demo sequence
 
 ### Part 1 — Establish the calculation reference in V1
 
 1. Open **Reference model (V1)** and use the Overview to introduce the aircraft, analysis date, lease expiry and headline reserve position.
-2. Open **Inputs & Assumptions** to show that aircraft, utilization, maintenance program, costs and reserve terms are editable.
+2. Open **Inputs & Assumptions** to review the aircraft, utilization, maintenance program, costs and reserve terms. These fields become editable when run locally.
 3. Walk through the deterministic sequence: **Utilization → Maintenance Events → Reserve Inflow → Event Settlement**.
 4. In **Event Settlement**, emphasize that every maintenance event draws only from its matching component account and that the analysis-date opening balance is reconstructed from modeled history.
 5. Use **Reserve Adequacy** to identify the component events requiring modeled lessee top-up.
@@ -22,7 +28,7 @@ All aircraft, airline and commercial assumptions shown here are fictional demons
 ### Part 2 — Demonstrate V1 analysis and free-form Q&A
 
 1. Open **08 Analysis & Q&A**.
-2. Generate a **Full Maintenance Reserve Analysis**.
+2. When running locally, generate a **Full Maintenance Reserve Analysis**. In the hosted demo, use the documented screenshot below.
 3. Switch to **Ask a question** and enter a question that is not one of the suggested prompts:
 
 > How should the lessor interpret the large lease-end retained reserve balance alongside the forecast engine funding shortfalls?
@@ -36,8 +42,8 @@ All aircraft, airline and commercial assumptions shown here are fictional demons
 1. Switch to **Lifecycle scenarios (V2)**.
 2. Review **Aircraft position** and the reconstructed analysis-date technical and reserve state.
 3. Open **Lease timeline** and show the current lease followed immediately by a proposed lease. Technical usage continues across the boundary; the old lease accounts close and new component reserve accounts open.
-4. Run the scenario and walk through **Forecast overview → Maintenance funding → Reserve accounts → Reserve cash flow**.
-5. Duplicate the scenario twice and change only the proposed lease utilization:
+4. Select each precalculated scenario and walk through **Forecast overview → Maintenance funding → Reserve accounts → Reserve cash flow**.
+5. The hosted demo already contains the following three paths. When running locally, the same set can be recreated by duplicating the base scenario twice and changing only proposed-lease utilization:
 
 | Scenario | Follow-on FH / month | Follow-on FC / month | Purpose |
 |---|---:|---:|---|
@@ -45,7 +51,7 @@ All aircraft, airline and commercial assumptions shown here are fictional demons
 | Lower-utilization follow-on | 210 | 80 | Defers the second engine event beyond the horizon |
 | Higher-utilization follow-on | 300 | 110 | Accelerates the second engine event |
 
-6. Select all three scenarios and run every pending calculation.
+6. Open **07 Scenario comparison**. All three hosted scenarios are already calculated and selected; locally, use **Run all pending** after making changes.
 
 ![V2 lease timeline](assets/demo/v2-lease-timeline.png)
 
@@ -68,7 +74,7 @@ The interface deliberately does not declare a universal “best” scenario. A l
 ### Part 5 — Generate a cross-scenario report and ask a custom question
 
 1. Open **08 Analysis & Q&A**.
-2. Select **Cross-Scenario Decision Report** and generate the report.
+2. When running locally, select **Cross-Scenario Decision Report** and generate the report. In the hosted demo, use the documented screenshot below.
 3. Switch to **Ask a question**, choose **Selected comparison set**, and enter:
 
 > Which scenario minimizes modeled lessee top-up exposure, and what trade-offs in maintenance timing, retained reserves, and end-of-horizon component life should the lessor consider?
@@ -116,4 +122,3 @@ The complete full-page capture set is retained for documentation and future READ
 The shortest coherent product story is:
 
 > V1 proves the monthly component-account methodology and reconciles the opening reserve position. V2 preserves that logic but allows the lessor to model consecutive leases and compare any number of lifecycle paths. The deterministic engine calculates every cash-flow result; Bedrock then turns those verified results into a report or a focused answer without inventing a second calculation layer.
-

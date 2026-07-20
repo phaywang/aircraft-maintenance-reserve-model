@@ -1,10 +1,11 @@
 const COMPONENTS = ["All", "6Y", "12Y", "LDG", "E1", "E2"];
 const VIEWS = ["overview", "assumptions", "utilization", "events", "inflows", "cashflow", "risk", "analysis", "audit"];
 const STORAGE_KEY = "aircraft-reserve-model-draft-v2";
+const STATIC_DEMO = location.hostname.endsWith("github.io") || location.protocol === "file:";
 
 const demoData = structuredClone(window.DASHBOARD_DATA);
 let currentData = structuredClone(demoData);
-let draftCase = applyV1DerivedBaseDates(loadDraft() || structuredClone(demoData.case));
+let draftCase = applyV1DerivedBaseDates((STATIC_DEMO ? null : loadDraft()) || structuredClone(demoData.case));
 let currentView = location.hash.slice(1) || "overview";
 if (currentView === "case-questions") currentView = "analysis";
 let selectedComponent = "All";
@@ -92,6 +93,14 @@ function updateStateIndicators() {
   const state = document.querySelector("#calculation-state");
   const modelState = document.querySelector("#model-state");
   const runButton = document.querySelector("#run-model");
+  if (STATIC_DEMO) {
+    state.className = "";
+    state.innerHTML = "<i></i> Precalculated demo";
+    modelState.textContent = "Read-only hosted results";
+    runButton.textContent = "Run locally to recalculate";
+    runButton.disabled = true;
+    return;
+  }
   if (isDirty) {
     state.className = "pending-state";
     state.innerHTML = "<i></i> Inputs changed";
@@ -162,7 +171,7 @@ function renderOverview() {
   const data = currentData;
   return `${heading("Portfolio overview", "Maintenance reserve position", "Forecast values include opening balances accumulated from the full historical simulation.")}
     <section class="metric-grid">${metric("Forecast reserve inflow", money(data.summary.forecast_reserve_inflow, true), `${data.summary.forecast_months}-month collection`)}${metric("Forecast reimbursement", money(data.summary.forecast_reimbursement, true), `Across ${data.summary.component_event_count} component events`)}${metric("Total forecast shortfall", money(data.summary.forecast_shortfall, true), `${data.summary.underfunded_event_count} underfunded events`, "risk-metric")}${metric("Lease-end reserve balance", money(data.summary.lease_end_reserve_balance, true), `Closing position · ${month(draftCase.lease_expiry_date)}`)}</section>
-    <section class="panel assumption-snapshot"><div class="panel-header"><div><p class="eyebrow">Reference inputs</p><h3>Model assumptions</h3></div><button class="button secondary compact" data-open-view="assumptions">Edit assumptions</button></div><div class="snapshot-grid"><div><span>Aircraft / lessee</span><strong>${escapeHtml(draftCase.aircraft_type)}</strong><small>${escapeHtml(draftCase.lessee)}</small></div><div><span>Lease period</span><strong>${longDate(draftCase.lease_start_date)}</strong><small>to ${longDate(draftCase.lease_expiry_date)}</small></div><div><span>Analysis date</span><strong>${longDate(draftCase.analysis_date)}</strong><small>${data.summary.forecast_months} forecast months</small></div><div><span>Default utilization</span><strong>${number(draftCase.default_monthly_fh)} FH / month</strong><small>${number(draftCase.default_monthly_fc)} FC / month</small></div></div><div class="table-scroll"><table><thead><tr><th>Component</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base event cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th></tr></thead><tbody>${draftCase.components.map((component) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong><span class="component-name">${escapeHtml(component.name)}</span></td><td>${escapeHtml(component.event_driver.replaceAll("_", " "))}</td><td class="number">${number(component.interval)}</td><td class="number">${money(component.base_cost)}</td><td class="number">${percent(component.annual_cost_escalation)}</td><td>${escapeHtml(component.reserve_basis.replaceAll("_", " "))}</td><td class="number">${money(component.base_reserve_rate)}</td><td class="number">${percent(component.annual_reserve_escalation)}</td></tr>`).join("")}</tbody></table></div><div class="assumption-footnote"><strong>Public demonstration basis.</strong> The private reference timeline is shifted forward by 32 months. Aircraft age and relative event timing are preserved, while January-based escalation is recalculated from the displayed dates.</div></section>
+    <section class="panel assumption-snapshot"><div class="panel-header"><div><p class="eyebrow">Reference inputs</p><h3>Model assumptions</h3></div><button class="button secondary compact" data-open-view="assumptions">View assumptions</button></div><div class="snapshot-grid"><div><span>Aircraft / lessee</span><strong>${escapeHtml(draftCase.aircraft_type)}</strong><small>${escapeHtml(draftCase.lessee)}</small></div><div><span>Lease period</span><strong>${longDate(draftCase.lease_start_date)}</strong><small>to ${longDate(draftCase.lease_expiry_date)}</small></div><div><span>Analysis date</span><strong>${longDate(draftCase.analysis_date)}</strong><small>${data.summary.forecast_months} forecast months</small></div><div><span>Default utilization</span><strong>${number(draftCase.default_monthly_fh)} FH / month</strong><small>${number(draftCase.default_monthly_fc)} FC / month</small></div></div><div class="table-scroll"><table><thead><tr><th>Component</th><th>Event driver</th><th class="number">Interval</th><th class="number">Base event cost</th><th class="number">Cost escalation</th><th>Reserve basis</th><th class="number">Base reserve rate</th><th class="number">Reserve escalation</th></tr></thead><tbody>${draftCase.components.map((component) => `<tr><td><strong class="component-code">${escapeHtml(component.code)}</strong><span class="component-name">${escapeHtml(component.name)}</span></td><td>${escapeHtml(component.event_driver.replaceAll("_", " "))}</td><td class="number">${number(component.interval)}</td><td class="number">${money(component.base_cost)}</td><td class="number">${percent(component.annual_cost_escalation)}</td><td>${escapeHtml(component.reserve_basis.replaceAll("_", " "))}</td><td class="number">${money(component.base_reserve_rate)}</td><td class="number">${percent(component.annual_reserve_escalation)}</td></tr>`).join("")}</tbody></table></div><div class="assumption-footnote"><strong>Public demonstration basis.</strong> Dates and counterparties are fictionalized for presentation. Aircraft age, contractual sequence and maintenance-reserve mechanics are preserved, while escalation is recalculated from the displayed dates.</div></section>
     <section class="panel cashflow-panel"><div class="panel-header"><div><p class="eyebrow">Monthly cash flow</p><h3>Collections, reimbursements and closing balance</h3></div><div class="chart-legend"><span><i class="legend-inflow"></i> Inflow</span><span><i class="legend-outflow"></i> Reimbursement</span><span><i class="legend-balance"></i> Closing balance</span></div></div>${cashflowChart(data.cashflows)}</section>
     <section class="panel funding-panel"><div class="panel-header funding-header"><div><p class="eyebrow">Event funding</p><h3>Forecast maintenance exposure</h3></div>${componentFilters()}</div>${fundingTable(filteredEvents())}</section>
     ${auditStrip()}`;
@@ -429,6 +438,10 @@ function renderCurrentView() {
   document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.view === currentView));
   const renderers = { overview: renderOverview, assumptions: renderAssumptionsV2, utilization: renderUtilization, events: renderEvents, inflows: renderInflows, cashflow: renderCashflow, risk: renderRisk, analysis: renderAnalysis, audit: renderAudit };
   document.querySelector("#view-root").innerHTML = renderers[currentView]();
+  if (STATIC_DEMO) {
+    document.querySelector("#view-root").insertAdjacentHTML("afterbegin", '<section class="note"><strong>Read-only hosted demo.</strong> Explore the precalculated results, or <a href="https://github.com/phaywang/aircraft-maintenance-reserve-model#run-locally">run locally</a> to edit assumptions and generate analysis.</section>');
+    document.querySelectorAll("[data-case-field], [data-component-field], [data-override-field], [data-run-from-form], [data-generate-analysis], [data-analysis-report-type], [data-analysis-question], [data-suggested-question], #add-override, [data-remove-override]").forEach((element) => { element.disabled = true; });
+  }
   bindViewActions();
   updateCaseHeader();
 }
@@ -503,6 +516,10 @@ function bindViewActions() {
 }
 
 async function generateV1Analysis() {
+  if (STATIC_DEMO) {
+    showToast("Run the local service to generate Bedrock analysis.", "error");
+    return;
+  }
   if (caseReportRunning || isDirty) return;
   caseReportRunning = true;
   caseReportError = "";
@@ -536,6 +553,10 @@ async function generateV1Analysis() {
 }
 
 async function runModel() {
+  if (STATIC_DEMO) {
+    showToast("Run the local service to edit and recalculate the model.", "error");
+    return;
+  }
   if (currentView === "assumptions") syncDraftFromForm();
   const buttons = document.querySelectorAll("#run-model, [data-run-from-form]");
   buttons.forEach((button) => { button.disabled = true; button.textContent = "Calculating…"; });

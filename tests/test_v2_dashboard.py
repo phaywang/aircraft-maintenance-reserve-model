@@ -399,6 +399,12 @@ class V2DashboardFrontendTests(unittest.TestCase):
                 self.assertTrue((root / filename).is_file(), str(root / filename))
         payload = json.loads((self.root / "dashboard-data.json").read_text(encoding="utf-8"))
         self.assertEqual(payload["run"]["perspective"], "lessor")
+        self.assertEqual(len(payload["demo_scenarios"]), 3)
+        self.assertEqual(
+            {item["input"]["scenario_id"] for item in payload["demo_scenarios"]},
+            {"base-plan", "lower-utilization", "higher-utilization"},
+        )
+        self.assertTrue(all(item["result"]["summary"] for item in payload["demo_scenarios"]))
 
 
 if __name__ == "__main__":

@@ -21,8 +21,10 @@ and multiple scenario paths.
 - [Open the guided demo workflow](docs/DEMO_WORKFLOW.md)
 
 > The hosted dashboard is a static demonstration with precalculated fictional
-> inputs. It can be explored without GitHub knowledge or local setup. Clone and
-> run the project locally when you want to edit assumptions and recalculate.
+> inputs. V2 includes three calculated utilization paths so the comparison view
+> works immediately. It can be explored without GitHub knowledge or local setup.
+> Clone and run the project locally to edit assumptions, recalculate or generate
+> Bedrock-assisted analysis.
 
 ## What this model answers
 
@@ -177,7 +179,8 @@ The included narrowbody scenario is fully illustrative and is not a market bench
 - monthly utilization: 260 flight hours and 95 flight cycles;
 - five tracked accounts: 6Y, 12Y, landing gear, engine 1 and engine 2.
 
-All dates, utilization, costs, reserve rates and escalation assumptions can be edited in the dashboard.
+All dates, utilization, costs, reserve rates and escalation assumptions can be
+edited when the dashboard is run locally.
 
 The synthetic reserve rates are calibrated to demonstrate different funding outcomes: fully funded events, a near-threshold event and material component shortfalls. They are illustrative inputs, not market quotations.
 
@@ -192,6 +195,8 @@ follow-on lease with the fictional Northstar Air from 1 July 2029 through
 31 January 2032. The follow-on path uses 250 FH and 95 FC per month and opens new
 component reserve accounts using a 1.05 rate multiplier. These terms are chosen
 to demonstrate the lifecycle workflow, not to represent a market quotation.
+The hosted V2 dashboard also includes precalculated lower-utilization (210 FH /
+80 FC) and higher-utilization (300 FH / 110 FC) variants for immediate comparison.
 
 ## Run locally
 
